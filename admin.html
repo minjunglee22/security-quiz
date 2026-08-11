@@ -8,7 +8,9 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-*{box-sizing:border-box}
+*{
+  box-sizing:border-box;
+}
 
 body{
   margin:0;
@@ -31,10 +33,17 @@ body{
   margin-bottom:18px;
 }
 
-h1{margin:0 0 6px}
-h2{margin-top:0}
+h1{
+  margin:0 0 6px;
+}
 
-.muted{color:#667085}
+h2{
+  margin-top:0;
+}
+
+.muted{
+  color:#667085;
+}
 
 .grid{
   display:grid;
@@ -79,6 +88,11 @@ button{
 
 button:hover{
   opacity:.9;
+}
+
+button:disabled{
+  opacity:.5;
+  cursor:not-allowed;
 }
 
 .primary{
@@ -126,7 +140,8 @@ table{
   font-size:13px;
 }
 
-th,td{
+th,
+td{
   text-align:left;
   padding:10px;
   border-bottom:1px solid #edf0f4;
@@ -167,13 +182,41 @@ th{
   font-weight:700;
 }
 
+.badge-active{
+  background:#e9f8ef;
+  color:#18794e;
+}
+
+.badge-inactive{
+  background:#f0f0f0;
+  color:#667085;
+}
+
 .hide{
   display:none !important;
 }
 
 .login{
-  max-width:480px;
+  max-width:440px;
   margin:12vh auto;
+}
+
+.login-logo{
+  font-size:42px;
+  margin-bottom:10px;
+}
+
+.login-title{
+  margin-bottom:20px;
+}
+
+.login-help{
+  background:#fff7cf;
+  padding:12px;
+  border-radius:12px;
+  font-size:13px;
+  line-height:1.6;
+  margin:15px 0;
 }
 
 .question-card{
@@ -304,7 +347,15 @@ label{
   margin-top:10px;
 }
 
+.section-count{
+  float:right;
+  font-size:13px;
+  color:#667085;
+  font-weight:normal;
+}
+
 @media(max-width:800px){
+
   .grid{
     grid-template-columns:repeat(2,1fr);
   }
@@ -312,9 +363,11 @@ label{
   .editor-grid{
     grid-template-columns:1fr;
   }
+
 }
 
 @media(max-width:500px){
+
   .wrap{
     padding:12px;
   }
@@ -330,44 +383,86 @@ label{
   .answer-selector{
     grid-template-columns:1fr 1fr;
   }
+
 }
 </style>
 </head>
 
 <body>
 
+<!-- ==========================================
+     관리자 로그인
+========================================== -->
+
 <div id="login" class="card login">
 
-  <h1>🐣 보안 병아리 관리자</h1>
+  <div class="login-logo">
+    🐣
+  </div>
+
+  <h1 class="login-title">
+    보안 병아리 관리자
+  </h1>
 
   <p class="muted">
-    관리자 이메일로 로그인 링크를 보내드립니다.
+    관리자 계정으로 로그인해주세요.
   </p>
+
+  <div class="login-help">
+    💡 이제 이메일 링크 없이<br>
+    관리자 계정과 비밀번호로 바로 로그인할 수 있습니다.
+  </div>
+
+  <label>
+    관리자 이메일
+  </label>
 
   <input
     id="email"
+    type="email"
     value="dlalswjd4276@naver.com"
-    readonly>
+    autocomplete="username">
+
+  <label>
+    비밀번호
+  </label>
+
+  <input
+    id="password"
+    type="password"
+    placeholder="비밀번호를 입력하세요"
+    autocomplete="current-password">
 
   <button
     id="loginButton"
     class="primary"
     type="button">
 
-    관리자 로그인 링크 보내기
+    🐣 관리자 로그인
 
   </button>
 
-  <p id="loginMsg" class="muted status-message"></p>
+  <p
+    id="loginMsg"
+    class="muted status-message">
+  </p>
 
 </div>
 
 
+<!-- ==========================================
+     관리자 화면
+========================================== -->
+
 <div id="app" class="wrap hide">
+
+  <!-- HEADER -->
 
   <div class="card">
 
-    <h1>🐣 보안 병아리 관리자</h1>
+    <h1>
+      🐣 보안 병아리 관리자
+    </h1>
 
     <p class="muted">
       보안 퀴즈 이벤트 운영 현황을 관리합니다.
@@ -384,6 +479,10 @@ label{
 
   </div>
 
+
+  <!-- ==========================================
+       주요 통계
+  ========================================== -->
 
   <div class="grid">
 
@@ -430,9 +529,15 @@ label{
   </div>
 
 
+  <!-- ==========================================
+       퀴즈 기간 / 출제 설정
+  ========================================== -->
+
   <div class="card">
 
-    <h2>🗓️ 퀴즈 기간 / 출제 설정</h2>
+    <h2>
+      🗓️ 퀴즈 기간 / 출제 설정
+    </h2>
 
     <div class="note">
 
@@ -449,33 +554,79 @@ label{
     <div class="grid">
 
       <div>
-        <label>시작일시</label>
-        <input id="startAt" type="datetime-local">
+
+        <label>
+          시작일시
+        </label>
+
+        <input
+          id="startAt"
+          type="datetime-local">
+
       </div>
 
       <div>
-        <label>종료일시</label>
-        <input id="endAt" type="datetime-local">
+
+        <label>
+          종료일시
+        </label>
+
+        <input
+          id="endAt"
+          type="datetime-local">
+
       </div>
 
       <div>
-        <label>전체 문제 수</label>
-        <input id="qCount" type="number" min="1">
+
+        <label>
+          전체 문제 수
+        </label>
+
+        <input
+          id="qCount"
+          type="number"
+          min="1">
+
       </div>
 
       <div>
-        <label>쉬움</label>
-        <input id="easy" type="number" min="0">
+
+        <label>
+          쉬움
+        </label>
+
+        <input
+          id="easy"
+          type="number"
+          min="0">
+
       </div>
 
       <div>
-        <label>보통</label>
-        <input id="medium" type="number" min="0">
+
+        <label>
+          보통
+        </label>
+
+        <input
+          id="medium"
+          type="number"
+          min="0">
+
       </div>
 
       <div>
-        <label>어려움</label>
-        <input id="hard" type="number" min="0">
+
+        <label>
+          어려움
+        </label>
+
+        <input
+          id="hard"
+          type="number"
+          min="0">
+
       </div>
 
     </div>
@@ -492,21 +643,29 @@ label{
   </div>
 
 
+  <!-- ==========================================
+       일별 통계
+  ========================================== -->
+
   <div class="card">
 
-    <h2>📈 일별 참여 추이</h2>
+    <h2>
+      📈 일별 참여 추이
+    </h2>
 
     <div class="scroll">
 
       <table>
 
         <thead>
+
           <tr>
             <th>날짜</th>
             <th>도전</th>
             <th>완료</th>
             <th>완료율</th>
           </tr>
+
         </thead>
 
         <tbody id="daily"></tbody>
@@ -518,15 +677,22 @@ label{
   </div>
 
 
+  <!-- ==========================================
+       TOP 10
+  ========================================== -->
+
   <div class="card">
 
-    <h2>🏆 현재 보안 병아리 TOP 10</h2>
+    <h2>
+      🏆 현재 보안 병아리 TOP 10
+    </h2>
 
     <div class="scroll">
 
       <table>
 
         <thead>
+
           <tr>
             <th>순위</th>
             <th>닉네임</th>
@@ -535,6 +701,7 @@ label{
             <th>점수</th>
             <th>최종 갱신</th>
           </tr>
+
         </thead>
 
         <tbody id="leaders"></tbody>
@@ -546,9 +713,15 @@ label{
   </div>
 
 
+  <!-- ==========================================
+       참가자 관리
+  ========================================== -->
+
   <div class="card">
 
-    <h2>👤 참가자 관리</h2>
+    <h2>
+      👤 참가자 관리
+    </h2>
 
     <div class="note">
 
@@ -572,6 +745,7 @@ label{
       <table>
 
         <thead>
+
           <tr>
             <th>닉네임</th>
             <th>최고 정답</th>
@@ -580,6 +754,7 @@ label{
             <th>가입일</th>
             <th>관리</th>
           </tr>
+
         </thead>
 
         <tbody id="participantsList"></tbody>
@@ -591,17 +766,37 @@ label{
   </div>
 
 
+  <!-- ==========================================
+       문제 Pool 관리
+  ========================================== -->
+
   <div class="card">
 
-    <h2>📚 문제 Pool 관리</h2>
+    <h2>
+      📚 문제 Pool 관리
+
+      <span
+        id="questionCountLabel"
+        class="section-count">
+      </span>
+
+    </h2>
 
     <p class="muted">
+
       현재 등록된 문제 Pool을 직접 수정할 수 있습니다.
+
       <br>
+
       문제 / 보기 / 정답 / 난이도 / 주제 /
       트렌드 / 활성 여부 / 해설을 관리합니다.
+
       <br><br>
-      <b>💡 비활성 문제는 실제 퀴즈 출제에서 제외됩니다.</b>
+
+      <b>
+        💡 비활성 문제는 실제 퀴즈 출제에서 제외됩니다.
+      </b>
+
     </p>
 
     <div id="questions"></div>
@@ -613,17 +808,15 @@ label{
 
 <script>
 
+/* ==========================================
+   Supabase
+========================================== */
+
 const SUPABASE_URL =
   "https://fwfdldjgfulbjkqasgur.supabase.co";
 
 const SUPABASE_KEY =
   "sb_publishable_zd4g1OUE0gKJKD4kTNH3sQ_ouojAgd7";
-
-const ADMIN_EMAIL =
-  "dlalswjd4276@naver.com";
-
-const ADMIN_URL =
-  "https://security-quiz-sigma.vercel.app/admin.html";
 
 const API =
   SUPABASE_URL +
@@ -636,7 +829,22 @@ const sb =
   );
 
 
+/* ==========================================
+   로그인
+========================================== */
+
 async function login(){
+
+  const email =
+    document
+      .getElementById("email")
+      .value
+      .trim();
+
+  const password =
+    document
+      .getElementById("password")
+      .value;
 
   const msg =
     document.getElementById("loginMsg");
@@ -644,42 +852,65 @@ async function login(){
   const button =
     document.getElementById("loginButton");
 
-  msg.textContent =
-    "📩 로그인 링크를 요청하는 중입니다...";
+  if(!email){
+
+    msg.textContent =
+      "❌ 관리자 이메일을 입력해주세요.";
+
+    return;
+
+  }
+
+  if(!password){
+
+    msg.textContent =
+      "❌ 비밀번호를 입력해주세요.";
+
+    return;
+
+  }
 
   button.disabled = true;
+
+  msg.textContent =
+    "🔐 로그인 중입니다...";
 
   try{
 
     const result =
-      await sb.auth.signInWithOtp({
+      await sb.auth.signInWithPassword({
 
-        email: ADMIN_EMAIL,
+        email:email,
 
-   options:{
-    emailRedirectTo: ADMIN_URL
-      }
+        password:password
 
       });
 
     if(result.error){
+
       throw result.error;
+
     }
 
     msg.textContent =
-      "📩 로그인 링크를 이메일로 보냈습니다. 메일을 확인해주세요.";
+      "✅ 로그인되었습니다.";
+
+    await showAdmin();
 
   }
   catch(error){
 
     console.error(
-      "LOGIN ERROR",
+      "LOGIN ERROR:",
       error
     );
 
     msg.textContent =
-      "❌ 로그인 링크 발송 실패: " +
-      (error.message || "알 수 없는 오류");
+      "❌ 로그인 실패: " +
+      (
+        error.message ||
+        "이메일 또는 비밀번호를 확인해주세요."
+      );
 
   }
   finally{
@@ -690,6 +921,31 @@ async function login(){
 
 }
 
+
+/* ==========================================
+   관리자 화면 표시
+========================================== */
+
+async function showAdmin(){
+
+  document
+    .getElementById("login")
+    .classList
+    .add("hide");
+
+  document
+    .getElementById("app")
+    .classList
+    .remove("hide");
+
+  await loadDashboard();
+
+}
+
+
+/* ==========================================
+   기존 세션 확인
+========================================== */
 
 async function checkSession(){
 
@@ -705,17 +961,7 @@ async function checkSession(){
 
     if(session){
 
-      document
-        .getElementById("login")
-        .classList
-        .add("hide");
-
-      document
-        .getElementById("app")
-        .classList
-        .remove("hide");
-
-      await loadDashboard();
+      await showAdmin();
 
     }
 
@@ -723,7 +969,7 @@ async function checkSession(){
   catch(error){
 
     console.error(
-      "SESSION ERROR",
+      "SESSION ERROR:",
       error
     );
 
@@ -731,6 +977,10 @@ async function checkSession(){
 
 }
 
+
+/* ==========================================
+   관리자 API
+========================================== */
 
 async function api(
   action,
@@ -783,10 +1033,15 @@ async function api(
   let json = {};
 
   try{
-    json = await response.json();
+
+    json =
+      await response.json();
+
   }
   catch(error){
+
     json = {};
+
   }
 
   if(!response.ok){
@@ -803,6 +1058,10 @@ async function api(
 }
 
 
+/* ==========================================
+   날짜
+========================================== */
+
 function dt(value){
 
   if(!value){
@@ -814,7 +1073,10 @@ function dt(value){
 
   const pad =
     function(n){
-      return String(n).padStart(2,"0");
+
+      return String(n)
+        .padStart(2,"0");
+
     };
 
   return (
@@ -835,7 +1097,9 @@ function dt(value){
 function localDate(value){
 
   if(!value){
+
     return "-";
+
   }
 
   return new Date(value)
@@ -844,14 +1108,22 @@ function localDate(value){
 }
 
 
+/* ==========================================
+   HTML Escape
+========================================== */
+
 function escapeHtml(value){
 
-  return String(value == null ? "" : value)
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#039;");
+  return String(
+    value == null
+    ? ""
+    : value
+  )
+  .replace(/&/g,"&amp;")
+  .replace(/</g,"&lt;")
+  .replace(/>/g,"&gt;")
+  .replace(/"/g,"&quot;")
+  .replace(/'/g,"&#039;");
 
 }
 
@@ -863,6 +1135,10 @@ function escapeAttribute(value){
 }
 
 
+/* ==========================================
+   Dashboard
+========================================== */
+
 async function loadDashboard(){
 
   try{
@@ -873,49 +1149,65 @@ async function loadDashboard(){
     const stats =
       data.stats || {};
 
-    document.getElementById("visits")
+
+    document
+      .getElementById("visits")
       .textContent =
       stats.visits == null
       ? "-"
       : stats.visits;
 
-    document.getElementById("participants")
+
+    document
+      .getElementById("participants")
       .textContent =
       stats.participants == null
       ? "-"
       : stats.participants;
 
-    document.getElementById("attempts")
+
+    document
+      .getElementById("attempts")
       .textContent =
       stats.attempts == null
       ? "-"
       : stats.attempts;
 
-    document.getElementById("completion")
-      .textContent =
-      (stats.completion_rate == null
-      ? "-"
-      : stats.completion_rate + "%");
 
-    document.getElementById("avgCorrect")
+    document
+      .getElementById("completion")
       .textContent =
-      (stats.avg_correct == null
+      stats.completion_rate == null
       ? "-"
-      : stats.avg_correct + "/10");
+      : stats.completion_rate + "%";
 
-    document.getElementById("avgScore")
+
+    document
+      .getElementById("avgCorrect")
+      .textContent =
+      stats.avg_correct == null
+      ? "-"
+      : stats.avg_correct + "/10";
+
+
+    document
+      .getElementById("avgScore")
       .textContent =
       stats.avg_score == null
       ? "-"
       : stats.avg_score + "점";
 
-    document.getElementById("avgElapsed")
-      .textContent =
-      (stats.avg_elapsed == null
-      ? "-"
-      : stats.avg_elapsed + "초");
 
-    document.getElementById("submitted")
+    document
+      .getElementById("avgElapsed")
+      .textContent =
+      stats.avg_elapsed == null
+      ? "-"
+      : stats.avg_elapsed + "초";
+
+
+    document
+      .getElementById("submitted")
       .textContent =
       stats.submitted == null
       ? "-"
@@ -924,27 +1216,42 @@ async function loadDashboard(){
 
     if(data.settings){
 
-      document.getElementById("startAt")
+      document
+        .getElementById("startAt")
         .value =
-        dt(data.settings.start_at);
+        dt(
+          data.settings.start_at
+        );
 
-      document.getElementById("endAt")
+
+      document
+        .getElementById("endAt")
         .value =
-        dt(data.settings.end_at);
+        dt(
+          data.settings.end_at
+        );
 
-      document.getElementById("qCount")
+
+      document
+        .getElementById("qCount")
         .value =
         data.settings.question_count;
 
-      document.getElementById("easy")
+
+      document
+        .getElementById("easy")
         .value =
         data.settings.easy_count;
 
-      document.getElementById("medium")
+
+      document
+        .getElementById("medium")
         .value =
         data.settings.medium_count;
 
-      document.getElementById("hard")
+
+      document
+        .getElementById("hard")
         .value =
         data.settings.hard_count;
 
@@ -955,13 +1262,16 @@ async function loadDashboard(){
       data.daily || []
     );
 
+
     renderLeaders(
       data.leaders || []
     );
 
+
     renderParticipants(
       data.participants_list || []
     );
+
 
     renderQuestions(
       data.questions || []
@@ -971,7 +1281,7 @@ async function loadDashboard(){
   catch(error){
 
     console.error(
-      "DASHBOARD ERROR",
+      "DASHBOARD ERROR:",
       error
     );
 
@@ -985,6 +1295,10 @@ async function loadDashboard(){
 }
 
 
+/* ==========================================
+   일별 통계
+========================================== */
+
 function renderDaily(list){
 
   const box =
@@ -993,47 +1307,63 @@ function renderDaily(list){
   if(!list.length){
 
     box.innerHTML =
-      "<tr><td colspan='4'>아직 데이터가 없습니다.</td></tr>";
+      "<tr>" +
+      "<td colspan='4'>" +
+      "아직 데이터가 없습니다." +
+      "</td>" +
+      "</tr>";
 
     return;
 
   }
 
   box.innerHTML =
-    list.map(
-      function(item){
+    list
+      .map(
+        function(item){
 
-        const rate =
-          item.attempts
-          ? Math.round(
-              item.completed /
-              item.attempts *
-              1000
-            ) / 10
-          : 0;
+          const rate =
+            item.attempts
+            ? Math.round(
+                item.completed /
+                item.attempts *
+                1000
+              ) / 10
+            : 0;
 
-        return (
-          "<tr>" +
-          "<td>" +
-          escapeHtml(item.date) +
-          "</td>" +
-          "<td>" +
-          item.attempts +
-          "</td>" +
-          "<td>" +
-          item.completed +
-          "</td>" +
-          "<td>" +
-          rate +
-          "%</td>" +
-          "</tr>"
-        );
+          return (
+            "<tr>" +
 
-      }
-    ).join("");
+            "<td>" +
+            escapeHtml(item.date) +
+            "</td>" +
+
+            "<td>" +
+            item.attempts +
+            "</td>" +
+
+            "<td>" +
+            item.completed +
+            "</td>" +
+
+            "<td>" +
+            rate +
+            "%" +
+            "</td>" +
+
+            "</tr>"
+          );
+
+        }
+      )
+      .join("");
 
 }
 
+
+/* ==========================================
+   TOP 10
+========================================== */
 
 function renderLeaders(list){
 
@@ -1046,46 +1376,68 @@ function renderLeaders(list){
   if(!list.length){
 
     box.innerHTML =
-      "<tr><td colspan='6'>아직 기록이 없습니다.</td></tr>";
+      "<tr>" +
+      "<td colspan='6'>" +
+      "아직 기록이 없습니다." +
+      "</td>" +
+      "</tr>";
 
     return;
 
   }
 
   box.innerHTML =
-    list.map(
-      function(item,index){
+    list
+      .map(
+        function(item,index){
 
-        const rank =
-          medals[index] ||
-          (index + 1) + "위";
+          const rank =
+            medals[index] ||
+            (index + 1) + "위";
 
-        return (
-          "<tr>" +
-          "<td>" + rank + "</td>" +
-          "<td>" +
-          escapeHtml(item.nickname) +
-          "</td>" +
-          "<td>" +
-          item.best_correct +
-          "/10</td>" +
-          "<td>" +
-          item.best_seconds +
-          "초</td>" +
-          "<td>" +
-          item.best_score +
-          "점</td>" +
-          "<td>" +
-          localDate(item.updated_at) +
-          "</td>" +
-          "</tr>"
-        );
+          return (
+            "<tr>" +
 
-      }
-    ).join("");
+            "<td>" +
+            rank +
+            "</td>" +
+
+            "<td>" +
+            escapeHtml(item.nickname) +
+            "</td>" +
+
+            "<td>" +
+            item.best_correct +
+            "/10" +
+            "</td>" +
+
+            "<td>" +
+            item.best_seconds +
+            "초" +
+            "</td>" +
+
+            "<td>" +
+            item.best_score +
+            "점" +
+            "</td>" +
+
+            "<td>" +
+            localDate(item.updated_at) +
+            "</td>" +
+
+            "</tr>"
+          );
+
+        }
+      )
+      .join("");
 
 }
 
+
+/* ==========================================
+   참가자 관리
+========================================== */
 
 function renderParticipants(list){
 
@@ -1097,80 +1449,106 @@ function renderParticipants(list){
   if(!list.length){
 
     box.innerHTML =
-      "<tr><td colspan='6'>아직 참가자가 없습니다.</td></tr>";
+      "<tr>" +
+      "<td colspan='6'>" +
+      "아직 참가자가 없습니다." +
+      "</td>" +
+      "</tr>";
 
     return;
 
   }
 
   box.innerHTML =
-    list.map(
-      function(person){
+    list
+      .map(
+        function(person){
 
-        const valid =
-          person.is_valid !== false;
+          const valid =
+            person.is_valid !== false;
 
-        const status =
-          valid
-          ? "<span class='badge badge-valid'>정상</span>"
-          : "<span class='badge badge-invalid'>🚫 무효</span>";
+          const status =
+            valid
+            ?
+            "<span class='badge badge-valid'>정상</span>"
+            :
+            "<span class='badge badge-invalid'>🚫 무효</span>";
 
-        const action =
-          valid
-          ?
-          "<button class='danger small-button' type='button' onclick=\"invalidateParticipant('" +
-          person.id +
-          "')\">🗑️ 무효 처리</button>"
-          :
-          "<button class='restore small-button' type='button' onclick=\"restoreParticipant('" +
-          person.id +
-          "')\">↩️ 복구</button>";
+          const action =
+            valid
+            ?
+            "<button " +
+            "class='danger small-button' " +
+            "type='button' " +
+            "onclick=\"invalidateParticipant('" +
+            person.id +
+            "')\">" +
+            "🗑️ 무효 처리" +
+            "</button>"
+            :
+            "<button " +
+            "class='restore small-button' " +
+            "type='button' " +
+            "onclick=\"restoreParticipant('" +
+            person.id +
+            "')\">" +
+            "↩️ 복구" +
+            "</button>";
 
-        return (
-          "<tr class='" +
-          (valid ? "" : "participant-invalid") +
-          "'>" +
+          return (
+            "<tr class='" +
+            (
+              valid
+              ? ""
+              : "participant-invalid"
+            ) +
+            "'>" +
 
-          "<td><b>" +
-          escapeHtml(person.nickname) +
-          "</b></td>" +
+            "<td><b>" +
+            escapeHtml(person.nickname) +
+            "</b></td>" +
 
-          "<td>" +
-          (
-            person.best_correct >= 0
-            ? person.best_correct + "/10"
-            : "-"
-          ) +
-          "</td>" +
+            "<td>" +
+            (
+              person.best_correct >= 0
+              ? person.best_correct + "/10"
+              : "-"
+            ) +
+            "</td>" +
 
-          "<td>" +
-          (
-            person.best_score >= 0
-            ? person.best_score + "점"
-            : "-"
-          ) +
-          "</td>" +
+            "<td>" +
+            (
+              person.best_score >= 0
+              ? person.best_score + "점"
+              : "-"
+            ) +
+            "</td>" +
 
-          "<td>" +
-          status +
-          "</td>" +
+            "<td>" +
+            status +
+            "</td>" +
 
-          "<td>" +
-          localDate(person.created_at) +
-          "</td>" +
+            "<td>" +
+            localDate(person.created_at) +
+            "</td>" +
 
-          "<td class='action-cell'>" +
-          action +
-          "</td>" +
+            "<td class='action-cell'>" +
+            action +
+            "</td>" +
 
-          "</tr>"
-        );
+            "</tr>"
+          );
 
-      }
-    ).join("");
+        }
+      )
+      .join("");
 
 }
 
+
+/* ==========================================
+   참가자 무효
+========================================== */
 
 async function invalidateParticipant(id){
 
@@ -1212,6 +1590,10 @@ async function invalidateParticipant(id){
 }
 
 
+/* ==========================================
+   참가자 복구
+========================================== */
+
 async function restoreParticipant(id){
 
   const ok =
@@ -1251,27 +1633,40 @@ async function restoreParticipant(id){
 }
 
 
+/* ==========================================
+   퀴즈 설정 저장
+========================================== */
+
 async function saveSettings(){
 
   const q =
     Number(
-      document.getElementById("qCount").value
+      document
+        .getElementById("qCount")
+        .value
     );
 
   const easy =
     Number(
-      document.getElementById("easy").value
+      document
+        .getElementById("easy")
+        .value
     );
 
   const medium =
     Number(
-      document.getElementById("medium").value
+      document
+        .getElementById("medium")
+        .value
     );
 
   const hard =
     Number(
-      document.getElementById("hard").value
+      document
+        .getElementById("hard")
+        .value
     );
+
 
   if(
     q !==
@@ -1288,11 +1683,17 @@ async function saveSettings(){
 
   }
 
+
   const startValue =
-    document.getElementById("startAt").value;
+    document
+      .getElementById("startAt")
+      .value;
 
   const endValue =
-    document.getElementById("endAt").value;
+    document
+      .getElementById("endAt")
+      .value;
+
 
   if(!startValue || !endValue){
 
@@ -1303,6 +1704,7 @@ async function saveSettings(){
     return;
 
   }
+
 
   if(
     new Date(startValue) >=
@@ -1317,27 +1719,37 @@ async function saveSettings(){
 
   }
 
+
   try{
 
     await api(
       "settings",
       {
         start_at:
-          new Date(startValue).toISOString(),
+          new Date(
+            startValue
+          ).toISOString(),
 
         end_at:
-          new Date(endValue).toISOString(),
+          new Date(
+            endValue
+          ).toISOString(),
 
         question_count:q,
+
         easy_count:easy,
+
         medium_count:medium,
+
         hard_count:hard
       }
     );
 
+
     alert(
       "🐣 퀴즈 설정을 저장했습니다!"
     );
+
 
     await loadDashboard();
 
@@ -1354,314 +1766,409 @@ async function saveSettings(){
 }
 
 
+/* ==========================================
+   문제 Pool
+========================================== */
+
 function renderQuestions(list){
 
   const box =
-    document.getElementById("questions");
+    document.getElementById(
+      "questions"
+    );
+
+  const countLabel =
+    document.getElementById(
+      "questionCountLabel"
+    );
+
+
+  countLabel.textContent =
+    list.length +
+    "개 등록됨";
+
 
   if(!list.length){
 
     box.innerHTML =
-      "<div class='empty'>등록된 문제가 없습니다.</div>";
+      "<div class='empty'>" +
+      "등록된 문제가 없습니다." +
+      "</div>";
 
     return;
 
   }
 
+
   box.innerHTML =
-    list.map(
-      function(question,index){
+    list
+      .map(
+        function(question,index){
 
-        const options =
-          Array.isArray(question.options)
-          ? question.options
-          : [];
+          const options =
+            Array.isArray(
+              question.options
+            )
+            ? question.options
+            : [];
 
-        let correct =
-          Number(question.correct_index);
 
-        if(
-          correct < 0 ||
-          correct > 3 ||
-          !Number.isFinite(correct)
-        ){
-          correct = 0;
-        }
+          let correct =
+            Number(
+              question.correct_index
+            );
 
-        const numberLabels =
-          ["①","②","③","④"];
 
-        let optionHtml = "";
+          if(
+            correct < 0 ||
+            correct > 3 ||
+            !Number.isFinite(correct)
+          ){
 
-        for(
-          let i = 0;
-          i < 4;
-          i++
-        ){
+            correct = 0;
 
-          optionHtml +=
-            "<div class='option-row'>" +
-            "<div class='option-label'>" +
-            numberLabels[i] +
+          }
+
+
+          const labels =
+            ["①","②","③","④"];
+
+
+          let optionHtml = "";
+
+
+          for(
+            let i = 0;
+            i < 4;
+            i++
+          ){
+
+            optionHtml +=
+
+              "<div class='option-row'>" +
+
+              "<div class='option-label'>" +
+              labels[i] +
+              "</div>" +
+
+              "<input " +
+              "id='o_" +
+              question.id +
+              "_" +
+              i +
+              "' " +
+              "value='" +
+              escapeAttribute(
+                options[i] || ""
+              ) +
+              "' " +
+              "placeholder='보기 " +
+              (i + 1) +
+              "'>" +
+
+              "</div>";
+
+          }
+
+
+          let answerHtml = "";
+
+
+          for(
+            let i = 0;
+            i < 4;
+            i++
+          ){
+
+            answerHtml +=
+
+              "<label>" +
+
+              "<input " +
+              "type='radio' " +
+              "name='answer_" +
+              question.id +
+              "' " +
+              "value='" +
+              i +
+              "'" +
+
+              (
+                correct === i
+                ? " checked"
+                : ""
+              ) +
+
+              ">" +
+
+              "<span>" +
+              labels[i] +
+              "</span>" +
+
+              "</label>";
+
+          }
+
+
+          const trendBadge =
+            question.is_trending
+            ?
+            "<span class='badge badge-trending'>" +
+            "🔥 트렌드" +
+            "</span>"
+            :
+            "";
+
+
+          const activeBadge =
+            question.active
+            ?
+            "<span class='badge badge-active'>" +
+            "활성" +
+            "</span>"
+            :
+            "<span class='badge badge-inactive'>" +
+            "비활성" +
+            "</span>";
+
+
+          return (
+
+            "<details class='card question-card'>" +
+
+            "<summary>" +
+
+            "<div class='question-header'>" +
+
+            "<div class='question-number'>" +
+            "#" +
+            (index + 1) +
             "</div>" +
-            "<input " +
-            "id='o_" +
+
+            "<div class='question-title'>" +
+
+            "<b>" +
+            escapeHtml(
+              question.question
+            ) +
+            "</b>" +
+
+            "<br>" +
+
+            "<span class='badge'>" +
+            escapeHtml(
+              question.difficulty || ""
+            ) +
+            "</span>" +
+
+            trendBadge +
+
+            activeBadge +
+
+            "<span class='badge badge-answer'>" +
+            "정답 " +
+            labels[correct] +
+            "</span>" +
+
+            "</div>" +
+
+            "</div>" +
+
+            "</summary>" +
+
+
+            "<div class='question-editor'>" +
+
+
+            "<label>문제</label>" +
+
+            "<textarea " +
+            "id='q_" +
             question.id +
-            "_" +
-            i +
+            "' " +
+            "rows='3'>" +
+            escapeHtml(
+              question.question || ""
+            ) +
+            "</textarea>" +
+
+
+            "<label>보기</label>" +
+
+            optionHtml +
+
+
+            "<label>정답</label>" +
+
+            "<div class='answer-selector'>" +
+
+            answerHtml +
+
+            "</div>" +
+
+
+            "<div class='editor-grid'>" +
+
+
+            "<div>" +
+
+            "<label>난이도</label>" +
+
+            "<select id='d_" +
+            question.id +
+            "'>" +
+
+            "<option value='쉬움'" +
+            (
+              question.difficulty === "쉬움"
+              ? " selected"
+              : ""
+            ) +
+            ">쉬움</option>" +
+
+            "<option value='보통'" +
+            (
+              question.difficulty === "보통"
+              ? " selected"
+              : ""
+            ) +
+            ">보통</option>" +
+
+            "<option value='어려움'" +
+            (
+              question.difficulty === "어려움"
+              ? " selected"
+              : ""
+            ) +
+            ">어려움</option>" +
+
+            "</select>" +
+
+            "</div>" +
+
+
+            "<div>" +
+
+            "<label>주제</label>" +
+
+            "<input " +
+            "id='t_" +
+            question.id +
             "' " +
             "value='" +
             escapeAttribute(
-              options[i] || ""
+              question.topic || ""
             ) +
-            "' " +
-            "placeholder='보기 " +
-            (i + 1) +
             "'>" +
-            "</div>";
 
-        }
+            "</div>" +
 
 
-        let answerHtml = "";
+            "<div>" +
 
-        for(
-          let i = 0;
-          i < 4;
-          i++
-        ){
+            "<label>활성 여부</label>" +
 
-          answerHtml +=
-            "<label>" +
-            "<input " +
-            "type='radio' " +
-            "name='answer_" +
+            "<select id='a_" +
             question.id +
-            "' " +
-            "value='" +
-            i +
-            "'" +
+            "'>" +
+
+            "<option value='true'" +
             (
-              correct === i
-              ? " checked"
+              question.active
+              ? " selected"
               : ""
             ) +
-            ">" +
-            "<span>" +
-            numberLabels[i] +
-            "</span>" +
-            "</label>";
+            ">활성</option>" +
+
+            "<option value='false'" +
+            (
+              !question.active
+              ? " selected"
+              : ""
+            ) +
+            ">비활성</option>" +
+
+            "</select>" +
+
+            "</div>" +
+
+
+            "<div>" +
+
+            "<label>트렌드 여부</label>" +
+
+            "<select id='tr_" +
+            question.id +
+            "'>" +
+
+            "<option value='false'" +
+            (
+              !question.is_trending
+              ? " selected"
+              : ""
+            ) +
+            ">일반 문제</option>" +
+
+            "<option value='true'" +
+            (
+              question.is_trending
+              ? " selected"
+              : ""
+            ) +
+            ">🔥 트렌드 문제</option>" +
+
+            "</select>" +
+
+            "</div>" +
+
+
+            "</div>" +
+
+
+            "<label>해설 / 출처 메모</label>" +
+
+            "<textarea " +
+            "id='s_" +
+            question.id +
+            "' " +
+            "rows='4' " +
+            "placeholder='정답 해설 또는 출처를 입력하세요.'>" +
+
+            escapeHtml(
+              question.source_note || ""
+            ) +
+
+            "</textarea>" +
+
+
+            "<button " +
+            "class='save-question' " +
+            "type='button' " +
+            "onclick=\"saveQuestion('" +
+            question.id +
+            "')\">" +
+
+            "💾 문제 / 보기 / 정답 저장" +
+
+            "</button>" +
+
+
+            "</div>" +
+
+            "</details>"
+
+          );
 
         }
-
-
-        const trendBadge =
-          question.is_trending
-          ? "<span class='badge badge-trending'>🔥 트렌드</span>"
-          : "";
-
-        const activeBadge =
-          !question.active
-          ? "<span class='badge'>비활성</span>"
-          : "";
-
-        return (
-
-          "<details class='card question-card'>" +
-
-          "<summary>" +
-
-          "<div class='question-header'>" +
-
-          "<div class='question-number'>" +
-          "#" +
-          (index + 1) +
-          "</div>" +
-
-          "<div class='question-title'>" +
-
-          "<b>" +
-          escapeHtml(question.question) +
-          "</b>" +
-
-          "<br>" +
-
-          "<span class='badge'>" +
-          escapeHtml(question.difficulty || "") +
-          "</span>" +
-
-          trendBadge +
-          activeBadge +
-
-          "<span class='badge badge-answer'>" +
-          "정답 " +
-          numberLabels[correct] +
-          "</span>" +
-
-          "</div>" +
-
-          "</div>" +
-
-          "</summary>" +
-
-          "<div class='question-editor'>" +
-
-          "<label>문제</label>" +
-
-          "<textarea id='q_" +
-          question.id +
-          "' rows='3'>" +
-          escapeHtml(question.question || "") +
-          "</textarea>" +
-
-          "<label>보기</label>" +
-
-          optionHtml +
-
-          "<label>정답</label>" +
-
-          "<div class='answer-selector'>" +
-          answerHtml +
-          "</div>" +
-
-          "<div class='editor-grid'>" +
-
-          "<div>" +
-
-          "<label>난이도</label>" +
-
-          "<select id='d_" +
-          question.id +
-          "'>" +
-
-          "<option value='쉬움'" +
-          (
-            question.difficulty === "쉬움"
-            ? " selected"
-            : ""
-          ) +
-          ">쉬움</option>" +
-
-          "<option value='보통'" +
-          (
-            question.difficulty === "보통"
-            ? " selected"
-            : ""
-          ) +
-          ">보통</option>" +
-
-          "<option value='어려움'" +
-          (
-            question.difficulty === "어려움"
-            ? " selected"
-            : ""
-          ) +
-          ">어려움</option>" +
-
-          "</select>" +
-
-          "</div>" +
-
-          "<div>" +
-
-          "<label>주제</label>" +
-
-          "<input id='t_" +
-          question.id +
-          "' value='" +
-          escapeAttribute(question.topic || "") +
-          "'>" +
-
-          "</div>" +
-
-          "<div>" +
-
-          "<label>활성 여부</label>" +
-
-          "<select id='a_" +
-          question.id +
-          "'>" +
-
-          "<option value='true'" +
-          (
-            question.active
-            ? " selected"
-            : ""
-          ) +
-          ">활성</option>" +
-
-          "<option value='false'" +
-          (
-            !question.active
-            ? " selected"
-            : ""
-          ) +
-          ">비활성</option>" +
-
-          "</select>" +
-
-          "</div>" +
-
-          "<div>" +
-
-          "<label>트렌드 여부</label>" +
-
-          "<select id='tr_" +
-          question.id +
-          "'>" +
-
-          "<option value='false'" +
-          (
-            !question.is_trending
-            ? " selected"
-            : ""
-          ) +
-          ">일반 문제</option>" +
-
-          "<option value='true'" +
-          (
-            question.is_trending
-            ? " selected"
-            : ""
-          ) +
-          ">🔥 트렌드 문제</option>" +
-
-          "</select>" +
-
-          "</div>" +
-
-          "</div>" +
-
-          "<label>해설 / 출처 메모</label>" +
-
-          "<textarea id='s_" +
-          question.id +
-          "' rows='4' placeholder='정답 해설 또는 출처를 입력하세요.'>" +
-          escapeHtml(question.source_note || "") +
-          "</textarea>" +
-
-          "<button " +
-          "class='save-question' " +
-          "type='button' " +
-          "onclick=\"saveQuestion('" +
-          question.id +
-          "')\">" +
-
-          "💾 문제 / 보기 / 정답 저장" +
-
-          "</button>" +
-
-          "</div>" +
-
-          "</details>"
-
-        );
-
-      }
-    ).join("");
+      )
+      .join("");
 
 }
 
+
+/* ==========================================
+   문제 저장
+========================================== */
 
 async function saveQuestion(id){
 
@@ -1670,12 +2177,17 @@ async function saveQuestion(id){
     const dashboard =
       await api("dashboard");
 
+
     const current =
-      (dashboard.questions || []).find(
-        function(item){
-          return item.id === id;
-        }
-      );
+      (dashboard.questions || [])
+        .find(
+          function(item){
+
+            return item.id === id;
+
+          }
+        );
+
 
     if(!current){
 
@@ -1685,7 +2197,9 @@ async function saveQuestion(id){
 
     }
 
+
     const options = [];
+
 
     for(
       let i = 0;
@@ -1695,8 +2209,12 @@ async function saveQuestion(id){
 
       const input =
         document.getElementById(
-          "o_" + id + "_" + i
+          "o_" +
+          id +
+          "_" +
+          i
         );
+
 
       options.push(
         input
@@ -1706,10 +2224,13 @@ async function saveQuestion(id){
 
     }
 
+
     if(
       options.some(
         function(value){
+
           return !value;
+
         }
       )
     ){
@@ -1722,12 +2243,14 @@ async function saveQuestion(id){
 
     }
 
+
     const answer =
       document.querySelector(
         "input[name='answer_" +
         id +
         "']:checked"
       );
+
 
     if(!answer){
 
@@ -1739,10 +2262,16 @@ async function saveQuestion(id){
 
     }
 
+
     const question =
-      document.getElementById(
-        "q_" + id
-      ).value.trim();
+      document
+        .getElementById(
+          "q_" +
+          id
+        )
+        .value
+        .trim();
+
 
     if(!question){
 
@@ -1754,6 +2283,7 @@ async function saveQuestion(id){
 
     }
 
+
     await api(
       "question_update",
       {
@@ -1764,38 +2294,59 @@ async function saveQuestion(id){
         options:options,
 
         correct_index:
-          Number(answer.value),
+          Number(
+            answer.value
+          ),
 
         difficulty:
-          document.getElementById(
-            "d_" + id
-          ).value,
+          document
+            .getElementById(
+              "d_" +
+              id
+            )
+            .value,
 
         topic:
-          document.getElementById(
-            "t_" + id
-          ).value.trim(),
+          document
+            .getElementById(
+              "t_" +
+              id
+            )
+            .value
+            .trim(),
 
         active:
-          document.getElementById(
-            "a_" + id
-          ).value === "true",
+          document
+            .getElementById(
+              "a_" +
+              id
+            )
+            .value === "true",
 
         is_trending:
-          document.getElementById(
-            "tr_" + id
-          ).value === "true",
+          document
+            .getElementById(
+              "tr_" +
+              id
+            )
+            .value === "true",
 
         source_note:
-          document.getElementById(
-            "s_" + id
-          ).value.trim()
+          document
+            .getElementById(
+              "s_" +
+              id
+            )
+            .value
+            .trim()
       }
     );
+
 
     alert(
       "🐣 문제 / 보기 / 정답을 저장했습니다!"
     );
+
 
     await loadDashboard();
 
@@ -1803,7 +2354,7 @@ async function saveQuestion(id){
   catch(error){
 
     console.error(
-      "QUESTION SAVE ERROR",
+      "QUESTION SAVE ERROR:",
       error
     );
 
@@ -1817,6 +2368,10 @@ async function saveQuestion(id){
 }
 
 
+/* ==========================================
+   로그아웃
+========================================== */
+
 async function logout(){
 
   await sb.auth.signOut();
@@ -1826,6 +2381,10 @@ async function logout(){
 }
 
 
+/* ==========================================
+   버튼 이벤트
+========================================== */
+
 document
   .getElementById("loginButton")
   .addEventListener(
@@ -1833,12 +2392,14 @@ document
     login
   );
 
+
 document
   .getElementById("logoutButton")
   .addEventListener(
     "click",
     logout
   );
+
 
 document
   .getElementById("settingsButton")
@@ -1848,12 +2409,48 @@ document
   );
 
 
+document
+  .getElementById("password")
+  .addEventListener(
+    "keydown",
+    function(event){
+
+      if(event.key === "Enter"){
+
+        login();
+
+      }
+
+    }
+  );
+
+
+/* ==========================================
+   Auth 상태
+========================================== */
+
 sb.auth.onAuthStateChange(
-  function(){
-    checkSession();
+  function(event,session){
+
+    if(
+      session &&
+      (
+        event === "SIGNED_IN" ||
+        event === "INITIAL_SESSION"
+      )
+    ){
+
+      showAdmin();
+
+    }
+
   }
 );
 
+
+/* ==========================================
+   시작
+========================================== */
 
 checkSession();
 
