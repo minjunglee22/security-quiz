@@ -340,7 +340,7 @@ button:hover{
     placeholder="귀여운 닉네임을 입력해주세요">
 
 
-  <button
+  <button id = "startButton" onclick="start()">
     onclick="start()">
 
     🐣 병아리 구하기 시작!
@@ -764,99 +764,122 @@ async function init(){
 
 async function start(){
 
-  try{
+const button =
+document.getElementById(
+'startButton'
+);
 
-    const n =
-      document
-        .getElementById(
-          'nick'
-        )
-        .value
-        .trim();
+try{
+
+```
+const n =
+  document
+    .getElementById(
+      'nick'
+    )
+    .value
+    .trim();
 
 
-    if(!n){
+if(!n){
 
-      alert(
-        '닉네임을 입력해주세요 🐣'
-      );
+  alert(
+    '닉네임을 입력해주세요 🐣'
+  );
 
-      return;
+  return;
 
+}
+
+
+// 버튼 즉시 잠금
+button.disabled = true;
+
+button.textContent =
+  '🐣 퀴즈를 준비하고 있어요...';
+
+
+const r =
+  await call(
+
+    'register',
+
+    {
+      nickname: n,
+      browser_id: getBrowserId()
     }
 
-
-  const r =
-    await call(
-
-      'register',
-
-      {
-        nickname:n,
-        browser_id:getBrowserId()
-      }
-
-    );  
+  );
 
 
-    token =
-      r.participant
-        .participant_token;
+token =
+  r.participant
+    .participant_token;
 
 
-    const x =
-      await call(
+const x =
+  await call(
 
-        'questions',
+    'questions',
 
-        {
-          token
-        }
+    {
+      token
+    }
 
-      );
-
-
-    aid =
-      x.attempt_id;
+  );
 
 
-    qs =
-      x.questions;
+aid =
+  x.attempt_id;
 
 
-    i = 0;
-
-    ans = {};
-
-
-    document
-      .getElementById(
-        'home'
-      )
-      .className =
-      'hide';
+qs =
+  x.questions;
 
 
-    document
-      .getElementById(
-        'quiz'
-      )
-      .className =
-      '';
+i = 0;
+
+ans = {};
 
 
-    show();
+document
+  .getElementById(
+    'home'
+  )
+  .className =
+  'hide';
 
-  }
 
-  catch(e){
+document
+  .getElementById(
+    'quiz'
+  )
+  .className =
+  '';
 
-    alert(
-      e.error ||
-      '오류가 발생했어요 🐣'
-    );
 
-  }
+show();
+```
+
+}
+
+catch(e){
+
+```
+// 오류가 나면 다시 누를 수 있도록 복구
+button.disabled = false;
+
+button.textContent =
+  '🐣 병아리 구하기 시작!';
+
+
+alert(
+  e.error ||
+  '오류가 발생했어요 🐣'
+);
+```
+
+}
 
 }
 
