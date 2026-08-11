@@ -1,4 +1,5 @@
 <!doctype html>
+
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
@@ -9,9 +10,7 @@
 
 <style>
 
-*{
-  box-sizing:border-box
-}
+*{box-sizing:border-box}
 
 body{
   margin:0;
@@ -34,17 +33,10 @@ body{
   margin-bottom:18px
 }
 
-h1{
-  margin:0 0 6px
-}
+h1{margin:0 0 6px}
+h2{margin-top:0}
 
-h2{
-  margin-top:0
-}
-
-.muted{
-  color:#667085
-}
+.muted{color:#667085}
 
 .grid{
   display:grid;
@@ -77,15 +69,18 @@ button{
   margin:4px 0
 }
 
+textarea{
+  resize:vertical;
+  line-height:1.5
+}
+
 button{
   background:#182230;
   color:#fff;
   cursor:pointer
 }
 
-button:hover{
-  opacity:.9
-}
+button:hover{opacity:.9}
 
 .primary{
   background:#ffd54f;
@@ -108,9 +103,7 @@ button:hover{
   font-weight:700
 }
 
-.logout{
-  max-width:120px
-}
+.logout{max-width:120px}
 
 .small-button{
   width:auto;
@@ -118,6 +111,12 @@ button:hover{
   padding:8px 12px;
   margin:0;
   font-size:12px
+}
+
+.save-question{
+  margin-top:18px;
+  background:#182230;
+  font-weight:700
 }
 
 table{
@@ -134,9 +133,7 @@ td{
   vertical-align:top
 }
 
-th{
-  white-space:nowrap
-}
+th{white-space:nowrap}
 
 .badge{
   display:inline-block;
@@ -157,9 +154,18 @@ th{
   color:#c92a3a
 }
 
-.hide{
-  display:none!important
+.badge-trending{
+  background:#fff2cc;
+  color:#946200
 }
+
+.badge-answer{
+  background:#e8f5e9;
+  color:#18794e;
+  font-weight:700
+}
+
+.hide{display:none!important}
 
 .login{
   max-width:480px;
@@ -174,6 +180,86 @@ th{
 summary{
   cursor:pointer;
   line-height:1.5
+}
+
+.question-header{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:12px;
+}
+
+.question-number{
+  color:#667085;
+  font-size:13px;
+  min-width:50px;
+}
+
+.question-title{
+  flex:1;
+}
+
+.question-editor{
+  margin-top:18px;
+  padding-top:18px;
+  border-top:1px solid #edf0f4
+}
+
+.option-row{
+  display:grid;
+  grid-template-columns:42px 1fr;
+  gap:8px;
+  align-items:center;
+  margin:7px 0;
+}
+
+.option-label{
+  width:42px;
+  height:42px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  border-radius:10px;
+  background:#f3f5f8;
+  font-weight:700;
+}
+
+.answer-selector{
+  display:grid;
+  grid-template-columns:repeat(4,1fr);
+  gap:8px;
+  margin-top:8px;
+}
+
+.answer-selector label{
+  margin:0;
+  cursor:pointer;
+}
+
+.answer-selector input{
+  display:none;
+}
+
+.answer-selector span{
+  display:block;
+  text-align:center;
+  padding:11px;
+  border:1px solid #d8dee8;
+  border-radius:10px;
+  background:#fff;
+}
+
+.answer-selector input:checked + span{
+  background:#e9f8ef;
+  border-color:#58a777;
+  color:#18794e;
+  font-weight:700;
+}
+
+.editor-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:14px;
 }
 
 label{
@@ -192,9 +278,7 @@ label{
   margin-bottom:16px
 }
 
-.scroll{
-  overflow:auto
-}
+.scroll{overflow:auto}
 
 .participant-invalid{
   background:#fff8f8
@@ -204,19 +288,27 @@ label{
   min-width:110px
 }
 
+.empty{
+  padding:30px;
+  text-align:center;
+  color:#667085
+}
+
 @media(max-width:800px){
 
   .grid{
     grid-template-columns:repeat(2,1fr)
   }
 
+  .editor-grid{
+    grid-template-columns:1fr
+  }
+
 }
 
 @media(max-width:500px){
 
-  .wrap{
-    padding:12px
-  }
+  .wrap{padding:12px}
 
   .grid{
     grid-template-columns:1fr 1fr
@@ -226,14 +318,17 @@ label{
     min-width:700px
   }
 
+  .answer-selector{
+    grid-template-columns:1fr 1fr
+  }
+
 }
 
 </style>
+
 </head>
 
-
 <body>
-
 
 <!-- ==========================================
      관리자 로그인
@@ -243,24 +338,24 @@ label{
   id="login"
   class="card login">
 
-  <h1>
-    🐣 보안 병아리 관리자
-  </h1>
+  <h1>🐣 보안 병아리 관리자</h1>
 
   <p class="muted">
     관리자 이메일로 로그인 링크를 보내드립니다.
   </p>
 
-  <input
-    id="email"
-    value="dlalswjd4276@naver.com"
-    readonly>
+<input
+ id="email"
+ value="dlalswjd4276@naver.com"
+ readonly>
 
-  <button
-    class="primary"
-    onclick="login()">
+<button
+ class="primary"
+ onclick="login()">
 
-    관리자 로그인 링크 보내기
+```
+관리자 로그인 링크 보내기
+```
 
   </button>
 
@@ -271,8 +366,6 @@ label{
 
 </div>
 
-
-
 <!-- ==========================================
      관리자 화면
 ========================================== -->
@@ -281,478 +374,296 @@ label{
   id="app"
   class="wrap hide">
 
-
   <!-- HEADER -->
 
   <div class="card">
 
-    <h1>
-      🐣 보안 병아리 관리자
-    </h1>
+```
+<h1>🐣 보안 병아리 관리자</h1>
 
-    <p class="muted">
-      보안 퀴즈 이벤트 운영 현황을 관리합니다.
-    </p>
+<p class="muted">
+  보안 퀴즈 이벤트 운영 현황을 관리합니다.
+</p>
 
-    <button
-      class="logout"
-      onclick="logout()">
+<button
+  class="logout"
+  onclick="logout()">
 
-      로그아웃
+  로그아웃
 
-    </button>
+</button>
+```
 
   </div>
 
-
-
-  <!-- ==========================================
-       주요 통계
-  ========================================== -->
+  <!-- 주요 통계 -->
 
   <div class="grid">
 
+```
+<div class="stat">
+  총 접속
+  <b id="visits">-</b>
+</div>
 
-    <div class="stat">
+<div class="stat">
+  고유 참가자
+  <b id="participants">-</b>
+</div>
 
-      총 접속
+<div class="stat">
+  총 도전
+  <b id="attempts">-</b>
+</div>
 
-      <b id="visits">
-        -
-      </b>
+<div class="stat">
+  완료율
+  <b id="completion">-</b>
+</div>
 
-    </div>
+<div class="stat">
+  평균 정답
+  <b id="avgCorrect">-</b>
+</div>
 
+<div class="stat">
+  평균 점수
+  <b id="avgScore">-</b>
+</div>
 
-    <div class="stat">
+<div class="stat">
+  평균 소요시간
+  <b id="avgElapsed">-</b>
+</div>
 
-      고유 참가자
-
-      <b id="participants">
-        -
-      </b>
-
-    </div>
-
-
-    <div class="stat">
-
-      총 도전
-
-      <b id="attempts">
-        -
-      </b>
-
-    </div>
-
-
-    <div class="stat">
-
-      완료율
-
-      <b id="completion">
-        -
-      </b>
-
-    </div>
-
-
-    <div class="stat">
-
-      평균 정답
-
-      <b id="avgCorrect">
-        -
-      </b>
-
-    </div>
-
-
-    <div class="stat">
-
-      평균 점수
-
-      <b id="avgScore">
-        -
-      </b>
-
-    </div>
-
-
-    <div class="stat">
-
-      평균 소요시간
-
-      <b id="avgElapsed">
-        -
-      </b>
-
-    </div>
-
-
-    <div class="stat">
-
-      완료 횟수
-
-      <b id="submitted">
-        -
-      </b>
-
-    </div>
-
+<div class="stat">
+  완료 횟수
+  <b id="submitted">-</b>
+</div>
+```
 
   </div>
 
-
-
-  <!-- ==========================================
-       퀴즈 기간 / 출제 설정
-  ========================================== -->
+  <!-- 퀴즈 기간 / 출제 설정 -->
 
   <div class="card">
 
-    <h2>
-      🗓️ 퀴즈 기간 / 출제 설정
-    </h2>
+```
+<h2>🗓️ 퀴즈 기간 / 출제 설정</h2>
 
+<div class="note">
 
-    <div class="note">
+  관리자가 변경한 기간과 난이도 설정은
+  실제 퀴즈 출제에 바로 반영됩니다.
 
-      관리자가 변경한 기간과 난이도 설정은
-      실제 퀴즈 출제에 바로 반영됩니다.
+  <br><br>
 
-      <br><br>
-
-      기간이 지나면 참가자는 퀴즈를
-      시작하거나 제출할 수 없습니다.
-
-    </div>
-
-
-    <div class="grid">
-
-
-      <div>
-
-        <label>
-          시작일시
-        </label>
-
-        <input
-          id="startAt"
-          type="datetime-local">
-
-      </div>
-
-
-      <div>
-
-        <label>
-          종료일시
-        </label>
-
-        <input
-          id="endAt"
-          type="datetime-local">
-
-      </div>
-
-
-      <div>
-
-        <label>
-          전체 문제 수
-        </label>
-
-        <input
-          id="qCount"
-          type="number"
-          min="1">
-
-      </div>
-
-
-      <div>
-
-        <label>
-          쉬움
-        </label>
-
-        <input
-          id="easy"
-          type="number"
-          min="0">
-
-      </div>
-
-
-      <div>
-
-        <label>
-          보통
-        </label>
-
-        <input
-          id="medium"
-          type="number"
-          min="0">
-
-      </div>
-
-
-      <div>
-
-        <label>
-          어려움
-        </label>
-
-        <input
-          id="hard"
-          type="number"
-          min="0">
-
-      </div>
-
-
-    </div>
-
-
-    <button
-      class="primary"
-      onclick="saveSettings()">
-
-      💾 설정 저장
-
-    </button>
-
-  </div>
-
-
-
-  <!-- ==========================================
-       일별 참여 추이
-  ========================================== -->
-
-  <div class="card">
-
-    <h2>
-      📈 일별 참여 추이
-    </h2>
-
-
-    <div class="scroll">
-
-      <table>
-
-        <thead>
-
-          <tr>
-
-            <th>
-              날짜
-            </th>
-
-            <th>
-              도전
-            </th>
-
-            <th>
-              완료
-            </th>
-
-            <th>
-              완료율
-            </th>
-
-          </tr>
-
-        </thead>
-
-
-        <tbody
-          id="daily">
-        </tbody>
-
-      </table>
-
-    </div>
-
-  </div>
-
-
-
-  <!-- ==========================================
-       TOP 10
-  ========================================== -->
-
-  <div class="card">
-
-    <h2>
-      🏆 현재 보안 병아리 TOP 10
-    </h2>
-
-
-    <div class="scroll">
-
-      <table>
-
-        <thead>
-
-          <tr>
-
-            <th>
-              순위
-            </th>
-
-            <th>
-              닉네임
-            </th>
-
-            <th>
-              정답
-            </th>
-
-            <th>
-              시간
-            </th>
-
-            <th>
-              점수
-            </th>
-
-            <th>
-              최종 갱신
-            </th>
-
-          </tr>
-
-        </thead>
-
-
-        <tbody
-          id="leaders">
-        </tbody>
-
-      </table>
-
-    </div>
-
-  </div>
-
-
-
-  <!-- ==========================================
-       참가자 관리
-  ========================================== -->
-
-  <div class="card">
-
-    <h2>
-      👤 참가자 관리
-    </h2>
-
-
-    <div class="note">
-
-      부적절한 닉네임 등 운영상 제외가 필요한
-      참가자는 <b>무효 처리</b>할 수 있습니다.
-
-      <br><br>
-
-      무효 처리된 참가자는 TOP 10과
-      최종 상품 대상에서 제외됩니다.
-
-      <br>
-
-      참가자 기록 자체는 삭제되지 않으며,
-      필요하면 다시 정상 상태로 복구할 수 있습니다.
-
-    </div>
-
-
-    <div class="scroll">
-
-      <table>
-
-        <thead>
-
-          <tr>
-
-            <th>
-              닉네임
-            </th>
-
-            <th>
-              최고 정답
-            </th>
-
-            <th>
-              최고 점수
-            </th>
-
-            <th>
-              상태
-            </th>
-
-            <th>
-              가입일
-            </th>
-
-            <th>
-              관리
-            </th>
-
-          </tr>
-
-        </thead>
-
-
-        <tbody
-          id="participantsList">
-        </tbody>
-
-      </table>
-
-    </div>
-
-  </div>
-
-
-
-  <!-- ==========================================
-       문제 관리
-  ========================================== -->
-
-  <div class="card">
-
-    <h2>
-      📚 문제 관리
-    </h2>
-
-
-    <p class="muted">
-
-      활성 문제만 실제 랜덤 출제 Pool에
-      포함됩니다.
-
-      <br>
-
-      난이도별 문제가 부족하면
-      퀴즈 시작이 차단됩니다.
-
-    </p>
-
-
-    <div
-      id="questions">
-    </div>
-
-  </div>
-
+  기간이 지나면 참가자는 퀴즈를
+  시작하거나 제출할 수 없습니다.
 
 </div>
 
+<div class="grid">
 
+  <div>
+    <label>시작일시</label>
+    <input
+      id="startAt"
+      type="datetime-local">
+  </div>
+
+  <div>
+    <label>종료일시</label>
+    <input
+      id="endAt"
+      type="datetime-local">
+  </div>
+
+  <div>
+    <label>전체 문제 수</label>
+    <input
+      id="qCount"
+      type="number"
+      min="1">
+  </div>
+
+  <div>
+    <label>쉬움</label>
+    <input
+      id="easy"
+      type="number"
+      min="0">
+  </div>
+
+  <div>
+    <label>보통</label>
+    <input
+      id="medium"
+      type="number"
+      min="0">
+  </div>
+
+  <div>
+    <label>어려움</label>
+    <input
+      id="hard"
+      type="number"
+      min="0">
+  </div>
+
+</div>
+
+<button
+  class="primary"
+  onclick="saveSettings()">
+
+  💾 설정 저장
+
+</button>
+```
+
+  </div>
+
+  <!-- 일별 참여 추이 -->
+
+  <div class="card">
+
+```
+<h2>📈 일별 참여 추이</h2>
+
+<div class="scroll">
+
+  <table>
+
+    <thead>
+      <tr>
+        <th>날짜</th>
+        <th>도전</th>
+        <th>완료</th>
+        <th>완료율</th>
+      </tr>
+    </thead>
+
+    <tbody id="daily"></tbody>
+
+  </table>
+
+</div>
+```
+
+  </div>
+
+  <!-- TOP 10 -->
+
+  <div class="card">
+
+```
+<h2>🏆 현재 보안 병아리 TOP 10</h2>
+
+<div class="scroll">
+
+  <table>
+
+    <thead>
+      <tr>
+        <th>순위</th>
+        <th>닉네임</th>
+        <th>정답</th>
+        <th>시간</th>
+        <th>점수</th>
+        <th>최종 갱신</th>
+      </tr>
+    </thead>
+
+    <tbody id="leaders"></tbody>
+
+  </table>
+
+</div>
+```
+
+  </div>
+
+  <!-- 참가자 관리 -->
+
+  <div class="card">
+
+```
+<h2>👤 참가자 관리</h2>
+
+<div class="note">
+
+  부적절한 닉네임 등 운영상 제외가 필요한
+  참가자는 <b>무효 처리</b>할 수 있습니다.
+
+  <br><br>
+
+  무효 처리된 참가자는 TOP 10과
+  최종 상품 대상에서 제외됩니다.
+
+  <br>
+
+  참가자 기록 자체는 삭제되지 않으며,
+  필요하면 다시 정상 상태로 복구할 수 있습니다.
+
+</div>
+
+<div class="scroll">
+
+  <table>
+
+    <thead>
+
+      <tr>
+        <th>닉네임</th>
+        <th>최고 정답</th>
+        <th>최고 점수</th>
+        <th>상태</th>
+        <th>가입일</th>
+        <th>관리</th>
+      </tr>
+
+    </thead>
+
+    <tbody id="participantsList"></tbody>
+
+  </table>
+
+</div>
+```
+
+  </div>
+
+  <!-- 문제 관리 -->
+
+  <div class="card">
+
+```
+<h2>📚 문제 Pool 관리</h2>
+
+<p class="muted">
+
+  현재 등록된 문제 Pool을 직접 수정할 수 있습니다.
+
+  <br>
+
+  문제 / 보기 / 정답 / 난이도 / 주제 /
+  트렌드 / 활성 여부 / 해설을 관리합니다.
+
+  <br><br>
+
+  <b>
+    💡 비활성 문제는 실제 퀴즈 출제에서 제외됩니다.
+  </b>
+
+</p>
+
+<div id="questions"></div>
+```
+
+  </div>
+
+</div>
 
 <script>
 
@@ -762,27 +673,23 @@ label{
 ========================================== */
 
 const SUPABASE_URL =
-"https://fwfdldjgfulbjkqasgur.supabase.co";
-
+  "https://fwfdldjgfulbjkqasgur.supabase.co";
 
 const SUPABASE_KEY =
-"sb_publishable_zd4g1OUE0gKJKD4kTNH3sQ_ouojAgd7";
-
+  "sb_publishable_zd4g1OUE0gKJKD4kTNH3sQ_ouojAgd7";
 
 const sb =
-supabase.createClient(
-  SUPABASE_URL,
-  SUPABASE_KEY
-);
-
+  supabase.createClient(
+    SUPABASE_URL,
+    SUPABASE_KEY
+  );
 
 const ADMIN_EMAIL =
-"dlalswjd4276@naver.com";
-
+  "dlalswjd4276@naver.com";
 
 const API =
-SUPABASE_URL +
-"/functions/v1/admin-api";
+  SUPABASE_URL +
+  "/functions/v1/admin-api";
 
 
 
@@ -794,9 +701,7 @@ async function login(){
 
   try{
 
-    const {
-      error
-    } =
+    const { error } =
       await sb.auth.signInWithOtp({
 
         email:
@@ -809,18 +714,12 @@ async function login(){
 
       });
 
-
     if(error){
-
       throw error;
-
     }
 
-
     document
-      .getElementById(
-        "loginMsg"
-      )
+      .getElementById("loginMsg")
       .textContent =
       "📩 로그인 링크를 이메일로 보냈습니다. 메일을 확인해주세요.";
 
@@ -829,9 +728,7 @@ async function login(){
   catch(e){
 
     document
-      .getElementById(
-        "loginMsg"
-      )
+      .getElementById("loginMsg")
       .textContent =
       "로그인 오류: " +
       e.message;
@@ -848,29 +745,20 @@ async function login(){
 
 async function session(){
 
-  const {
-    data
-  } =
+  const { data } =
     await sb.auth.getSession();
-
 
   if(data.session){
 
     document
-      .getElementById(
-        "login"
-      )
+      .getElementById("login")
       .classList
       .add("hide");
 
-
     document
-      .getElementById(
-        "app"
-      )
+      .getElementById("app")
       .classList
       .remove("hide");
-
 
     load();
 
@@ -889,11 +777,8 @@ async function api(
   body={}
 ){
 
-  const {
-    data
-  } =
+  const { data } =
     await sb.auth.getSession();
-
 
   if(!data.session){
 
@@ -903,16 +788,13 @@ async function api(
 
   }
 
-
   const r =
     await fetch(
 
       API,
 
       {
-
-        method:
-          "POST",
+        method:"POST",
 
         headers:{
 
@@ -927,21 +809,16 @@ async function api(
 
         body:
           JSON.stringify({
-
             action,
-
             ...body
-
           })
 
       }
 
     );
 
-
   const x =
     await r.json();
-
 
   if(!r.ok){
 
@@ -951,7 +828,6 @@ async function api(
     );
 
   }
-
 
   return x;
 
@@ -966,74 +842,42 @@ async function api(
 function dt(value){
 
   if(!value){
-
     return "";
-
   }
-
 
   const d =
     new Date(value);
 
-
   const pad =
     n =>
-    String(n)
-      .padStart(
-        2,
-        "0"
-      );
-
+      String(n)
+        .padStart(2,"0");
 
   return (
 
     d.getFullYear() +
-
     "-" +
-
-    pad(
-      d.getMonth()+1
-    ) +
-
+    pad(d.getMonth()+1) +
     "-" +
-
-    pad(
-      d.getDate()
-    ) +
-
+    pad(d.getDate()) +
     "T" +
-
-    pad(
-      d.getHours()
-    ) +
-
+    pad(d.getHours()) +
     ":" +
-
-    pad(
-      d.getMinutes()
-    )
+    pad(d.getMinutes())
 
   );
 
 }
 
 
-function localDate(
-  value
-){
+function localDate(value){
 
   if(!value){
-
     return "-";
-
   }
 
-
-  return new Date(
-    value
-  ).toLocaleString(
-    "ko-KR"
-  );
+  return new Date(value)
+    .toLocaleString("ko-KR");
 
 }
 
@@ -1048,154 +892,99 @@ async function load(){
   try{
 
     const x =
-      await api(
-        "dashboard"
-      );
-
+      await api("dashboard");
 
     const s =
       x.stats;
 
 
     document
-      .getElementById(
-        "visits"
-      )
+      .getElementById("visits")
       .textContent =
       s.visits;
 
-
     document
-      .getElementById(
-        "participants"
-      )
+      .getElementById("participants")
       .textContent =
       s.participants;
 
-
     document
-      .getElementById(
-        "attempts"
-      )
+      .getElementById("attempts")
       .textContent =
       s.attempts;
 
-
     document
-      .getElementById(
-        "completion"
-      )
+      .getElementById("completion")
       .textContent =
       s.completion_rate +
       "%";
 
-
     document
-      .getElementById(
-        "avgCorrect"
-      )
+      .getElementById("avgCorrect")
       .textContent =
       s.avg_correct +
       "/10";
 
-
     document
-      .getElementById(
-        "avgScore"
-      )
+      .getElementById("avgScore")
       .textContent =
       s.avg_score;
 
-
     document
-      .getElementById(
-        "avgElapsed"
-      )
+      .getElementById("avgElapsed")
       .textContent =
       s.avg_elapsed +
       "초";
 
-
     document
-      .getElementById(
-        "submitted"
-      )
+      .getElementById("submitted")
       .textContent =
       s.submitted;
 
 
-
-    /* 기간 */
-
     document
-      .getElementById(
-        "startAt"
-      )
+      .getElementById("startAt")
       .value =
-      dt(
-        x.settings.start_at
-      );
-
+      dt(x.settings.start_at);
 
     document
-      .getElementById(
-        "endAt"
-      )
+      .getElementById("endAt")
       .value =
-      dt(
-        x.settings.end_at
-      );
+      dt(x.settings.end_at);
 
-
-    /* 출제 설정 */
 
     document
-      .getElementById(
-        "qCount"
-      )
+      .getElementById("qCount")
       .value =
       x.settings.question_count;
 
-
     document
-      .getElementById(
-        "easy"
-      )
+      .getElementById("easy")
       .value =
       x.settings.easy_count;
 
-
     document
-      .getElementById(
-        "medium"
-      )
+      .getElementById("medium")
       .value =
       x.settings.medium_count;
 
-
     document
-      .getElementById(
-        "hard"
-      )
+      .getElementById("hard")
       .value =
       x.settings.hard_count;
-
 
 
     renderDaily(
       x.daily || []
     );
 
-
     renderLeaders(
       x.leaders || []
     );
 
-
     renderParticipants(
       x.participants_list || []
     );
-
 
     renderQuestions(
       x.questions || []
@@ -1220,86 +1009,60 @@ async function load(){
    일별 통계
 ========================================== */
 
-function renderDaily(
-  list
-){
+function renderDaily(list){
 
   const box =
-    document
-      .getElementById(
-        "daily"
-      );
-
+    document.getElementById("daily");
 
   if(!list.length){
 
     box.innerHTML = `
+      <tr>
+        <td colspan="4">
+          아직 데이터가 없습니다.
+        </td>
+      </tr>
+    `;
+
+    return;
+  }
+
+  box.innerHTML =
+    list.map(x => `
 
       <tr>
 
-        <td colspan="4">
+        <td>
+          ${escapeHtml(x.date)}
+        </td>
 
-          아직 데이터가 없습니다.
+        <td>
+          ${x.attempts}
+        </td>
+
+        <td>
+          ${x.completed}
+        </td>
+
+        <td>
+
+          ${
+            x.attempts
+            ?
+            Math.round(
+              x.completed /
+              x.attempts *
+              1000
+            ) / 10
+            :
+            0
+          }%
 
         </td>
 
       </tr>
 
-    `;
-
-    return;
-
-  }
-
-
-  box.innerHTML =
-
-    list
-      .map(
-
-        x => `
-
-          <tr>
-
-            <td>
-              ${escapeHtml(x.date)}
-            </td>
-
-            <td>
-              ${x.attempts}
-            </td>
-
-            <td>
-              ${x.completed}
-            </td>
-
-            <td>
-
-              ${
-                x.attempts
-
-                ?
-
-                Math.round(
-                  x.completed /
-                  x.attempts *
-                  1000
-                ) / 10
-
-                :
-
-                0
-
-              }%
-
-            </td>
-
-          </tr>
-
-        `
-
-      )
-      .join("");
+    `).join("");
 
 }
 
@@ -1309,9 +1072,7 @@ function renderDaily(
    TOP 10
 ========================================== */
 
-function renderLeaders(
-  list
-){
+function renderLeaders(list){
 
   const medals = [
     "🥇",
@@ -1319,101 +1080,54 @@ function renderLeaders(
     "🥉"
   ];
 
-
   const box =
-    document
-      .getElementById(
-        "leaders"
-      );
-
+    document.getElementById("leaders");
 
   if(!list.length){
 
     box.innerHTML = `
+      <tr>
+        <td colspan="6">
+          아직 기록이 없습니다.
+        </td>
+      </tr>
+    `;
+
+    return;
+  }
+
+  box.innerHTML =
+    list.map((v,i) => `
 
       <tr>
 
-        <td colspan="6">
+        <td>
+          ${medals[i] || (i+1) + "위"}
+        </td>
 
-          아직 기록이 없습니다.
+        <td>
+          ${escapeHtml(v.nickname)}
+        </td>
 
+        <td>
+          ${v.best_correct}/10
+        </td>
+
+        <td>
+          ${v.best_seconds}초
+        </td>
+
+        <td>
+          ${v.best_score}점
+        </td>
+
+        <td>
+          ${localDate(v.updated_at)}
         </td>
 
       </tr>
 
-    `;
-
-    return;
-
-  }
-
-
-  box.innerHTML =
-
-    list
-      .map(
-
-        (v,i) => `
-
-          <tr>
-
-            <td>
-
-              ${
-                medals[i] ||
-                (i+1) +
-                "위"
-              }
-
-            </td>
-
-
-            <td>
-
-              ${
-                escapeHtml(
-                  v.nickname
-                )
-              }
-
-            </td>
-
-
-            <td>
-
-              ${v.best_correct}/10
-
-            </td>
-
-
-            <td>
-
-              ${v.best_seconds}초
-
-            </td>
-
-
-            <td>
-
-              ${v.best_score}점
-
-            </td>
-
-
-            <td>
-
-              ${localDate(
-                v.updated_at
-              )}
-
-            </td>
-
-          </tr>
-
-        `
-
-      )
-      .join("");
+    `).join("");
 
 }
 
@@ -1423,200 +1137,132 @@ function renderLeaders(
    참가자 관리
 ========================================== */
 
-function renderParticipants(
-  list
-){
+function renderParticipants(list){
 
   const box =
-    document
-      .getElementById(
-        "participantsList"
-      );
-
+    document.getElementById(
+      "participantsList"
+    );
 
   if(!list.length){
 
     box.innerHTML = `
-
       <tr>
-
         <td colspan="6">
-
           아직 참가자가 없습니다.
-
         </td>
-
       </tr>
-
     `;
 
     return;
-
   }
 
-
   box.innerHTML =
+    list.map(p => {
 
-    list
-      .map(
+      const valid =
+        p.is_valid !== false;
 
-        p => {
+      return `
 
-          const valid =
-            p.is_valid !== false;
+        <tr
+          class="${
+            valid
+            ? ""
+            : "participant-invalid"
+          }">
 
+          <td>
+            <b>
+              ${escapeHtml(p.nickname)}
+            </b>
+          </td>
 
-          return `
+          <td>
+            ${
+              p.best_correct >= 0
+              ? p.best_correct + "/10"
+              : "-"
+            }
+          </td>
 
-            <tr
-              class="${
-                valid
-                ?
-                ""
-                :
-                "participant-invalid"
-              }">
+          <td>
+            ${
+              p.best_score >= 0
+              ? p.best_score + "점"
+              : "-"
+            }
+          </td>
 
+          <td>
 
-              <td>
+            ${
+              valid
 
-                <b>
+              ?
 
-                  ${
-                    escapeHtml(
-                      p.nickname
-                    )
-                  }
+              `
+              <span class="badge badge-valid">
+                정상
+              </span>
+              `
 
-                </b>
+              :
 
-              </td>
+              `
+              <span class="badge badge-invalid">
+                🚫 무효
+              </span>
+              `
+            }
 
+          </td>
 
-              <td>
+          <td>
+            ${localDate(p.created_at)}
+          </td>
 
-                ${
-                  p.best_correct >= 0
-                  ?
-                  p.best_correct + "/10"
-                  :
-                  "-"
-                }
+          <td class="action-cell">
 
-              </td>
+            ${
+              valid
 
+              ?
 
-              <td>
+              `
+              <button
+                class="danger small-button"
+                onclick="
+                  invalidateParticipant('${p.id}')
+                ">
 
-                ${
-                  p.best_score >= 0
-                  ?
-                  p.best_score + "점"
-                  :
-                  "-"
-                }
+                🗑️ 무효 처리
 
-              </td>
+              </button>
+              `
 
+              :
 
-              <td>
+              `
+              <button
+                class="restore small-button"
+                onclick="
+                  restoreParticipant('${p.id}')
+                ">
 
-                ${
-                  valid
+                ↩️ 복구
 
-                  ?
+              </button>
+              `
+            }
 
-                  `
-                  <span
-                    class="badge badge-valid">
+          </td>
 
-                    정상
+        </tr>
 
-                  </span>
-                  `
+      `;
 
-                  :
-
-                  `
-                  <span
-                    class="badge badge-invalid">
-
-                    🚫 무효
-
-                  </span>
-                  `
-
-                }
-
-              </td>
-
-
-              <td>
-
-                ${localDate(
-                  p.created_at
-                )}
-
-              </td>
-
-
-              <td
-                class="action-cell">
-
-
-                ${
-                  valid
-
-                  ?
-
-                  `
-
-                  <button
-                    class="danger small-button"
-                    onclick="
-                      invalidateParticipant(
-                        '${p.id}'
-                      )
-                    ">
-
-                    🗑️ 무효 처리
-
-                  </button>
-
-                  `
-
-                  :
-
-                  `
-
-                  <button
-                    class="restore small-button"
-                    onclick="
-                      restoreParticipant(
-                        '${p.id}'
-                      )
-                    ">
-
-                    ↩️ 복구
-
-                  </button>
-
-                  `
-
-                }
-
-
-              </td>
-
-
-            </tr>
-
-          `;
-
-        }
-
-      )
-      .join("");
+    }).join("");
 
 }
 
@@ -1626,9 +1272,7 @@ function renderParticipants(
    참가자 무효 처리
 ========================================== */
 
-async function invalidateParticipant(
-  id
-){
+async function invalidateParticipant(id){
 
   const ok =
     confirm(
@@ -1636,44 +1280,29 @@ async function invalidateParticipant(
       "이 참가자를 무효 처리할까요?\n\n" +
 
       "무효 처리하면 해당 참가자는\n" +
-
       "• TOP 10에서 제외\n" +
-
       "• 최종 순위에서 제외\n" +
-
       "• 상품 지급 대상에서 제외\n\n" +
-
       "됩니다.\n\n" +
 
       "참가자 기록 자체는 삭제되지 않습니다."
 
     );
 
-
   if(!ok){
-
     return;
-
   }
-
 
   try{
 
     await api(
-
       "participant_invalidate",
-
-      {
-        id:id
-      }
-
+      {id}
     );
-
 
     alert(
       "🚫 참가자를 무효 처리했습니다."
     );
-
 
     await load();
 
@@ -1682,10 +1311,8 @@ async function invalidateParticipant(
   catch(e){
 
     alert(
-
       "참가자 무효 처리에 실패했습니다.\n\n" +
       e.message
-
     );
 
   }
@@ -1698,9 +1325,7 @@ async function invalidateParticipant(
    참가자 복구
 ========================================== */
 
-async function restoreParticipant(
-  id
-){
+async function restoreParticipant(id){
 
   const ok =
     confirm(
@@ -1708,36 +1333,24 @@ async function restoreParticipant(
       "이 참가자를 다시 정상 상태로 복구할까요?\n\n" +
 
       "복구하면 해당 참가자의 기록이\n" +
-
       "다시 순위에 반영될 수 있습니다."
 
     );
 
-
   if(!ok){
-
     return;
-
   }
-
 
   try{
 
     await api(
-
       "participant_restore",
-
-      {
-        id:id
-      }
-
+      {id}
     );
-
 
     alert(
       "↩️ 참가자를 정상 상태로 복구했습니다."
     );
-
 
     await load();
 
@@ -1746,10 +1359,8 @@ async function restoreParticipant(
   catch(e){
 
     alert(
-
       "참가자 복구에 실패했습니다.\n\n" +
       e.message
-
     );
 
   }
@@ -1766,41 +1377,22 @@ async function saveSettings(){
 
   const q =
     Number(
-      document
-        .getElementById(
-          "qCount"
-        )
-        .value
+      document.getElementById("qCount").value
     );
-
 
   const easy =
     Number(
-      document
-        .getElementById(
-          "easy"
-        )
-        .value
+      document.getElementById("easy").value
     );
-
 
   const medium =
     Number(
-      document
-        .getElementById(
-          "medium"
-        )
-        .value
+      document.getElementById("medium").value
     );
-
 
   const hard =
     Number(
-      document
-        .getElementById(
-          "hard"
-        )
-        .value
+      document.getElementById("hard").value
     );
 
 
@@ -1816,7 +1408,40 @@ async function saveSettings(){
     );
 
     return;
+  }
 
+
+  const startValue =
+    document.getElementById(
+      "startAt"
+    ).value;
+
+  const endValue =
+    document.getElementById(
+      "endAt"
+    ).value;
+
+
+  if(!startValue || !endValue){
+
+    alert(
+      "시작일시와 종료일시를 입력해주세요."
+    );
+
+    return;
+  }
+
+
+  if(
+    new Date(startValue) >=
+    new Date(endValue)
+  ){
+
+    alert(
+      "종료일시는 시작일시보다 늦어야 합니다."
+    );
+
+    return;
   }
 
 
@@ -1830,35 +1455,22 @@ async function saveSettings(){
 
         start_at:
           new Date(
-            document
-              .getElementById(
-                "startAt"
-              )
-              .value
+            startValue
           ).toISOString(),
-
 
         end_at:
           new Date(
-            document
-              .getElementById(
-                "endAt"
-              )
-              .value
+            endValue
           ).toISOString(),
-
 
         question_count:
           q,
 
-
         easy_count:
           easy,
 
-
         medium_count:
           medium,
-
 
         hard_count:
           hard
@@ -1871,7 +1483,6 @@ async function saveSettings(){
     alert(
       "🐣 퀴즈 설정을 저장했습니다!"
     );
-
 
     load();
 
@@ -1894,117 +1505,201 @@ async function saveSettings(){
    문제 목록
 ========================================== */
 
-function renderQuestions(
-  list
-){
+function renderQuestions(list){
 
-  document
-    .getElementById(
+  const box =
+    document.getElementById(
       "questions"
-    )
-    .innerHTML =
-
-    list
-      .map(
-
-        q => `
-
-          <details
-            class="card question-card">
+    );
 
 
-            <summary>
+  if(!list.length){
 
-              <b>
+    box.innerHTML = `
+      <div class="empty">
+        등록된 문제가 없습니다.
+      </div>
+    `;
 
-                ${
-                  escapeHtml(
-                    q.question
-                  )
-                }
-
-              </b>
-
-
-              <span
-                class="badge">
-
-                ${
-                  escapeHtml(
-                    q.difficulty
-                  )
-                }
-
-              </span>
+    return;
+  }
 
 
-              ${
-                q.is_trending
+  box.innerHTML =
+    list.map((q,index) => {
 
-                ?
+      const options =
+        Array.isArray(q.options)
+        ? q.options
+        : [];
 
-                `
 
-                <span
-                  class="badge">
+      const correct =
+        Number.isInteger(
+          Number(q.correct_index)
+        )
+        ? Number(q.correct_index)
+        : 0;
 
-                  🔥 트렌드
 
+      return `
+
+        <details
+          class="card question-card">
+
+
+          <summary>
+
+            <div class="question-header">
+
+              <div class="question-number">
+                #${index + 1}
+              </div>
+
+              <div class="question-title">
+
+                <b>
+                  ${escapeHtml(q.question)}
+                </b>
+
+                <br>
+
+                <span class="badge">
+                  ${escapeHtml(q.difficulty || "")}
                 </span>
 
-                `
+                ${
+                  q.is_trending
 
-                :
+                  ?
 
-                ""
+                  `
+                  <span class="badge badge-trending">
+                    🔥 트렌드
+                  </span>
+                  `
 
-              }
+                  :
 
+                  ""
+                }
 
-              ${
-                !q.active
+                ${
+                  !q.active
 
-                ?
+                  ?
 
-                `
+                  `
+                  <span class="badge">
+                    비활성
+                  </span>
+                  `
 
-                <span
-                  class="badge">
+                  :
 
-                  비활성
+                  ""
+                }
 
+                <span class="badge badge-answer">
+                  정답 ${["①","②","③","④"][correct] || "-"}
                 </span>
 
-                `
+              </div>
 
-                :
+            </div>
 
-                ""
-
-              }
+          </summary>
 
 
-            </summary>
+          <div class="question-editor">
 
 
+            <!-- 문제 -->
 
             <label>
               문제
             </label>
 
-
             <textarea
               id="q_${q.id}"
               rows="3">${escapeHtml(
-                q.question
+                q.question || ""
               )}</textarea>
 
+```
+        <!-- 보기 -->
 
+        <label>
+          보기
+        </label>
+
+
+        ${[0,1,2,3].map(i => `
+
+          <div class="option-row">
+
+            <div class="option-label">
+              ${["①","②","③","④"][i]}
+            </div>
+
+            <input
+              id="o_${q.id}_${i}"
+              value="${escapeAttribute(
+                options[i] || ""
+              )}"
+              placeholder="보기 ${i+1}">
+
+          </div>
+
+        `).join("")}
+
+
+
+        <!-- 정답 -->
+
+        <label>
+          정답
+        </label>
+
+
+        <div class="answer-selector">
+
+          ${[0,1,2,3].map(i => `
+
+            <label>
+
+              <input
+                type="radio"
+                name="answer_${q.id}"
+                value="${i}"
+                ${
+                  correct === i
+                  ? "checked"
+                  : ""
+                }>
+
+              <span>
+                ${["①","②","③","④"][i]}
+              </span>
+
+            </label>
+
+          `).join("")}
+
+        </div>
+
+
+
+        <!-- 기본 설정 -->
+
+        <div class="editor-grid">
+
+
+          <div>
 
             <label>
               난이도
             </label>
-
 
             <select
               id="d_${q.id}">
@@ -2012,72 +1707,58 @@ function renderQuestions(
               <option
                 value="쉬움"
                 ${
-                  q.difficulty ===
-                  "쉬움"
-                  ?
-                  "selected"
-                  :
-                  ""
+                  q.difficulty === "쉬움"
+                  ? "selected"
+                  : ""
                 }>
-
                 쉬움
-
               </option>
-
 
               <option
                 value="보통"
                 ${
-                  q.difficulty ===
-                  "보통"
-                  ?
-                  "selected"
-                  :
-                  ""
+                  q.difficulty === "보통"
+                  ? "selected"
+                  : ""
                 }>
-
                 보통
-
               </option>
-
 
               <option
                 value="어려움"
                 ${
-                  q.difficulty ===
-                  "어려움"
-                  ?
-                  "selected"
-                  :
-                  ""
+                  q.difficulty === "어려움"
+                  ? "selected"
+                  : ""
                 }>
-
                 어려움
-
               </option>
 
             </select>
 
+          </div>
 
+
+          <div>
 
             <label>
               주제
             </label>
 
-
             <input
               id="t_${q.id}"
-              value="${escapeHtml(
-                q.topic ||
-                ""
+              value="${escapeAttribute(
+                q.topic || ""
               )}">
 
+          </div>
 
+
+          <div>
 
             <label>
               활성 여부
             </label>
-
 
             <select
               id="a_${q.id}">
@@ -2086,39 +1767,32 @@ function renderQuestions(
                 value="true"
                 ${
                   q.active
-                  ?
-                  "selected"
-                  :
-                  ""
+                  ? "selected"
+                  : ""
                 }>
-
                 활성
-
               </option>
-
 
               <option
                 value="false"
                 ${
                   !q.active
-                  ?
-                  "selected"
-                  :
-                  ""
+                  ? "selected"
+                  : ""
                 }>
-
                 비활성
-
               </option>
 
             </select>
 
+          </div>
 
+
+          <div>
 
             <label>
               트렌드 여부
             </label>
-
 
             <select
               id="tr_${q.id}">
@@ -2127,243 +1801,317 @@ function renderQuestions(
                 value="false"
                 ${
                   !q.is_trending
-                  ?
-                  "selected"
-                  :
-                  ""
+                  ? "selected"
+                  : ""
                 }>
-
                 일반 문제
-
               </option>
-
 
               <option
                 value="true"
                 ${
                   q.is_trending
-                  ?
-                  "selected"
-                  :
-                  ""
+                  ? "selected"
+                  : ""
                 }>
-
                 🔥 트렌드 문제
-
               </option>
 
             </select>
 
+          </div>
 
 
-            <button
-              onclick="
-                saveQuestion(
-                  '${q.id}'
-                )
-              ">
-
-              💾 문제 설정 저장
-
-            </button>
-
-
-          </details>
-
-        `
-
-      )
-      .join("");
-
-}
+        </div>
 
 
 
-/* ==========================================
-   문제 저장
-========================================== */
+        <!-- 해설 / 출처 -->
 
-async function saveQuestion(
-  id
-){
+        <label>
+          해설 / 출처 메모
+        </label>
 
-  try{
-
-    const dashboard =
-      await api(
-        "dashboard"
-      );
+        <textarea
+          id="s_${q.id}"
+          rows="4"
+          placeholder="정답 해설 또는 출처를 입력하세요.">${escapeHtml(
+            q.source_note || ""
+          )}</textarea>
 
 
-    const current =
-      dashboard.questions
-        .find(
-          x =>
-          x.id === id
-        );
+
+        <!-- 저장 -->
+
+        <button
+          class="save-question"
+          onclick="
+            saveQuestion('${q.id}')
+          ">
+
+          💾 문제 / 보기 / 정답 저장
+
+        </button>
 
 
-    if(!current){
-
-      throw new Error(
-        "문제를 찾을 수 없습니다."
-      );
-
-    }
+      </div>
 
 
-    await api(
+    </details>
 
-      "question_update",
+  `;
 
-      {
-
-        id:id,
-
-        question:
-          document
-            .getElementById(
-              "q_" + id
-            )
-            .value,
-
-        options:
-          current.options,
-
-        correct_index:
-          current.correct_index,
-
-        difficulty:
-          document
-            .getElementById(
-              "d_" + id
-            )
-            .value,
-
-        topic:
-          document
-            .getElementById(
-              "t_" + id
-            )
-            .value,
-
-        active:
-          document
-            .getElementById(
-              "a_" + id
-            )
-            .value ===
-            "true",
-
-        is_trending:
-          document
-            .getElementById(
-              "tr_" + id
-            )
-            .value ===
-            "true",
-
-        source_note:
-          current.source_note ||
-          ""
-
-      }
-
-    );
-
-
-    alert(
-      "🐣 문제를 저장했습니다!"
-    );
-
-
-    load();
-
-  }
-
-  catch(e){
-
-    alert(
-      "문제를 저장하지 못했습니다.\n\n" +
-      e.message
-    );
-
-  }
+}).join("");
+```
 
 }
 
-
-
 /* ==========================================
-   HTML Escape
+문제 저장
 ========================================== */
 
-function escapeHtml(
-  value
-){
+async function saveQuestion(id){
 
-  return String(
-    value ?? ""
-  )
+try{
 
-  .replaceAll(
-    "&",
-    "&amp;"
-  )
+```
+const dashboard =
+  await api("dashboard");
 
-  .replaceAll(
-    "<",
-    "&lt;"
-  )
 
-  .replaceAll(
-    ">",
-    "&gt;"
-  )
+const current =
+  dashboard.questions
+    .find(
+      x => x.id === id
+    );
 
-  .replaceAll(
-    '"',
-    "&quot;"
-  )
 
-  .replaceAll(
-    "'",
-    "&#039;"
+if(!current){
+
+  throw new Error(
+    "문제를 찾을 수 없습니다."
   );
 
 }
 
 
+/* -----------------------------
+   보기 가져오기
+----------------------------- */
+
+const options =
+  [0,1,2,3].map(i => {
+
+    return document
+      .getElementById(
+        "o_" + id + "_" + i
+      )
+      .value
+      .trim();
+
+  });
+
+
+if(
+  options.some(
+    x => !x
+  )
+){
+
+  alert(
+    "보기 4개를 모두 입력해주세요."
+  );
+
+  return;
+}
+
+
+/* -----------------------------
+   정답 가져오기
+----------------------------- */
+
+const answer =
+  document.querySelector(
+    'input[name="answer_' +
+    id +
+    '"]:checked'
+  );
+
+
+if(!answer){
+
+  alert(
+    "정답을 하나 선택해주세요."
+  );
+
+  return;
+}
+
+
+const correct_index =
+  Number(
+    answer.value
+  );
+
+
+/* -----------------------------
+   문제 확인
+----------------------------- */
+
+const question =
+  document
+    .getElementById(
+      "q_" + id
+    )
+    .value
+    .trim();
+
+
+if(!question){
+
+  alert(
+    "문제 내용을 입력해주세요."
+  );
+
+  return;
+}
+
+
+/* -----------------------------
+   저장
+----------------------------- */
+
+await api(
+
+  "question_update",
+
+  {
+
+    id,
+
+    question,
+
+    options,
+
+    correct_index,
+
+    difficulty:
+      document
+        .getElementById(
+          "d_" + id
+        )
+        .value,
+
+    topic:
+      document
+        .getElementById(
+          "t_" + id
+        )
+        .value
+        .trim(),
+
+    active:
+      document
+        .getElementById(
+          "a_" + id
+        )
+        .value === "true",
+
+    is_trending:
+      document
+        .getElementById(
+          "tr_" + id
+        )
+        .value === "true",
+
+    source_note:
+      document
+        .getElementById(
+          "s_" + id
+        )
+        .value
+        .trim()
+
+  }
+
+);
+
+
+alert(
+  "🐣 문제 / 보기 / 정답을 저장했습니다!"
+);
+
+
+await load();
+```
+
+}
+
+catch(e){
+
+```
+alert(
+  "문제를 저장하지 못했습니다.\n\n" +
+  e.message
+);
+```
+
+}
+
+}
 
 /* ==========================================
-   로그아웃
+HTML Escape
+========================================== */
+
+function escapeHtml(value){
+
+return String(
+value ?? ""
+)
+
+.replaceAll("&","&")
+.replaceAll("<","<")
+.replaceAll(">",">")
+.replaceAll('"',""")
+.replaceAll("'","'");
+
+}
+
+function escapeAttribute(value){
+
+return escapeHtml(value);
+
+}
+
+/* ==========================================
+로그아웃
 ========================================== */
 
 async function logout(){
 
-  await sb.auth.signOut();
+await sb.auth.signOut();
 
-  location.reload();
+location.reload();
 
 }
 
-
-
 /* ==========================================
-   Auth 상태
+Auth 상태
 ========================================== */
 
 sb.auth.onAuthStateChange(
-  function(){
+function(){
 
-    session();
+```
+session();
+```
 
-  }
+}
 );
 
-
 /* ==========================================
-   시작
+시작
 ========================================== */
 
 session();
