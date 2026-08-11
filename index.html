@@ -3,171 +3,674 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>2026 정보보안 퀴즈</title>
+<title>🐣 보안 병아리를 지켜주세요!</title>
 
 <style>
-body{
-  font-family:Arial,"Noto Sans KR",sans-serif;
-  max-width:720px;
-  margin:auto;
-  padding:24px;
-  background:#f5f7fa;
-  color:#111827
-}
-main{
-  background:#fff;
-  padding:24px;
-  border-radius:16px;
-  box-shadow:0 4px 18px #0001
-}
-button,input{
-  width:100%;
-  padding:13px;
-  margin:7px 0;
+*{
   box-sizing:border-box;
-  border-radius:9px;
-  border:1px solid #ccc;
-  font-size:16px
 }
-button{
-  background:#111827;
-  color:#fff;
-  cursor:pointer
+
+body{
+  margin:0;
+  min-height:100vh;
+  font-family:
+    Arial,
+    "Noto Sans KR",
+    sans-serif;
+  background:
+    linear-gradient(180deg,#fff9d9 0%,#fff 42%,#f3f8ff 100%);
+  color:#243047;
 }
-.ans{
+
+.wrap{
+  width:min(720px,100%);
+  margin:auto;
+  padding:20px;
+}
+
+.card{
   background:#fff;
-  color:#111;
-  text-align:left
+  border-radius:28px;
+  padding:28px;
+  box-shadow:
+    0 12px 35px rgba(48,67,92,.12);
 }
-.hide{display:none}
-.muted{color:#667085}
-.notice{
-  background:#eff6ff;
+
+/* 병아리 */
+.chick{
+  font-size:82px;
+  text-align:center;
+  line-height:1;
+  margin:8px 0 15px;
+  animation:bounce 2s infinite;
+}
+
+@keyframes bounce{
+  0%,100%{transform:translateY(0)}
+  50%{transform:translateY(-7px)}
+}
+
+.title{
+  text-align:center;
+  font-size:30px;
+  font-weight:800;
+  margin:5px 0 10px;
+}
+
+.subtitle{
+  text-align:center;
+  color:#68758a;
+  line-height:1.7;
+  margin-bottom:24px;
+}
+
+.period{
+  background:#fff8d7;
+  border-radius:14px;
   padding:12px;
-  border-radius:10px;
+  text-align:center;
   font-size:14px;
-  line-height:1.6
+  margin-bottom:18px;
 }
-.lb p{
-  border-bottom:1px solid #eee;
-  padding:8px
+
+/* 닉네임 */
+input{
+  width:100%;
+  padding:15px 16px;
+  border:2px solid #e5e9ef;
+  border-radius:14px;
+  font-size:16px;
+  outline:none;
+}
+
+input:focus{
+  border-color:#ffd54f;
+}
+
+/* 버튼 */
+button{
+  width:100%;
+  border:0;
+  border-radius:14px;
+  padding:15px;
+  margin-top:10px;
+  font-size:16px;
+  font-weight:700;
+  cursor:pointer;
+  transition:.15s;
+}
+
+button:hover{
+  transform:translateY(-1px);
+}
+
+.start-btn{
+  background:#ffd54f;
+  color:#4b3b00;
+  box-shadow:0 5px 0 #e6b92f;
+}
+
+.start-btn:active{
+  transform:translateY(3px);
+  box-shadow:0 2px 0 #e6b92f;
+}
+
+.notice{
+  margin-top:18px;
+  padding:15px;
+  border-radius:15px;
+  background:#f5f8ff;
+  color:#667085;
+  font-size:13px;
+  line-height:1.7;
+}
+
+/* 퀴즈 */
+.quiz-header{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  margin-bottom:14px;
+  font-weight:700;
+}
+
+.progress{
+  height:10px;
+  background:#edf0f4;
+  border-radius:20px;
+  overflow:hidden;
+  margin-bottom:20px;
+}
+
+.progress-bar{
+  height:100%;
+  background:#ffd54f;
+  transition:.3s;
+}
+
+.status{
+  display:flex;
+  justify-content:space-between;
+  margin-bottom:18px;
+}
+
+.level{
+  background:#fff6c8;
+  padding:7px 11px;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:700;
+}
+
+.timer{
+  background:#eef5ff;
+  padding:7px 11px;
+  border-radius:20px;
+  font-size:13px;
+  font-weight:700;
+}
+
+.question-box{
+  background:#f8fafc;
+  border-radius:18px;
+  padding:22px;
+  margin-bottom:18px;
+}
+
+.question-label{
+  font-size:13px;
+  color:#8994a5;
+  margin-bottom:9px;
+}
+
+.question{
+  font-size:21px;
+  line-height:1.55;
+  font-weight:800;
+}
+
+.answer{
+  background:#fff;
+  color:#263248;
+  border:2px solid #e7ebf0;
+  text-align:left;
+  margin-top:10px;
+}
+
+.answer:hover{
+  border-color:#ffd54f;
+  background:#fffdf0;
+}
+
+/* 피드백 */
+.feedback{
+  text-align:center;
+  padding:22px;
+  border-radius:18px;
+  margin-top:15px;
+  animation:pop .25s ease;
+}
+
+.correct{
+  background:#edfff5;
+  color:#16834b;
+}
+
+.wrong{
+  background:#fff1f1;
+  color:#d04444;
+}
+
+.feedback-emoji{
+  font-size:48px;
+  margin-bottom:8px;
+}
+
+.feedback-title{
+  font-size:20px;
+  font-weight:800;
+}
+
+.feedback-text{
+  margin-top:7px;
+  font-size:14px;
+  line-height:1.6;
+}
+
+@keyframes pop{
+  from{
+    transform:scale(.95);
+    opacity:0;
+  }
+  to{
+    transform:scale(1);
+    opacity:1;
+  }
+}
+
+/* 결과 */
+.result-chick{
+  font-size:88px;
+  text-align:center;
+  margin:5px 0;
+}
+
+.result-title{
+  text-align:center;
+  font-size:27px;
+  font-weight:800;
+}
+
+.result-message{
+  text-align:center;
+  color:#68758a;
+  margin-bottom:22px;
+}
+
+.score-card{
+  background:#fff9d9;
+  border-radius:20px;
+  padding:20px;
+  text-align:center;
+}
+
+.score-number{
+  font-size:40px;
+  font-weight:900;
+  color:#d79c00;
+}
+
+.rank-box{
+  background:#f5f8ff;
+  border-radius:18px;
+  padding:18px;
+  margin-top:18px;
+}
+
+.rank-title{
+  font-weight:800;
+  margin-bottom:10px;
+}
+
+.rank-row{
+  display:flex;
+  justify-content:space-between;
+  padding:10px 5px;
+  border-bottom:1px solid #e9edf3;
+  font-size:14px;
+}
+
+.rank-row:last-child{
+  border-bottom:0;
+}
+
+.final-notice{
+  margin-top:18px;
+  padding:17px;
+  background:#fff4e5;
+  border-radius:16px;
+  line-height:1.7;
+  font-size:14px;
+}
+
+.retry-btn{
+  background:#263248;
+  color:#fff;
+  margin-top:18px;
+}
+
+/* 공통 */
+.hide{
+  display:none!important;
+}
+
+.small{
+  font-size:12px;
+  color:#8a94a5;
+  text-align:center;
+  margin-top:10px;
+}
+
+@media(max-width:500px){
+  .wrap{
+    padding:12px;
+  }
+
+  .card{
+    padding:20px;
+    border-radius:22px;
+  }
+
+  .title{
+    font-size:25px;
+  }
+
+  .chick{
+    font-size:68px;
+  }
+
+  .question{
+    font-size:19px;
+  }
 }
 </style>
 </head>
 
+
 <body>
-<main>
 
-<section id="home">
+<div class="wrap">
 
-<h1>🔐 2026 정보보안 퀴즈</h1>
+<!-- =========================
+     HOME
+========================= -->
 
-<p id="period" class="muted">
-참여기간 확인 중...
-</p>
+<section id="home" class="card">
 
-<p class="muted">
-랜덤 10문제 · 쉬움 5 / 보통 3 / 어려움 2
-</p>
+  <div class="chick">
+    🐣
+  </div>
 
-<input
-  id="nick"
-  maxlength="20"
-  placeholder="닉네임">
+  <div class="title">
+    삐약! 보안 병아리를<br>
+    지켜주세요!
+  </div>
 
-<button onclick="start()">
-퀴즈 시작
-</button>
+  <div class="subtitle">
+    수상한 메일 📧<br>
+    위험한 링크 🔗<br>
+    의심스러운 파일 💻
+    <br><br>
+    우리 병아리가 무사히 살아남을 수 있도록<br>
+    보안 문제를 해결해주세요! 🛡️
+  </div>
 
-<div class="notice">
-실명이나 사번은 입력하지 마세요.<br>
-퀴즈 기간 내 여러 번 도전할 수 있으며,
-닉네임별 최고 기록이 순위에 반영됩니다.<br>
-<b>
-행사 종료 시점 최종 1~3위에게 소정의 상품을 지급합니다.
-</b>
+  <div id="period" class="period">
+    참여기간 확인 중...
+  </div>
+
+  <input
+    id="nick"
+    maxlength="20"
+    placeholder="🐣 나만의 닉네임을 입력해주세요">
+
+  <button
+    class="start-btn"
+    onclick="start()">
+
+    🐣 병아리 구하기 시작!
+
+  </button>
+
+  <div class="notice">
+
+    💡 <b>잠깐!</b><br>
+
+    실명이나 사번은 입력하지 마세요.<br>
+    재미있는 닉네임으로 참여해주세요!
+    <br><br>
+
+    예시:
+    <b>피싱킬러</b> ·
+    <b>방화벽요정</b> ·
+    <b>삐약보안관</b>
+    <br><br>
+
+    🔄 퀴즈 기간 동안 여러 번 도전할 수 있어요.<br>
+    🏆 닉네임별 최고 기록이 순위에 반영됩니다.
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     QUIZ
+========================= -->
+
+<section id="quiz" class="card hide">
+
+  <div class="quiz-header">
+
+    <span id="num">
+      1 / 10
+    </span>
+
+    <span id="streak">
+      🐣 출동!
+    </span>
+
+  </div>
+
+
+  <div class="progress">
+
+    <div
+      id="progressBar"
+      class="progress-bar"
+      style="width:10%">
+    </div>
+
+  </div>
+
+
+  <div class="status">
+
+    <span
+      id="level"
+      class="level">
+      🛡️ 보안 Lv.1
+    </span>
+
+    <span
+      id="time"
+      class="timer">
+      ⏱️ 20초
+    </span>
+
+  </div>
+
+
+  <div class="question-box">
+
+    <div class="question-label">
+      🚨 보안 사건 발생!
+    </div>
+
+    <div
+      id="q"
+      class="question">
+      문제를 불러오는 중...
+    </div>
+
+  </div>
+
+
+  <div id="a"></div>
+
+
+  <div
+    id="feedback"
+    class="feedback hide">
+
+    <div
+      id="feedbackEmoji"
+      class="feedback-emoji">
+    </div>
+
+    <div
+      id="feedbackTitle"
+      class="feedback-title">
+    </div>
+
+    <div
+      id="feedbackText"
+      class="feedback-text">
+    </div>
+
+  </div>
+
+</section>
+
+
+<!-- =========================
+     RESULT
+========================= -->
+
+<section id="res" class="card hide">
+
+  <div class="result-chick">
+    🐣🛡️
+  </div>
+
+  <div class="result-title">
+    삐약! 미션 완료!
+  </div>
+
+  <div class="result-message">
+    우리 병아리가 무사히 살아남았어요! 🎉
+  </div>
+
+
+  <div class="score-card">
+
+    <div>
+      당신의 보안 점수
+    </div>
+
+    <div
+      id="score"
+      class="score-number">
+      -
+    </div>
+
+  </div>
+
+
+  <div
+    id="rankBox"
+    class="rank-box">
+
+    <div class="rank-title">
+      🏆 현재 보안 병아리 TOP 10
+    </div>
+
+    <div id="lb"></div>
+
+  </div>
+
+
+  <div class="final-notice">
+
+    🎁 <b>최종 보안 병아리 TOP 3에게 선물!</b>
+    <br><br>
+
+    지금의 순위가 최종 순위는 아니에요! 😎<br>
+
+    퀴즈 기간 동안 여러 번 도전할 수 있고,
+    <b>행사 종료 시점의 최종 1~3위</b>에게
+    소정의 상품이 지급됩니다.
+
+    <br><br>
+
+    🐣 병아리를 더 튼튼하게 만들어주세요!
+
+  </div>
+
+
+  <button
+    class="retry-btn"
+    onclick="location.reload()">
+
+    🐣 다시 도전하기
+
+  </button>
+
+  <div class="small">
+    순위는 실시간으로 변경될 수 있습니다.
+  </div>
+
+</section>
+
 </div>
-
-</section>
-
-
-<section id="quiz" class="hide">
-
-<p>
-<b id="num"></b>
-&nbsp;
-<b id="time"></b>
-</p>
-
-<h2 id="q"></h2>
-
-<div id="a"></div>
-
-</section>
-
-
-<section id="res" class="hide">
-
-<h2>🎉 퀴즈 완료!</h2>
-
-<h3 id="score"></h3>
-
-<h3>🏆 현재 TOP 10</h3>
-
-<div id="lb" class="lb"></div>
-
-<button onclick="location.reload()">
-다시 도전
-</button>
-
-</section>
-
-</main>
 
 
 <script>
 
+/* ==========================================
+   API
+========================================== */
+
 const API =
 "https://fwfdldjgfulbjkqasgur.supabase.co/functions/v1/quiz-api";
 
+
+/* ==========================================
+   상태값
+========================================== */
+
 let token = "";
 let aid = "";
+
 let qs = [];
+
 let i = 0;
+
 let ans = {};
+
 let timer;
 
+let currentCorrect = 0;
 
-/* Supabase API 호출 */
-async function call(action, body = {}) {
+let streak = 0;
 
-  const r = await fetch(API, {
 
-    method:"POST",
+/* ==========================================
+   API 호출
+========================================== */
 
-    headers:{
-      "content-type":
-      "application/json;charset=UTF-8"
-    },
+async function call(action, body = {}){
 
-    body:JSON.stringify({
-      action,
-      ...body
-    })
+  const r =
+    await fetch(
+      API,
+      {
+        method:"POST",
 
-  });
+        headers:{
+          "content-type":
+          "application/json;charset=UTF-8"
+        },
 
-  const x = await r.json();
+        body:
+        JSON.stringify({
+          action,
+          ...body
+        })
+      }
+    );
+
+
+  const x =
+    await r.json();
+
 
   if(!r.ok){
+
     throw x;
+
   }
 
+
   return x;
+
 }
 
 
-/* 퀴즈 기간 표시 */
+/* ==========================================
+   초기화
+========================================== */
+
 async function init(){
 
   try{
@@ -175,15 +678,22 @@ async function init(){
     const x =
       await call("config");
 
+
     document
       .getElementById("period")
       .textContent =
-      "참여기간: " +
-      new Date(x.start_at)
-        .toLocaleString("ko-KR") +
+
+      "🗓️ 참여기간: " +
+
+      new Date(
+        x.start_at
+      ).toLocaleString("ko-KR") +
+
       " ~ " +
-      new Date(x.end_at)
-        .toLocaleString("ko-KR");
+
+      new Date(
+        x.end_at
+      ).toLocaleString("ko-KR");
 
   }
 
@@ -192,14 +702,17 @@ async function init(){
     document
       .getElementById("period")
       .textContent =
-      "참여기간 정보를 불러오지 못했습니다.";
+      "참여기간 정보를 불러오지 못했어요 😢";
 
   }
 
 }
 
 
-/* 퀴즈 시작 */
+/* ==========================================
+   퀴즈 시작
+========================================== */
+
 async function start(){
 
   try{
@@ -210,9 +723,12 @@ async function start(){
         .value
         .trim();
 
+
     if(!n){
 
-      alert("닉네임을 입력해주세요.");
+      alert(
+        "🐣 병아리에게 이름표를 달아주세요!\n닉네임을 입력해주세요."
+      );
 
       return;
 
@@ -242,22 +758,31 @@ async function start(){
       );
 
 
-    aid = x.attempt_id;
+    aid =
+      x.attempt_id;
 
-    qs = x.questions;
+
+    qs =
+      x.questions;
+
 
     i = 0;
 
     ans = {};
 
+    currentCorrect = 0;
+
+    streak = 0;
+
 
     document
       .getElementById("home")
-      .className = "hide";
+      .classList.add("hide");
+
 
     document
       .getElementById("quiz")
-      .className = "";
+      .classList.remove("hide");
 
 
     show();
@@ -268,7 +793,7 @@ async function start(){
 
     alert(
       e.error ||
-      "오류가 발생했습니다."
+      "🐣 삐약! 문제가 생겼어요."
     );
 
   }
@@ -276,13 +801,19 @@ async function start(){
 }
 
 
-/* 문제 표시 */
+/* ==========================================
+   문제 표시
+========================================== */
+
 function show(){
 
   clearInterval(timer);
 
+
   let left = 20;
 
+
+  /* 번호 */
 
   document
     .getElementById("num")
@@ -292,17 +823,53 @@ function show(){
     qs.length;
 
 
+  /* 진행률 */
+
+  document
+    .getElementById("progressBar")
+    .style.width =
+    ((i + 1) / qs.length * 100) +
+    "%";
+
+
+  /* 레벨 */
+
+  document
+    .getElementById("level")
+    .textContent =
+    "🛡️ 보안 Lv." +
+    Math.max(
+      1,
+      currentCorrect + 1
+    );
+
+
+  /* 타이머 */
+
   document
     .getElementById("time")
     .textContent =
-    left + "초";
+    "⏱️ " +
+    left +
+    "초";
 
+
+  /* 문제 */
 
   document
     .getElementById("q")
     .textContent =
     qs[i].question;
 
+
+  /* 피드백 숨기기 */
+
+  document
+    .getElementById("feedback")
+    .classList.add("hide");
+
+
+  /* 답변 */
 
   const box =
     document
@@ -316,17 +883,21 @@ function show(){
     .forEach(
       (v,j)=>{
 
+
         const b =
           document.createElement(
             "button"
           );
 
-        b.className = "ans";
+
+        b.className =
+          "answer";
+
 
         b.textContent =
-          String.fromCharCode(65+j)
-          + ". "
-          + v;
+          String.fromCharCode(65+j) +
+          ". " +
+          v;
 
 
         b.onclick =
@@ -339,6 +910,8 @@ function show(){
     );
 
 
+  /* 타이머 */
+
   timer =
     setInterval(
 
@@ -346,11 +919,16 @@ function show(){
 
         left--;
 
+
         document
           .getElementById("time")
           .textContent =
-          Math.max(left,0)
-          + "초";
+          "⏱️ " +
+          Math.max(
+            left,
+            0
+          ) +
+          "초";
 
 
         if(left <= 0){
@@ -368,19 +946,59 @@ function show(){
 }
 
 
-/* 답 선택 */
+/* ==========================================
+   답변
+========================================== */
+
 function pick(v){
 
   clearInterval(timer);
 
-  ans[qs[i].id] = v;
+
+  /* 버튼 비활성화 */
+
+  document
+    .querySelectorAll(".answer")
+    .forEach(
+      b=>{
+        b.disabled=true;
+      }
+    );
+
+
+  ans[
+    qs[i].id
+  ] = v;
+
+
+  /* 정답 여부 */
+
+  const correct =
+    Number(v) ===
+    Number(
+      qs[i].correct_index
+    );
+
+
+  /*
+    현재 API가 correct_index를
+    참가자에게 보내지 않는 경우가 있으므로
+    실제 정답 판정은 submit에서 처리됩니다.
+    여기서는 재미 요소만 표시합니다.
+  */
+
 
   i++;
 
 
   if(i < 10){
 
-    show();
+    setTimeout(
+      ()=>{
+        show();
+      },
+      250
+    );
 
   }
 
@@ -393,7 +1011,10 @@ function pick(v){
 }
 
 
-/* 결과 제출 */
+/* ==========================================
+   제출
+========================================== */
+
 async function submit(){
 
   try{
@@ -411,53 +1032,75 @@ async function submit(){
 
     document
       .getElementById("quiz")
-      .className = "hide";
+      .classList.add("hide");
 
 
     document
       .getElementById("res")
-      .className = "";
+      .classList.remove("hide");
 
+
+    const best =
+      x.result.best_correct;
+
+
+    currentCorrect =
+      best;
+
+
+    /* 점수 */
 
     document
       .getElementById("score")
       .textContent =
-      "최고 기록 " +
-      x.result.best_correct +
-      "/10 · " +
-      x.result.best_seconds +
-      "초 · 현재 " +
-      x.result.rank +
-      "위";
+      best +
+      " / 10";
+
+
+    /* 순위 */
+
+    const board =
+      x.leaderboard || [];
 
 
     document
       .getElementById("lb")
       .innerHTML =
 
-      x.leaderboard
+      board
         .map(
-          (v,j)=>
+          (v,j)=>{
 
-          "<p>" +
 
-          (j+1) +
-          "위 " +
+            let medal =
+              j === 0 ? "🥇" :
+              j === 1 ? "🥈" :
+              j === 2 ? "🥉" :
+              (j + 1) + "위";
 
-          v.nickname +
 
-          " · " +
+            return `
 
-          v.best_correct +
-          "/10 · " +
+              <div class="rank-row">
 
-          v.best_seconds +
-          "초" +
+                <span>
+                  ${medal}
+                  ${escapeHtml(v.nickname)}
+                </span>
 
-          "</p>"
+                <span>
+                  ${v.best_correct}/10
+                  · ${v.best_seconds}초
+                </span>
 
+              </div>
+
+            `;
+
+          }
         )
         .join("");
+
 
   }
 
@@ -465,13 +1108,33 @@ async function submit(){
 
     alert(
       e.error ||
-      "제출 오류"
+      "🐣 제출 중 문제가 발생했어요."
     );
 
   }
 
 }
 
+
+/* ==========================================
+   HTML escape
+========================================== */
+
+function escapeHtml(str){
+
+  return String(str)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#039;");
+
+}
+
+
+/* ==========================================
+   시작
+========================================== */
 
 init();
 
