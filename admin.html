@@ -354,9 +354,7 @@ label{
  class="primary"
  onclick="login()">
 
-```
 관리자 로그인 링크 보내기
-```
 
   </button>
 
@@ -370,7 +368,6 @@ label{
 
   <div class="card">
 
-```
 <h1>🐣 보안 병아리 관리자</h1>
 
 <p class="muted">
@@ -384,7 +381,6 @@ label{
   로그아웃
 
 </button>
-```
 
   </div>
 
@@ -392,7 +388,6 @@ label{
 
   <div class="grid">
 
-```
 <div class="stat">
   총 접속
   <b id="visits">-</b>
@@ -432,7 +427,6 @@ label{
   완료 횟수
   <b id="submitted">-</b>
 </div>
-```
 
   </div>
 
@@ -440,7 +434,6 @@ label{
 
   <div class="card">
 
-```
 <h2>🗓️ 퀴즈 기간 / 출제 설정</h2>
 
 <div class="note">
@@ -492,7 +485,6 @@ label{
   💾 설정 저장
 
 </button>
-```
 
   </div>
 
@@ -500,7 +492,6 @@ label{
 
   <div class="card">
 
-```
 <h2>📈 일별 참여 추이</h2>
 
 <div class="scroll">
@@ -521,7 +512,6 @@ label{
   </table>
 
 </div>
-```
 
   </div>
 
@@ -529,7 +519,6 @@ label{
 
   <div class="card">
 
-```
 <h2>🏆 현재 보안 병아리 TOP 10</h2>
 
 <div class="scroll">
@@ -552,7 +541,6 @@ label{
   </table>
 
 </div>
-```
 
   </div>
 
@@ -560,7 +548,6 @@ label{
 
   <div class="card">
 
-```
 <h2>👤 참가자 관리</h2>
 
 <div class="note">
@@ -600,7 +587,6 @@ label{
   </table>
 
 </div>
-```
 
   </div>
 
@@ -608,7 +594,6 @@ label{
 
   <div class="card">
 
-```
 <h2>📚 문제 Pool 관리</h2>
 
 <p class="muted">
@@ -621,7 +606,6 @@ label{
 </p>
 
 <div id="questions"></div>
-```
 
   </div>
 
@@ -1534,7 +1518,6 @@ function renderQuestions(list){
                 q.question || ""
               )}</textarea>
 
-```
         <label>
           보기
         </label>
@@ -1753,7 +1736,6 @@ function renderQuestions(list){
   `;
 
 }).join("");
-```
 
 }
 
@@ -1765,7 +1747,6 @@ async function saveQuestion(id){
 
 try{
 
-```
 const dashboard =
   await api("dashboard");
 
@@ -1912,13 +1893,11 @@ alert(
 
 
 await load();
-```
 
 }
 
 catch(e){
 
-```
 console.error(
   "QUESTION SAVE ERROR:",
   e
@@ -1928,7 +1907,6 @@ alert(
   "문제를 저장하지 못했습니다.\n\n" +
   e.message
 );
-```
 
 }
 
