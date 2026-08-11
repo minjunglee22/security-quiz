@@ -22,19 +22,31 @@
 }
 
 body{
-  font-family:Arial,"Noto Sans KR",sans-serif;
+  font-family:
+    Arial,
+    "Noto Sans KR",
+    sans-serif;
+
   max-width:720px;
+
   margin:auto;
+
   padding:24px;
+
   background:#fff8dc;
+
   color:#3b3024;
 }
 
 main{
   background:#fff;
+
   padding:26px;
+
   border-radius:24px;
-  box-shadow:0 8px 28px #0001;
+
+  box-shadow:
+    0 8px 28px #0001;
 }
 
 h1{
@@ -43,20 +55,32 @@ h1{
 
 button,
 input{
+
   width:100%;
+
   padding:14px;
+
   margin:7px 0;
+
   box-sizing:border-box;
+
   border-radius:12px;
+
   border:1px solid #ddd;
+
   font-size:16px;
 }
 
 button{
+
   background:#ffcf4a;
+
   color:#4b3b00;
+
   border:0;
+
   font-weight:700;
+
   cursor:pointer;
 }
 
@@ -65,9 +89,13 @@ button:hover{
 }
 
 .ans{
+
   background:#fff;
+
   color:#3b3024;
+
   text-align:left;
+
   border:1px solid #eadfb8;
 }
 
@@ -80,16 +108,25 @@ button:hover{
 }
 
 .notice{
+
   background:#fff7cf;
+
   padding:14px;
+
   border-radius:14px;
+
   font-size:14px;
+
   line-height:1.7;
 }
 
 .lb p{
-  border-bottom:1px solid #eee;
+
+  border-bottom:
+    1px solid #eee;
+
   padding:9px;
+
   margin:0;
 }
 
@@ -98,46 +135,73 @@ button:hover{
 }
 
 .pill{
+
   display:inline-block;
+
   background:#fff1a8;
+
   padding:5px 9px;
+
   border-radius:999px;
+
   font-size:12px;
+
   margin:2px;
 }
 
 .result{
+
   background:#fff8dc;
+
   border-radius:18px;
+
   padding:20px;
+
   text-align:center;
 }
 
 .score{
+
   font-size:48px;
+
   font-weight:800;
+
   color:#d48b00;
+
   margin:8px;
 }
 
 .nickname{
+
   font-size:20px;
+
   font-weight:700;
+
   margin:8px;
 }
 
 .message{
+
   font-size:18px;
+
   font-weight:700;
+
   margin:12px 0 18px;
+
 }
 
 .capture{
+
   background:#fff;
+
   padding:14px;
+
   border-radius:14px;
+
   border:2px dashed #f0c84b;
+
   font-weight:700;
+
   line-height:1.6;
 }
 
@@ -173,16 +237,26 @@ button:hover{
     🐣
   </div>
 
+
   <h1>
+
     삐약!<br>
+
     보안 병아리를 지켜주세요!
+
   </h1>
 
+
   <p>
+
     가볍게 즐기는 보안 상식 퀴즈예요.
+
     <br>
+
     닉네임으로 재미있게 도전해보세요 💛
+
   </p>
+
 
   <p
     id="period"
@@ -192,6 +266,7 @@ button:hover{
 
   </p>
 
+
   <p
     id="mix"
     class="muted">
@@ -200,10 +275,12 @@ button:hover{
 
   </p>
 
+
   <input
     id="nick"
     maxlength="20"
     placeholder="귀여운 닉네임을 입력해주세요">
+
 
   <button
     onclick="start()">
@@ -211,6 +288,7 @@ button:hover{
     🐣 병아리 구하기 시작!
 
   </button>
+
 
   <div class="notice">
 
@@ -247,15 +325,27 @@ button:hover{
   id="quiz"
   class="hide">
 
+
   <p>
+
     <b id="num"></b>
+
     &nbsp;
+
     <b id="time"></b>
+
   </p>
 
-  <h2 id="q"></h2>
 
-  <div id="a"></div>
+  <h2
+    id="q">
+  </h2>
+
+
+  <div
+    id="a">
+  </div>
+
 
 </section>
 
@@ -269,38 +359,47 @@ button:hover{
   id="res"
   class="hide">
 
+
   <div class="chick">
     🎉
   </div>
 
+
   <div class="result">
+
 
     <h2>
       삐약! 퀴즈 완료!
     </h2>
+
 
     <div
       id="nickname"
       class="nickname">
     </div>
 
+
     <div
       id="score"
       class="score">
     </div>
+
 
     <div
       id="message"
       class="message">
     </div>
 
+
     <p
       id="record">
     </p>
 
+
     <div class="capture">
 
       📸
+
       <b>
         이 결과 화면을 꼭 캡처해 두세요!
       </b>
@@ -312,16 +411,20 @@ button:hover{
 
     </div>
 
+
   </div>
+
 
   <h3>
     🏆 현재 보안 병아리 TOP 10
   </h3>
 
+
   <div
     id="lb"
     class="lb">
   </div>
+
 
   <button
     onclick="location.reload()">
@@ -329,6 +432,7 @@ button:hover{
     🐣 다시 도전하기
 
   </button>
+
 
 </section>
 
@@ -377,6 +481,7 @@ async function call(
       api,
 
       {
+
         method:'POST',
 
         headers:{
@@ -386,21 +491,69 @@ async function call(
 
         body:
           JSON.stringify({
+
             action,
+
             ...body
+
           })
+
       }
 
     );
 
+
   const x =
     await r.json();
 
+
   if(!r.ok){
+
     throw x;
+
   }
 
+
   return x;
+
+}
+
+
+
+/* ==========================================
+   날짜/시간 표시
+   초 단위 제거
+========================================== */
+
+function formatDateTime(
+  value
+){
+
+  const d =
+    new Date(value);
+
+
+  return d.toLocaleString(
+
+    'ko-KR',
+
+    {
+
+      year:'numeric',
+
+      month:'numeric',
+
+      day:'numeric',
+
+      hour:'numeric',
+
+      minute:'2-digit',
+
+      hour12:true
+
+    }
+
+  );
 
 }
 
@@ -415,28 +568,34 @@ async function init(){
   try{
 
     const x =
-      await call('config');
+      await call(
+        'config'
+      );
 
 
     document
-      .getElementById('period')
+      .getElementById(
+        'period'
+      )
       .textContent =
 
-      '참여기간: ' +
+      '🗓️ 참여기간: ' +
 
-      new Date(
+      formatDateTime(
         x.start_at
-      ).toLocaleString('ko-KR') +
+      ) +
 
       ' ~ ' +
 
-      new Date(
+      formatDateTime(
         x.end_at
-      ).toLocaleString('ko-KR');
+      );
 
 
     document
-      .getElementById('mix')
+      .getElementById(
+        'mix'
+      )
       .innerHTML =
 
       '랜덤 ' +
@@ -446,18 +605,27 @@ async function init(){
       '문제 · ' +
 
       '<span class="pill">' +
+
       '쉬움 ' +
+
       x.easy_count +
+
       '</span>' +
 
       '<span class="pill">' +
+
       '보통 ' +
+
       x.medium_count +
+
       '</span>' +
 
       '<span class="pill">' +
+
       '어려움 ' +
+
       x.hard_count +
+
       '</span>' +
 
       ' · 🔥 트렌드 1~2문제 포함';
@@ -467,8 +635,11 @@ async function init(){
   catch(e){
 
     document
-      .getElementById('period')
+      .getElementById(
+        'period'
+      )
       .textContent =
+
       '참여기간 정보를 불러오지 못했어요.';
 
   }
@@ -487,7 +658,9 @@ async function start(){
 
     const n =
       document
-        .getElementById('nick')
+        .getElementById(
+          'nick'
+        )
         .value
         .trim();
 
@@ -505,10 +678,13 @@ async function start(){
 
     const r =
       await call(
+
         'register',
+
         {
           nickname:n
         }
+
       );
 
 
@@ -519,10 +695,13 @@ async function start(){
 
     const x =
       await call(
+
         'questions',
+
         {
           token
         }
+
       );
 
 
@@ -540,13 +719,17 @@ async function start(){
 
 
     document
-      .getElementById('home')
+      .getElementById(
+        'home'
+      )
       .className =
       'hide';
 
 
     document
-      .getElementById('quiz')
+      .getElementById(
+        'quiz'
+      )
       .className =
       '';
 
@@ -574,31 +757,42 @@ async function start(){
 
 function show(){
 
-  clearInterval(timer);
+  clearInterval(
+    timer
+  );
 
 
   let left = 20;
 
 
   document
-    .getElementById('num')
+    .getElementById(
+      'num'
+    )
     .textContent =
 
     (i+1) +
+
     ' / ' +
+
     qs.length;
 
 
   document
-    .getElementById('time')
+    .getElementById(
+      'time'
+    )
     .textContent =
 
     left +
+
     '초';
 
 
   document
-    .getElementById('q')
+    .getElementById(
+      'q'
+    )
     .textContent =
 
     qs[i].question;
@@ -606,7 +800,9 @@ function show(){
 
   const box =
     document
-      .getElementById('a');
+      .getElementById(
+        'a'
+      );
 
 
   box.innerHTML = '';
@@ -620,7 +816,9 @@ function show(){
 
         const b =
           document
-            .createElement('button');
+            .createElement(
+              'button'
+            );
 
 
         b.className =
@@ -642,7 +840,9 @@ function show(){
           () => pick(j);
 
 
-        box.appendChild(b);
+        box.appendChild(
+          b
+        );
 
       }
 
@@ -658,7 +858,9 @@ function show(){
 
 
         document
-          .getElementById('time')
+          .getElementById(
+            'time'
+          )
           .textContent =
 
           Math.max(
@@ -691,7 +893,9 @@ function show(){
 
 function pick(v){
 
-  clearInterval(timer);
+  clearInterval(
+    timer
+  );
 
 
   ans[
@@ -703,7 +907,8 @@ function pick(v){
 
 
   if(
-    i < qs.length
+    i <
+    qs.length
   ){
 
     show();
@@ -776,22 +981,32 @@ async function submit(){
         'submit',
 
         {
+
           token,
-          attempt_id:aid,
-          answers:ans
+
+          attempt_id:
+            aid,
+
+          answers:
+            ans
+
         }
 
       );
 
 
     document
-      .getElementById('quiz')
+      .getElementById(
+        'quiz'
+      )
       .className =
       'hide';
 
 
     document
-      .getElementById('res')
+      .getElementById(
+        'res'
+      )
       .className =
       '';
 
@@ -801,36 +1016,52 @@ async function submit(){
 
 
     document
-      .getElementById('nickname')
+      .getElementById(
+        'nickname'
+      )
       .textContent =
 
       '닉네임: ' +
+
       x.result.nickname;
 
 
     document
-      .getElementById('score')
+      .getElementById(
+        'score'
+      )
       .textContent =
 
       score +
+
       '점';
 
 
     document
-      .getElementById('message')
+      .getElementById(
+        'message'
+      )
       .textContent =
 
-      getMessage(score);
+      getMessage(
+        score
+      );
 
 
     document
-      .getElementById('record')
+      .getElementById(
+        'record'
+      )
       .textContent =
 
       '정답 ' +
+
       x.result.best_correct +
+
       '/10 · 현재 ' +
+
       x.result.rank +
+
       '위';
 
 
@@ -867,7 +1098,9 @@ function draw(r){
 
 
   document
-    .getElementById('lb')
+    .getElementById(
+      'lb'
+    )
     .innerHTML =
 
     r
@@ -879,7 +1112,8 @@ function draw(r){
 
             ${
               medals[j] ||
-              (j+1) + '위'
+              (j+1) +
+              '위'
             }
 
             ${escapeHtml(
@@ -951,6 +1185,7 @@ function escapeHtml(
 init();
 
 </script>
+
 
 </body>
 
