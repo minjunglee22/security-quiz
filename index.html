@@ -1,402 +1,211 @@
 <!doctype html>
 <html lang="ko">
+
 <head>
-<!-- Security Chick Quiz -->
+
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>🐣 보안 병아리를 지켜주세요!</title>
+
+<meta
+  http-equiv="Content-Type"
+  content="text/html; charset=UTF-8">
+
+<meta
+  name="viewport"
+  content="width=device-width,initial-scale=1">
+
+<title>🐣 2026 보안 병아리 퀴즈</title>
 
 <style>
+
 *{
-  box-sizing:border-box;
+  box-sizing:border-box
 }
 
 body{
-  margin:0;
-  min-height:100vh;
-  font-family:
-    Arial,
-    "Noto Sans KR",
-    sans-serif;
-  background:
-    linear-gradient(180deg,#fff9d9 0%,#fff 42%,#f3f8ff 100%);
-  color:#243047;
-}
-
-.wrap{
-  width:min(720px,100%);
+  font-family:Arial,"Noto Sans KR",sans-serif;
+  max-width:720px;
   margin:auto;
-  padding:20px;
+  padding:24px;
+  background:#fff8dc;
+  color:#3b3024;
 }
 
-.card{
+main{
   background:#fff;
-  border-radius:28px;
-  padding:28px;
-  box-shadow:
-    0 12px 35px rgba(48,67,92,.12);
+  padding:26px;
+  border-radius:24px;
+  box-shadow:0 8px 28px #0001;
 }
 
-/* 병아리 */
-.chick{
-  font-size:82px;
-  text-align:center;
-  line-height:1;
-  margin:8px 0 15px;
-  animation:bounce 2s infinite;
+h1{
+  line-height:1.35;
 }
 
-@keyframes bounce{
-  0%,100%{transform:translateY(0)}
-  50%{transform:translateY(-7px)}
-}
-
-.title{
-  text-align:center;
-  font-size:30px;
-  font-weight:800;
-  margin:5px 0 10px;
-}
-
-.subtitle{
-  text-align:center;
-  color:#68758a;
-  line-height:1.7;
-  margin-bottom:24px;
-}
-
-.period{
-  background:#fff8d7;
-  border-radius:14px;
-  padding:12px;
-  text-align:center;
-  font-size:14px;
-  margin-bottom:18px;
-}
-
-/* 닉네임 */
+button,
 input{
   width:100%;
-  padding:15px 16px;
-  border:2px solid #e5e9ef;
-  border-radius:14px;
+  padding:14px;
+  margin:7px 0;
+  box-sizing:border-box;
+  border-radius:12px;
+  border:1px solid #ddd;
   font-size:16px;
-  outline:none;
 }
 
-input:focus{
-  border-color:#ffd54f;
-}
-
-/* 버튼 */
 button{
-  width:100%;
+  background:#ffcf4a;
+  color:#4b3b00;
   border:0;
-  border-radius:14px;
-  padding:15px;
-  margin-top:10px;
-  font-size:16px;
   font-weight:700;
   cursor:pointer;
-  transition:.15s;
 }
 
 button:hover{
-  transform:translateY(-1px);
+  opacity:.9;
 }
 
-.start-btn{
-  background:#ffd54f;
-  color:#4b3b00;
-  box-shadow:0 5px 0 #e6b92f;
-}
-
-.start-btn:active{
-  transform:translateY(3px);
-  box-shadow:0 2px 0 #e6b92f;
-}
-
-.notice{
-  margin-top:18px;
-  padding:15px;
-  border-radius:15px;
-  background:#f5f8ff;
-  color:#667085;
-  font-size:13px;
-  line-height:1.7;
-}
-
-/* 퀴즈 */
-.quiz-header{
-  display:flex;
-  justify-content:space-between;
-  align-items:center;
-  margin-bottom:14px;
-  font-weight:700;
-}
-
-.progress{
-  height:10px;
-  background:#edf0f4;
-  border-radius:20px;
-  overflow:hidden;
-  margin-bottom:20px;
-}
-
-.progress-bar{
-  height:100%;
-  background:#ffd54f;
-  transition:.3s;
-}
-
-.status{
-  display:flex;
-  justify-content:space-between;
-  margin-bottom:18px;
-}
-
-.level{
-  background:#fff6c8;
-  padding:7px 11px;
-  border-radius:20px;
-  font-size:13px;
-  font-weight:700;
-}
-
-.timer{
-  background:#eef5ff;
-  padding:7px 11px;
-  border-radius:20px;
-  font-size:13px;
-  font-weight:700;
-}
-
-.question-box{
-  background:#f8fafc;
-  border-radius:18px;
-  padding:22px;
-  margin-bottom:18px;
-}
-
-.question-label{
-  font-size:13px;
-  color:#8994a5;
-  margin-bottom:9px;
-}
-
-.question{
-  font-size:21px;
-  line-height:1.55;
-  font-weight:800;
-}
-
-.answer{
+.ans{
   background:#fff;
-  color:#263248;
-  border:2px solid #e7ebf0;
+  color:#3b3024;
   text-align:left;
-  margin-top:10px;
+  border:1px solid #eadfb8;
 }
 
-.answer:hover{
-  border-color:#ffd54f;
-  background:#fffdf0;
-}
-
-/* 피드백 */
-.feedback{
-  text-align:center;
-  padding:22px;
-  border-radius:18px;
-  margin-top:15px;
-  animation:pop .25s ease;
-}
-
-.correct{
-  background:#edfff5;
-  color:#16834b;
-}
-
-.wrong{
-  background:#fff1f1;
-  color:#d04444;
-}
-
-.feedback-emoji{
-  font-size:48px;
-  margin-bottom:8px;
-}
-
-.feedback-title{
-  font-size:20px;
-  font-weight:800;
-}
-
-.feedback-text{
-  margin-top:7px;
-  font-size:14px;
-  line-height:1.6;
-}
-
-@keyframes pop{
-  from{
-    transform:scale(.95);
-    opacity:0;
-  }
-  to{
-    transform:scale(1);
-    opacity:1;
-  }
-}
-
-/* 결과 */
-.result-chick{
-  font-size:88px;
-  text-align:center;
-  margin:5px 0;
-}
-
-.result-title{
-  text-align:center;
-  font-size:27px;
-  font-weight:800;
-}
-
-.result-message{
-  text-align:center;
-  color:#68758a;
-  margin-bottom:22px;
-}
-
-.score-card{
-  background:#fff9d9;
-  border-radius:20px;
-  padding:20px;
-  text-align:center;
-}
-
-.score-number{
-  font-size:40px;
-  font-weight:900;
-  color:#d79c00;
-}
-
-.rank-box{
-  background:#f5f8ff;
-  border-radius:18px;
-  padding:18px;
-  margin-top:18px;
-}
-
-.rank-title{
-  font-weight:800;
-  margin-bottom:10px;
-}
-
-.rank-row{
-  display:flex;
-  justify-content:space-between;
-  padding:10px 5px;
-  border-bottom:1px solid #e9edf3;
-  font-size:14px;
-}
-
-.rank-row:last-child{
-  border-bottom:0;
-}
-
-.final-notice{
-  margin-top:18px;
-  padding:17px;
-  background:#fff4e5;
-  border-radius:16px;
-  line-height:1.7;
-  font-size:14px;
-}
-
-.retry-btn{
-  background:#263248;
-  color:#fff;
-  margin-top:18px;
-}
-
-/* 공통 */
 .hide{
   display:none!important;
 }
 
-.small{
+.muted{
+  color:#766c60;
+}
+
+.notice{
+  background:#fff7cf;
+  padding:14px;
+  border-radius:14px;
+  font-size:14px;
+  line-height:1.7;
+}
+
+.lb p{
+  border-bottom:1px solid #eee;
+  padding:9px;
+  margin:0;
+}
+
+.chick{
+  font-size:54px;
+}
+
+.pill{
+  display:inline-block;
+  background:#fff1a8;
+  padding:5px 9px;
+  border-radius:999px;
   font-size:12px;
-  color:#8a94a5;
+  margin:2px;
+}
+
+.result{
+  background:#fff8dc;
+  border-radius:18px;
+  padding:20px;
   text-align:center;
-  margin-top:10px;
+}
+
+.score{
+  font-size:48px;
+  font-weight:800;
+  color:#d48b00;
+  margin:8px;
+}
+
+.nickname{
+  font-size:20px;
+  font-weight:700;
+  margin:8px;
+}
+
+.message{
+  font-size:18px;
+  font-weight:700;
+  margin:12px 0 18px;
+}
+
+.capture{
+  background:#fff;
+  padding:14px;
+  border-radius:14px;
+  border:2px dashed #f0c84b;
+  font-weight:700;
+  line-height:1.6;
 }
 
 @media(max-width:500px){
-  .wrap{
+
+  body{
     padding:12px;
   }
 
-  .card{
+  main{
     padding:20px;
-    border-radius:22px;
   }
 
-  .title{
-    font-size:25px;
-  }
-
-  .chick{
-    font-size:68px;
-  }
-
-  .question{
-    font-size:19px;
-  }
 }
+
 </style>
+
 </head>
 
 
 <body>
 
-<div class="wrap">
+<main>
 
-<!-- =========================
-     HOME
-========================= -->
 
-<section id="home" class="card">
+<!-- ==========================================
+     시작 화면
+========================================== -->
+
+<section id="home">
 
   <div class="chick">
     🐣
   </div>
 
-  <div class="title">
-    삐약! 보안 병아리를<br>
-    지켜주세요!
-  </div>
+  <h1>
+    삐약!<br>
+    보안 병아리를 지켜주세요!
+  </h1>
 
-  <div class="subtitle">
-    수상한 메일 📧<br>
-    위험한 링크 🔗<br>
-    의심스러운 파일 💻
-    <br><br>
-    우리 병아리가 무사히 살아남을 수 있도록<br>
-    보안 문제를 해결해주세요! 🛡️
-  </div>
+  <p>
+    가볍게 즐기는 보안 상식 퀴즈예요.
+    <br>
+    닉네임으로 재미있게 도전해보세요 💛
+  </p>
 
-  <div id="period" class="period">
-    참여기간 확인 중...
-  </div>
+  <p
+    id="period"
+    class="muted">
+
+    참여기간을 확인하는 중...
+
+  </p>
+
+  <p
+    id="mix"
+    class="muted">
+
+    랜덤 문제를 준비하고 있어요.
+
+  </p>
 
   <input
     id="nick"
     maxlength="20"
-    placeholder="🐣 나만의 닉네임을 입력해주세요">
+    placeholder="귀여운 닉네임을 입력해주세요">
 
   <button
-    class="start-btn"
     onclick="start()">
 
     🐣 병아리 구하기 시작!
@@ -405,213 +214,139 @@ button:hover{
 
   <div class="notice">
 
-    💡 <b>잠깐!</b><br>
+    실명이나 사번은 입력하지 마세요.
 
-    실명이나 사번은 입력하지 마세요.<br>
-    재미있는 닉네임으로 참여해주세요!
-    <br><br>
+    <br>
 
-    예시:
-    <b>피싱킬러</b> ·
-    <b>방화벽요정</b> ·
-    <b>삐약보안관</b>
-    <br><br>
+    퀴즈 기간 내 여러 번 도전할 수 있으며,
+    <b>닉네임별 최고 점수</b>가 순위에 반영됩니다.
 
-    🔄 퀴즈 기간 동안 여러 번 도전할 수 있어요.<br>
-    🏆 닉네임별 최고 기록이 순위에 반영됩니다.
+    <br>
+
+    같은 점수라면
+    <b>더 빠르게 푼 사람이 높은 순위</b>가 됩니다.
+
+    <br>
+
+    <b>
+      행사 종료 시점의 최종 1~3위에게
+      소정의 상품을 드립니다.
+    </b>
 
   </div>
 
 </section>
 
 
-<!-- =========================
-     QUIZ
-========================= -->
 
-<section id="quiz" class="card hide">
+<!-- ==========================================
+     퀴즈
+========================================== -->
 
-  <div class="quiz-header">
+<section
+  id="quiz"
+  class="hide">
 
-    <span id="num">
-      1 / 10
-    </span>
+  <p>
+    <b id="num"></b>
+    &nbsp;
+    <b id="time"></b>
+  </p>
 
-    <span id="streak">
-      🐣 출동!
-    </span>
-
-  </div>
-
-
-  <div class="progress">
-
-    <div
-      id="progressBar"
-      class="progress-bar"
-      style="width:10%">
-    </div>
-
-  </div>
-
-
-  <div class="status">
-
-    <span
-      id="level"
-      class="level">
-      🛡️ 보안 Lv.1
-    </span>
-
-    <span
-      id="time"
-      class="timer">
-      ⏱️ 20초
-    </span>
-
-  </div>
-
-
-  <div class="question-box">
-
-    <div class="question-label">
-      🚨 보안 사건 발생!
-    </div>
-
-    <div
-      id="q"
-      class="question">
-      문제를 불러오는 중...
-    </div>
-
-  </div>
-
+  <h2 id="q"></h2>
 
   <div id="a"></div>
 
-
-  <div
-    id="feedback"
-    class="feedback hide">
-
-    <div
-      id="feedbackEmoji"
-      class="feedback-emoji">
-    </div>
-
-    <div
-      id="feedbackTitle"
-      class="feedback-title">
-    </div>
-
-    <div
-      id="feedbackText"
-      class="feedback-text">
-    </div>
-
-  </div>
-
 </section>
 
 
-<!-- =========================
-     RESULT
-========================= -->
 
-<section id="res" class="card hide">
+<!-- ==========================================
+     결과
+========================================== -->
 
-  <div class="result-chick">
-    🐣🛡️
+<section
+  id="res"
+  class="hide">
+
+  <div class="chick">
+    🎉
   </div>
 
-  <div class="result-title">
-    삐약! 미션 완료!
-  </div>
+  <div class="result">
 
-  <div class="result-message">
-    우리 병아리가 무사히 살아남았어요! 🎉
-  </div>
+    <h2>
+      삐약! 퀴즈 완료!
+    </h2>
 
-
-  <div class="score-card">
-
-    <div>
-      당신의 보안 점수
+    <div
+      id="nickname"
+      class="nickname">
     </div>
 
     <div
       id="score"
-      class="score-number">
-      -
+      class="score">
+    </div>
+
+    <div
+      id="message"
+      class="message">
+    </div>
+
+    <p
+      id="record">
+    </p>
+
+    <div class="capture">
+
+      📸
+      <b>
+        이 결과 화면을 꼭 캡처해 두세요!
+      </b>
+
+      <br>
+
+      행사 종료 후 최종 1~3위 확인 및
+      상품 지급 시 닉네임 확인에 사용됩니다.
+
     </div>
 
   </div>
 
+  <h3>
+    🏆 현재 보안 병아리 TOP 10
+  </h3>
 
   <div
-    id="rankBox"
-    class="rank-box">
-
-    <div class="rank-title">
-      🏆 현재 보안 병아리 TOP 10
-    </div>
-
-    <div id="lb"></div>
-
+    id="lb"
+    class="lb">
   </div>
-
-
-  <div class="final-notice">
-
-    🎁 <b>최종 보안 병아리 TOP 3에게 선물!</b>
-    <br><br>
-
-    지금의 순위가 최종 순위는 아니에요! 😎<br>
-
-    퀴즈 기간 동안 여러 번 도전할 수 있고,
-    <b>행사 종료 시점의 최종 1~3위</b>에게
-    소정의 상품이 지급됩니다.
-
-    <br><br>
-
-    🐣 병아리를 더 튼튼하게 만들어주세요!
-
-  </div>
-
 
   <button
-    class="retry-btn"
     onclick="location.reload()">
 
     🐣 다시 도전하기
 
   </button>
 
-  <div class="small">
-    순위는 실시간으로 변경될 수 있습니다.
-  </div>
-
 </section>
 
-</div>
+
+</main>
+
 
 
 <script>
 
-/* ==========================================
-   API
-========================================== */
-
-const API =
-"https://fwfdldjgfulbjkqasgur.supabase.co/functions/v1/quiz-api";
-
 
 /* ==========================================
-   상태값
+   기본 변수
 ========================================== */
 
-let token = "";
-let aid = "";
+let token = '';
+
+let aid = '';
 
 let qs = [];
 
@@ -621,55 +356,58 @@ let ans = {};
 
 let timer;
 
-let currentCorrect = 0;
 
-let streak = 0;
+const api =
+  location.href;
+
 
 
 /* ==========================================
    API 호출
 ========================================== */
 
-async function call(action, body = {}){
+async function call(
+  action,
+  body={}
+){
 
   const r =
     await fetch(
-      API,
+
+      api,
+
       {
-        method:"POST",
+        method:'POST',
 
         headers:{
-          "content-type":
-          "application/json;charset=UTF-8"
+          'content-type':
+            'application/json;charset=utf-8'
         },
 
         body:
-        JSON.stringify({
-          action,
-          ...body
-        })
+          JSON.stringify({
+            action,
+            ...body
+          })
       }
-    );
 
+    );
 
   const x =
     await r.json();
 
-
   if(!r.ok){
-
     throw x;
-
   }
-
 
   return x;
 
 }
 
 
+
 /* ==========================================
-   초기화
+   초기 화면
 ========================================== */
 
 async function init(){
@@ -677,37 +415,66 @@ async function init(){
   try{
 
     const x =
-      await call("config");
+      await call('config');
 
 
     document
-      .getElementById("period")
+      .getElementById('period')
       .textContent =
 
-      "🗓️ 참여기간: " +
+      '참여기간: ' +
 
       new Date(
         x.start_at
-      ).toLocaleString("ko-KR") +
+      ).toLocaleString('ko-KR') +
 
-      " ~ " +
+      ' ~ ' +
 
       new Date(
         x.end_at
-      ).toLocaleString("ko-KR");
+      ).toLocaleString('ko-KR');
+
+
+    document
+      .getElementById('mix')
+      .innerHTML =
+
+      '랜덤 ' +
+
+      x.question_count +
+
+      '문제 · ' +
+
+      '<span class="pill">' +
+      '쉬움 ' +
+      x.easy_count +
+      '</span>' +
+
+      '<span class="pill">' +
+      '보통 ' +
+      x.medium_count +
+      '</span>' +
+
+      '<span class="pill">' +
+      '어려움 ' +
+      x.hard_count +
+      '</span>' +
+
+      ' · 🔥 트렌드 1~2문제 포함';
 
   }
 
   catch(e){
 
     document
-      .getElementById("period")
+      .getElementById('period')
       .textContent =
-      "참여기간 정보를 불러오지 못했어요 😢";
+      '참여기간 정보를 불러오지 못했어요.';
 
   }
 
 }
+
 
 
 /* ==========================================
@@ -720,7 +487,7 @@ async function start(){
 
     const n =
       document
-        .getElementById("nick")
+        .getElementById('nick')
         .value
         .trim();
 
@@ -728,7 +495,7 @@ async function start(){
     if(!n){
 
       alert(
-        "🐣 병아리에게 이름표를 달아주세요!\n닉네임을 입력해주세요."
+        '닉네임을 입력해주세요 🐣'
       );
 
       return;
@@ -738,7 +505,7 @@ async function start(){
 
     const r =
       await call(
-        "register",
+        'register',
         {
           nickname:n
         }
@@ -747,12 +514,12 @@ async function start(){
 
     token =
       r.participant
-       .participant_token;
+        .participant_token;
 
 
     const x =
       await call(
-        "questions",
+        'questions',
         {
           token
         }
@@ -771,19 +538,17 @@ async function start(){
 
     ans = {};
 
-    currentCorrect = 0;
 
-    streak = 0;
+    document
+      .getElementById('home')
+      .className =
+      'hide';
 
 
     document
-      .getElementById("home")
-      .classList.add("hide");
-
-
-    document
-      .getElementById("quiz")
-      .classList.remove("hide");
+      .getElementById('quiz')
+      .className =
+      '';
 
 
     show();
@@ -794,12 +559,13 @@ async function start(){
 
     alert(
       e.error ||
-      "🐣 삐약! 문제가 생겼어요."
+      '오류가 발생했어요 🐣'
     );
 
   }
 
 }
+
 
 
 /* ==========================================
@@ -814,104 +580,74 @@ function show(){
   let left = 20;
 
 
-  /* 번호 */
-
   document
-    .getElementById("num")
+    .getElementById('num')
     .textContent =
-    (i + 1) +
-    " / " +
+
+    (i+1) +
+    ' / ' +
     qs.length;
 
 
-  /* 진행률 */
-
   document
-    .getElementById("progressBar")
-    .style.width =
-    ((i + 1) / qs.length * 100) +
-    "%";
-
-
-  /* 레벨 */
-
-  document
-    .getElementById("level")
+    .getElementById('time')
     .textContent =
-    "🛡️ 보안 Lv." +
-    Math.max(
-      1,
-      currentCorrect + 1
-    );
 
-
-  /* 타이머 */
-
-  document
-    .getElementById("time")
-    .textContent =
-    "⏱️ " +
     left +
-    "초";
+    '초';
 
-
-  /* 문제 */
 
   document
-    .getElementById("q")
+    .getElementById('q')
     .textContent =
+
     qs[i].question;
 
 
-  /* 피드백 숨기기 */
-
-  document
-    .getElementById("feedback")
-    .classList.add("hide");
-
-
-  /* 답변 */
-
   const box =
     document
-      .getElementById("a");
+      .getElementById('a');
 
 
-  box.innerHTML = "";
+  box.innerHTML = '';
 
 
-  qs[i].options
+  qs[i]
+    .options
     .forEach(
+
       (v,j)=>{
 
-
         const b =
-          document.createElement(
-            "button"
-          );
+          document
+            .createElement('button');
 
 
         b.className =
-          "answer";
+          'ans';
 
 
         b.textContent =
-          String.fromCharCode(65+j) +
-          ". " +
+
+          String.fromCharCode(
+            65+j
+          ) +
+
+          '. ' +
+
           v;
 
 
         b.onclick =
-          ()=>pick(j);
+          () => pick(j);
 
 
         box.appendChild(b);
 
       }
+
     );
 
-
-  /* 타이머 */
 
   timer =
     setInterval(
@@ -922,17 +658,18 @@ function show(){
 
 
         document
-          .getElementById("time")
+          .getElementById('time')
           .textContent =
-          "⏱️ " +
+
           Math.max(
             left,
             0
           ) +
-          "초";
+
+          '초';
 
 
-        if(left <= 0){
+        if(left<=0){
 
           pick(-1);
 
@@ -947,8 +684,9 @@ function show(){
 }
 
 
+
 /* ==========================================
-   답변
+   답변 선택
 ========================================== */
 
 function pick(v){
@@ -956,50 +694,19 @@ function pick(v){
   clearInterval(timer);
 
 
-  /* 버튼 비활성화 */
-
-  document
-    .querySelectorAll(".answer")
-    .forEach(
-      b=>{
-        b.disabled=true;
-      }
-    );
-
-
   ans[
     qs[i].id
   ] = v;
 
 
-  /* 정답 여부 */
-
-  const correct =
-    Number(v) ===
-    Number(
-      qs[i].correct_index
-    );
-
-
-  /*
-    현재 API가 correct_index를
-    참가자에게 보내지 않는 경우가 있으므로
-    실제 정답 판정은 submit에서 처리됩니다.
-    여기서는 재미 요소만 표시합니다.
-  */
-
-
   i++;
 
 
-  if(i < 10){
+  if(
+    i < qs.length
+  ){
 
-    setTimeout(
-      ()=>{
-        show();
-      },
-      250
-    );
+    show();
 
   }
 
@@ -1012,6 +719,49 @@ function pick(v){
 }
 
 
+
+/* ==========================================
+   점수별 병아리 멘트
+========================================== */
+
+function getMessage(
+  score
+){
+
+  if(score === 100){
+
+    return '🏆 퍼펙트! 병아리 구조 완료!';
+
+  }
+
+
+  if(score >= 90){
+
+    return '🐣 보안 고수! 병아리를 완벽하게 지켜냈어요!';
+
+  }
+
+
+  if(score >= 70){
+
+    return '🐥 잘했어요! 병아리 구조에 성공했어요!';
+
+  }
+
+
+  if(score >= 50){
+
+    return '🐤 조금 아슬아슬했지만 병아리를 구했어요!';
+
+  }
+
+
+  return '🐣 앗! 병아리가 위험해요! 다시 도전해볼까요?';
+
+}
+
+
+
 /* ==========================================
    제출
 ========================================== */
@@ -1022,86 +772,71 @@ async function submit(){
 
     const x =
       await call(
-        "submit",
+
+        'submit',
+
         {
           token,
           attempt_id:aid,
           answers:ans
         }
+
       );
 
 
     document
-      .getElementById("quiz")
-      .classList.add("hide");
+      .getElementById('quiz')
+      .className =
+      'hide';
 
 
     document
-      .getElementById("res")
-      .classList.remove("hide");
+      .getElementById('res')
+      .className =
+      '';
 
 
-    const best =
-      x.result.best_correct;
+    const score =
+      x.result.score;
 
-
-    currentCorrect =
-      best;
-
-
-    /* 점수 */
 
     document
-      .getElementById("score")
+      .getElementById('nickname')
       .textContent =
-      best +
-      " / 10";
 
-
-    /* 순위 */
-
-    const board =
-      x.leaderboard || [];
+      '닉네임: ' +
+      x.result.nickname;
 
 
     document
-      .getElementById("lb")
-      .innerHTML =
+      .getElementById('score')
+      .textContent =
 
-      board
-        .map(
-          (v,j)=>{
-
-
-            let medal =
-              j === 0 ? "🥇" :
-              j === 1 ? "🥈" :
-              j === 2 ? "🥉" :
-              (j + 1) + "위";
+      score +
+      '점';
 
 
-            return `
+    document
+      .getElementById('message')
+      .textContent =
 
-              <div class="rank-row">
+      getMessage(score);
 
-                <span>
-                  ${medal}
-                  ${escapeHtml(v.nickname)}
-                </span>
 
-                <span>
-                  ${v.best_correct}/10
-                  · ${v.best_seconds}초
-                </span>
+    document
+      .getElementById('record')
+      .textContent =
 
-              </div>
+      '정답 ' +
+      x.result.best_correct +
+      '/10 · 현재 ' +
+      x.result.rank +
+      '위';
 
-            `;
 
-          }
-        )
-        .join("");
-
+    draw(
+      x.leaderboard
+    );
 
   }
 
@@ -1109,7 +844,7 @@ async function submit(){
 
     alert(
       e.error ||
-      "🐣 제출 중 문제가 발생했어요."
+      '제출 오류가 발생했어요.'
     );
 
   }
@@ -1117,20 +852,96 @@ async function submit(){
 }
 
 
+
 /* ==========================================
-   HTML escape
+   TOP 10
 ========================================== */
 
-function escapeHtml(str){
+function draw(r){
 
-  return String(str)
-    .replaceAll("&","&amp;")
-    .replaceAll("<","&lt;")
-    .replaceAll(">","&gt;")
-    .replaceAll('"',"&quot;")
-    .replaceAll("'","&#039;");
+  const medals = [
+    '🥇',
+    '🥈',
+    '🥉'
+  ];
+
+
+  document
+    .getElementById('lb')
+    .innerHTML =
+
+    r
+      .map(
+
+        (x,j)=>`
+
+          <p>
+
+            ${
+              medals[j] ||
+              (j+1) + '위'
+            }
+
+            ${escapeHtml(
+              x.nickname
+            )}
+
+            ·
+
+            <b>
+              ${x.best_score}점
+            </b>
+
+          </p>
+
+        `
+
+      )
+      .join('');
 
 }
+
+
+
+/* ==========================================
+   HTML Escape
+========================================== */
+
+function escapeHtml(
+  value
+){
+
+  return String(
+    value ?? ''
+  )
+
+  .replaceAll(
+    '&',
+    '&amp;'
+  )
+
+  .replaceAll(
+    '<',
+    '&lt;'
+  )
+
+  .replaceAll(
+    '>',
+    '&gt;'
+  )
+
+  .replaceAll(
+    '"',
+    '&quot;'
+  )
+
+  .replaceAll(
+    "'",
+    '&#039;'
+  );
+
+}
+
 
 
 /* ==========================================
@@ -1142,4 +953,5 @@ init();
 </script>
 
 </body>
+
 </html>
