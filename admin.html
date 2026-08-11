@@ -9,20 +9,19 @@
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
 <style>
-
 *{box-sizing:border-box}
 
 body{
   margin:0;
   font-family:Arial,"Noto Sans KR",sans-serif;
   background:#f5f7fb;
-  color:#182230
+  color:#182230;
 }
 
 .wrap{
   max-width:1180px;
   margin:auto;
-  padding:24px
+  padding:24px;
 }
 
 .card{
@@ -30,7 +29,7 @@ body{
   border-radius:18px;
   padding:22px;
   box-shadow:0 6px 24px #0000000d;
-  margin-bottom:18px
+  margin-bottom:18px;
 }
 
 h1{margin:0 0 6px}
@@ -41,19 +40,19 @@ h2{margin-top:0}
 .grid{
   display:grid;
   grid-template-columns:repeat(4,1fr);
-  gap:14px
+  gap:14px;
 }
 
 .stat{
   padding:18px;
   border-radius:15px;
-  background:#f7f9fc
+  background:#f7f9fc;
 }
 
 .stat b{
   font-size:28px;
   display:block;
-  margin-top:8px
+  margin-top:8px;
 }
 
 input,
@@ -66,63 +65,67 @@ button{
   border:1px solid #d8dee8;
   border-radius:10px;
   font-size:14px;
-  margin:4px 0
+  margin:4px 0;
 }
 
 textarea{
   resize:vertical;
-  line-height:1.5
+  line-height:1.5;
 }
 
 button{
   background:#182230;
   color:#fff;
-  cursor:pointer
+  cursor:pointer;
 }
 
-button:hover{opacity:.9}
+button:hover{
+  opacity:.9;
+}
 
 .primary{
   background:#ffd54f;
   color:#4b3b00;
   border:0;
-  font-weight:700
+  font-weight:700;
 }
 
 .danger{
   background:#dc3545;
   color:#fff;
   border:0;
-  font-weight:700
+  font-weight:700;
 }
 
 .restore{
   background:#198754;
   color:#fff;
   border:0;
-  font-weight:700
+  font-weight:700;
 }
 
-.logout{max-width:120px}
+.logout{
+  max-width:120px;
+}
 
 .small-button{
   width:auto;
   min-width:90px;
   padding:8px 12px;
   margin:0;
-  font-size:12px
+  font-size:12px;
 }
 
 .save-question{
   margin-top:18px;
   background:#182230;
-  font-weight:700
+  font-weight:700;
 }
 
 table{
   width:100%;
   border-collapse:collapse;
-  font-size:13px
+  font-size:13px;
 }
 
 th,
@@ -130,10 +133,12 @@ td{
   text-align:left;
   padding:10px;
   border-bottom:1px solid #edf0f4;
-  vertical-align:top
+  vertical-align:top;
 }
 
-th{white-space:nowrap}
+th{
+  white-space:nowrap;
+}
 
 .badge{
   display:inline-block;
@@ -141,51 +146,52 @@ th{white-space:nowrap}
   border-radius:99px;
   background:#eef3ff;
   margin:2px;
-  font-size:12px
+  font-size:12px;
 }
 
 .badge-valid{
   background:#e9f8ef;
-  color:#18794e
+  color:#18794e;
 }
 
 .badge-invalid{
   background:#ffe9ec;
-  color:#c92a3a
+  color:#c92a3a;
 }
 
 .badge-trending{
   background:#fff2cc;
-  color:#946200
+  color:#946200;
 }
 
 .badge-answer{
   background:#e8f5e9;
   color:#18794e;
-  font-weight:700
+  font-weight:700;
 }
 
-.hide{display:none!important}
+.hide{
+  display:none !important;
+}
 
 .login{
   max-width:480px;
-  margin:12vh auto
+  margin:12vh auto;
 }
 
 .question-card{
   border:1px solid #edf0f4;
-  box-shadow:none
+  box-shadow:none;
 }
 
 summary{
   cursor:pointer;
-  line-height:1.5
+  line-height:1.5;
 }
 
 .question-header{
   display:flex;
   align-items:flex-start;
-  justify-content:space-between;
   gap:12px;
 }
 
@@ -202,7 +208,7 @@ summary{
 .question-editor{
   margin-top:18px;
   padding-top:18px;
-  border-top:1px solid #edf0f4
+  border-top:1px solid #edf0f4;
 }
 
 .option-row{
@@ -266,7 +272,7 @@ label{
   display:block;
   margin-top:10px;
   font-size:13px;
-  font-weight:700
+  font-weight:700;
 }
 
 .note{
@@ -275,68 +281,63 @@ label{
   border-radius:12px;
   font-size:13px;
   line-height:1.6;
-  margin-bottom:16px
+  margin-bottom:16px;
 }
 
-.scroll{overflow:auto}
+.scroll{
+  overflow:auto;
+}
 
 .participant-invalid{
-  background:#fff8f8
+  background:#fff8f8;
 }
 
 .action-cell{
-  min-width:110px
+  min-width:110px;
 }
 
 .empty{
   padding:30px;
   text-align:center;
-  color:#667085
+  color:#667085;
 }
 
 @media(max-width:800px){
-
   .grid{
-    grid-template-columns:repeat(2,1fr)
+    grid-template-columns:repeat(2,1fr);
   }
 
   .editor-grid{
-    grid-template-columns:1fr
+    grid-template-columns:1fr;
   }
-
 }
 
 @media(max-width:500px){
-
-  .wrap{padding:12px}
+  .wrap{
+    padding:12px;
+  }
 
   .grid{
-    grid-template-columns:1fr 1fr
+    grid-template-columns:1fr 1fr;
   }
 
   table{
-    min-width:700px
+    min-width:700px;
   }
 
   .answer-selector{
-    grid-template-columns:1fr 1fr
+    grid-template-columns:1fr 1fr;
   }
-
 }
-
 </style>
 
 </head>
 
 <body>
 
-<!-- ==========================================
-     관리자 로그인
-========================================== -->
+<!-- 관리자 로그인 -->
 
-<div
-  id="login"
-  class="card login">
+<div id="login" class="card login">
 
   <h1>🐣 보안 병아리 관리자</h1>
 
@@ -359,22 +360,13 @@ label{
 
   </button>
 
-  <p
-    id="loginMsg"
-    class="muted">
-  </p>
+  <p id="loginMsg" class="muted"></p>
 
 </div>
 
-<!-- ==========================================
-     관리자 화면
-========================================== -->
+<!-- 관리자 화면 -->
 
-<div
-  id="app"
-  class="wrap hide">
-
-  <!-- HEADER -->
+<div id="app" class="wrap hide">
 
   <div class="card">
 
@@ -444,7 +436,7 @@ label{
 
   </div>
 
-  <!-- 퀴즈 기간 / 출제 설정 -->
+  <!-- 기간 / 출제 설정 -->
 
   <div class="card">
 
@@ -452,63 +444,43 @@ label{
 <h2>🗓️ 퀴즈 기간 / 출제 설정</h2>
 
 <div class="note">
-
   관리자가 변경한 기간과 난이도 설정은
   실제 퀴즈 출제에 바로 반영됩니다.
-
   <br><br>
-
   기간이 지나면 참가자는 퀴즈를
   시작하거나 제출할 수 없습니다.
-
 </div>
 
 <div class="grid">
 
   <div>
     <label>시작일시</label>
-    <input
-      id="startAt"
-      type="datetime-local">
+    <input id="startAt" type="datetime-local">
   </div>
 
   <div>
     <label>종료일시</label>
-    <input
-      id="endAt"
-      type="datetime-local">
+    <input id="endAt" type="datetime-local">
   </div>
 
   <div>
     <label>전체 문제 수</label>
-    <input
-      id="qCount"
-      type="number"
-      min="1">
+    <input id="qCount" type="number" min="1">
   </div>
 
   <div>
     <label>쉬움</label>
-    <input
-      id="easy"
-      type="number"
-      min="0">
+    <input id="easy" type="number" min="0">
   </div>
 
   <div>
     <label>보통</label>
-    <input
-      id="medium"
-      type="number"
-      min="0">
+    <input id="medium" type="number" min="0">
   </div>
 
   <div>
     <label>어려움</label>
-    <input
-      id="hard"
-      type="number"
-      min="0">
+    <input id="hard" type="number" min="0">
   </div>
 
 </div>
@@ -524,7 +496,7 @@ label{
 
   </div>
 
-  <!-- 일별 참여 추이 -->
+  <!-- 일별 통계 -->
 
   <div class="card">
 
@@ -613,7 +585,6 @@ label{
   <table>
 
     <thead>
-
       <tr>
         <th>닉네임</th>
         <th>최고 정답</th>
@@ -622,7 +593,6 @@ label{
         <th>가입일</th>
         <th>관리</th>
       </tr>
-
     </thead>
 
     <tbody id="participantsList"></tbody>
@@ -642,20 +612,12 @@ label{
 <h2>📚 문제 Pool 관리</h2>
 
 <p class="muted">
-
   현재 등록된 문제 Pool을 직접 수정할 수 있습니다.
-
   <br>
-
   문제 / 보기 / 정답 / 난이도 / 주제 /
   트렌드 / 활성 여부 / 해설을 관리합니다.
-
   <br><br>
-
-  <b>
-    💡 비활성 문제는 실제 퀴즈 출제에서 제외됩니다.
-  </b>
-
+  <b>💡 비활성 문제는 실제 퀴즈 출제에서 제외됩니다.</b>
 </p>
 
 <div id="questions"></div>
@@ -666,7 +628,6 @@ label{
 </div>
 
 <script>
-
 
 /* ==========================================
    Supabase
@@ -692,51 +653,51 @@ const API =
   "/functions/v1/admin-api";
 
 
-
 /* ==========================================
    관리자 로그인
 ========================================== */
 
 async function login(){
 
+  const msg =
+    document.getElementById("loginMsg");
+
+  msg.textContent =
+    "📩 로그인 링크를 요청하는 중입니다...";
+
   try{
 
-    const { error } =
+    const result =
       await sb.auth.signInWithOtp({
 
-        email:
-          ADMIN_EMAIL,
+        email:ADMIN_EMAIL,
 
         options:{
-          emailRedirectTo:
-            location.href
+          emailRedirectTo:location.href
         }
 
       });
 
-    if(error){
-      throw error;
+    if(result.error){
+      throw result.error;
     }
 
-    document
-      .getElementById("loginMsg")
-      .textContent =
+    msg.textContent =
       "📩 로그인 링크를 이메일로 보냈습니다. 메일을 확인해주세요.";
 
   }
 
   catch(e){
 
-    document
-      .getElementById("loginMsg")
-      .textContent =
-      "로그인 오류: " +
-      e.message;
+    console.error("LOGIN ERROR:",e);
+
+    msg.textContent =
+      "❌ 로그인 링크 발송 실패: " +
+      (e.message || "알 수 없는 오류");
 
   }
 
 }
-
 
 
 /* ==========================================
@@ -745,27 +706,42 @@ async function login(){
 
 async function session(){
 
-  const { data } =
-    await sb.auth.getSession();
+  try{
 
-  if(data.session){
+    const result =
+      await sb.auth.getSession();
 
-    document
-      .getElementById("login")
-      .classList
-      .add("hide");
+    const data =
+      result.data;
 
-    document
-      .getElementById("app")
-      .classList
-      .remove("hide");
+    if(data && data.session){
 
-    load();
+      document
+        .getElementById("login")
+        .classList
+        .add("hide");
+
+      document
+        .getElementById("app")
+        .classList
+        .remove("hide");
+
+      await load();
+
+    }
+
+  }
+
+  catch(e){
+
+    console.error(
+      "SESSION ERROR:",
+      e
+    );
 
   }
 
 }
-
 
 
 /* ==========================================
@@ -777,10 +753,13 @@ async function api(
   body={}
 ){
 
-  const { data } =
+  const result =
     await sb.auth.getSession();
 
-  if(!data.session){
+  const data =
+    result.data;
+
+  if(!data || !data.session){
 
     throw new Error(
       "로그인이 필요합니다."
@@ -788,7 +767,7 @@ async function api(
 
   }
 
-  const r =
+  const response =
     await fetch(
 
       API,
@@ -802,7 +781,7 @@ async function api(
             "Bearer " +
             data.session.access_token,
 
-          "content-type":
+          "Content-Type":
             "application/json"
 
         },
@@ -817,22 +796,21 @@ async function api(
 
     );
 
-  const x =
-    await r.json();
+  const json =
+    await response.json();
 
-  if(!r.ok){
+  if(!response.ok){
 
     throw new Error(
-      x.error ||
+      json.error ||
       "관리자 API 오류"
     );
 
   }
 
-  return x;
+  return json;
 
 }
-
 
 
 /* ==========================================
@@ -850,11 +828,9 @@ function dt(value){
 
   const pad =
     n =>
-      String(n)
-        .padStart(2,"0");
+      String(n).padStart(2,"0");
 
   return (
-
     d.getFullYear() +
     "-" +
     pad(d.getMonth()+1) +
@@ -864,7 +840,6 @@ function dt(value){
     pad(d.getHours()) +
     ":" +
     pad(d.getMinutes())
-
   );
 
 }
@@ -882,7 +857,6 @@ function localDate(value){
 }
 
 
-
 /* ==========================================
    Dashboard
 ========================================== */
@@ -898,78 +872,60 @@ async function load(){
       x.stats;
 
 
-    document
-      .getElementById("visits")
+    document.getElementById("visits")
       .textContent =
       s.visits;
 
-    document
-      .getElementById("participants")
+    document.getElementById("participants")
       .textContent =
       s.participants;
 
-    document
-      .getElementById("attempts")
+    document.getElementById("attempts")
       .textContent =
       s.attempts;
 
-    document
-      .getElementById("completion")
+    document.getElementById("completion")
       .textContent =
-      s.completion_rate +
-      "%";
+      s.completion_rate + "%";
 
-    document
-      .getElementById("avgCorrect")
+    document.getElementById("avgCorrect")
       .textContent =
-      s.avg_correct +
-      "/10";
+      s.avg_correct + "/10";
 
-    document
-      .getElementById("avgScore")
+    document.getElementById("avgScore")
       .textContent =
       s.avg_score;
 
-    document
-      .getElementById("avgElapsed")
+    document.getElementById("avgElapsed")
       .textContent =
-      s.avg_elapsed +
-      "초";
+      s.avg_elapsed + "초";
 
-    document
-      .getElementById("submitted")
+    document.getElementById("submitted")
       .textContent =
       s.submitted;
 
 
-    document
-      .getElementById("startAt")
+    document.getElementById("startAt")
       .value =
       dt(x.settings.start_at);
 
-    document
-      .getElementById("endAt")
+    document.getElementById("endAt")
       .value =
       dt(x.settings.end_at);
 
-
-    document
-      .getElementById("qCount")
+    document.getElementById("qCount")
       .value =
       x.settings.question_count;
 
-    document
-      .getElementById("easy")
+    document.getElementById("easy")
       .value =
       x.settings.easy_count;
 
-    document
-      .getElementById("medium")
+    document.getElementById("medium")
       .value =
       x.settings.medium_count;
 
-    document
-      .getElementById("hard")
+    document.getElementById("hard")
       .value =
       x.settings.hard_count;
 
@@ -994,6 +950,11 @@ async function load(){
 
   catch(e){
 
+    console.error(
+      "DASHBOARD ERROR:",
+      e
+    );
+
     alert(
       "Dashboard를 불러오지 못했습니다.\n\n" +
       e.message
@@ -1002,7 +963,6 @@ async function load(){
   }
 
 }
-
 
 
 /* ==========================================
@@ -1045,7 +1005,6 @@ function renderDaily(list){
         </td>
 
         <td>
-
           ${
             x.attempts
             ?
@@ -1057,7 +1016,6 @@ function renderDaily(list){
             :
             0
           }%
-
         </td>
 
       </tr>
@@ -1065,7 +1023,6 @@ function renderDaily(list){
     `).join("");
 
 }
-
 
 
 /* ==========================================
@@ -1132,7 +1089,6 @@ function renderLeaders(list){
 }
 
 
-
 /* ==========================================
    참가자 관리
 ========================================== */
@@ -1195,27 +1151,21 @@ function renderParticipants(list){
           </td>
 
           <td>
-
             ${
               valid
-
               ?
-
               `
               <span class="badge badge-valid">
                 정상
               </span>
               `
-
               :
-
               `
               <span class="badge badge-invalid">
                 🚫 무효
               </span>
               `
             }
-
           </td>
 
           <td>
@@ -1226,32 +1176,24 @@ function renderParticipants(list){
 
             ${
               valid
-
               ?
-
               `
               <button
                 class="danger small-button"
                 onclick="
                   invalidateParticipant('${p.id}')
                 ">
-
                 🗑️ 무효 처리
-
               </button>
               `
-
               :
-
               `
               <button
                 class="restore small-button"
                 onclick="
                   restoreParticipant('${p.id}')
                 ">
-
                 ↩️ 복구
-
               </button>
               `
             }
@@ -1267,7 +1209,6 @@ function renderParticipants(list){
 }
 
 
-
 /* ==========================================
    참가자 무효 처리
 ========================================== */
@@ -1276,17 +1217,13 @@ async function invalidateParticipant(id){
 
   const ok =
     confirm(
-
       "이 참가자를 무효 처리할까요?\n\n" +
-
       "무효 처리하면 해당 참가자는\n" +
       "• TOP 10에서 제외\n" +
       "• 최종 순위에서 제외\n" +
       "• 상품 지급 대상에서 제외\n\n" +
       "됩니다.\n\n" +
-
       "참가자 기록 자체는 삭제되지 않습니다."
-
     );
 
   if(!ok){
@@ -1297,7 +1234,7 @@ async function invalidateParticipant(id){
 
     await api(
       "participant_invalidate",
-      {id}
+      {id:id}
     );
 
     alert(
@@ -1320,7 +1257,6 @@ async function invalidateParticipant(id){
 }
 
 
-
 /* ==========================================
    참가자 복구
 ========================================== */
@@ -1329,12 +1265,9 @@ async function restoreParticipant(id){
 
   const ok =
     confirm(
-
       "이 참가자를 다시 정상 상태로 복구할까요?\n\n" +
-
       "복구하면 해당 참가자의 기록이\n" +
       "다시 순위에 반영될 수 있습니다."
-
     );
 
   if(!ok){
@@ -1345,7 +1278,7 @@ async function restoreParticipant(id){
 
     await api(
       "participant_restore",
-      {id}
+      {id:id}
     );
 
     alert(
@@ -1366,7 +1299,6 @@ async function restoreParticipant(id){
   }
 
 }
-
 
 
 /* ==========================================
@@ -1448,11 +1380,8 @@ async function saveSettings(){
   try{
 
     await api(
-
       "settings",
-
       {
-
         start_at:
           new Date(
             startValue
@@ -1463,28 +1392,18 @@ async function saveSettings(){
             endValue
           ).toISOString(),
 
-        question_count:
-          q,
-
-        easy_count:
-          easy,
-
-        medium_count:
-          medium,
-
-        hard_count:
-          hard
-
+        question_count:q,
+        easy_count:easy,
+        medium_count:medium,
+        hard_count:hard
       }
-
     );
-
 
     alert(
       "🐣 퀴즈 설정을 저장했습니다!"
     );
 
-    load();
+    await load();
 
   }
 
@@ -1500,9 +1419,8 @@ async function saveSettings(){
 }
 
 
-
 /* ==========================================
-   문제 목록
+   문제 Pool
 ========================================== */
 
 function renderQuestions(list){
@@ -1533,12 +1451,13 @@ function renderQuestions(list){
         ? q.options
         : [];
 
-
       const correct =
-        Number.isInteger(
-          Number(q.correct_index)
-        )
-        ? Number(q.correct_index)
+        Number(q.correct_index);
+
+      const safeCorrect =
+        correct >= 0 &&
+        correct <= 3
+        ? correct
         : 0;
 
 
@@ -1546,7 +1465,6 @@ function renderQuestions(list){
 
         <details
           class="card question-card">
-
 
           <summary>
 
@@ -1570,38 +1488,30 @@ function renderQuestions(list){
 
                 ${
                   q.is_trending
-
                   ?
-
                   `
                   <span class="badge badge-trending">
                     🔥 트렌드
                   </span>
                   `
-
                   :
-
                   ""
                 }
 
                 ${
                   !q.active
-
                   ?
-
                   `
                   <span class="badge">
                     비활성
                   </span>
                   `
-
                   :
-
                   ""
                 }
 
                 <span class="badge badge-answer">
-                  정답 ${["①","②","③","④"][correct] || "-"}
+                  정답 ${["①","②","③","④"][safeCorrect]}
                 </span>
 
               </div>
@@ -1614,8 +1524,6 @@ function renderQuestions(list){
           <div class="question-editor">
 
 
-            <!-- 문제 -->
-
             <label>
               문제
             </label>
@@ -1627,8 +1535,6 @@ function renderQuestions(list){
               )}</textarea>
 
 ```
-        <!-- 보기 -->
-
         <label>
           보기
         </label>
@@ -1654,9 +1560,6 @@ function renderQuestions(list){
         `).join("")}
 
 
-
-        <!-- 정답 -->
-
         <label>
           정답
         </label>
@@ -1673,7 +1576,7 @@ function renderQuestions(list){
                 name="answer_${q.id}"
                 value="${i}"
                 ${
-                  correct === i
+                  safeCorrect === i
                   ? "checked"
                   : ""
                 }>
@@ -1689,11 +1592,7 @@ function renderQuestions(list){
         </div>
 
 
-
-        <!-- 기본 설정 -->
-
         <div class="editor-grid">
-
 
           <div>
 
@@ -1821,12 +1720,8 @@ function renderQuestions(list){
 
           </div>
 
-
         </div>
 
-
-
-        <!-- 해설 / 출처 -->
 
         <label>
           해설 / 출처 메모
@@ -1840,9 +1735,6 @@ function renderQuestions(list){
           )}</textarea>
 
 
-
-        <!-- 저장 -->
-
         <button
           class="save-question"
           onclick="
@@ -1855,7 +1747,6 @@ function renderQuestions(list){
 
 
       </div>
-
 
     </details>
 
@@ -1880,10 +1771,9 @@ const dashboard =
 
 
 const current =
-  dashboard.questions
-    .find(
-      x => x.id === id
-    );
+  dashboard.questions.find(
+    x => x.id === id
+  );
 
 
 if(!current){
@@ -1894,10 +1784,6 @@ if(!current){
 
 }
 
-
-/* -----------------------------
-   보기 가져오기
------------------------------ */
 
 const options =
   [0,1,2,3].map(i => {
@@ -1926,10 +1812,6 @@ if(
 }
 
 
-/* -----------------------------
-   정답 가져오기
------------------------------ */
-
 const answer =
   document.querySelector(
     'input[name="answer_' +
@@ -1954,10 +1836,6 @@ const correct_index =
   );
 
 
-/* -----------------------------
-   문제 확인
------------------------------ */
-
 const question =
   document
     .getElementById(
@@ -1977,23 +1855,16 @@ if(!question){
 }
 
 
-/* -----------------------------
-   저장
------------------------------ */
-
 await api(
-
   "question_update",
-
   {
+    id:id,
 
-    id,
+    question:question,
 
-    question,
+    options:options,
 
-    options,
-
-    correct_index,
+    correct_index:correct_index,
 
     difficulty:
       document
@@ -2031,9 +1902,7 @@ await api(
         )
         .value
         .trim()
-
   }
-
 );
 
 
@@ -2050,6 +1919,11 @@ await load();
 catch(e){
 
 ```
+console.error(
+  "QUESTION SAVE ERROR:",
+  e
+);
+
 alert(
   "문제를 저장하지 못했습니다.\n\n" +
   e.message
@@ -2069,7 +1943,6 @@ function escapeHtml(value){
 return String(
 value ?? ""
 )
-
 .replaceAll("&","&")
 .replaceAll("<","<")
 .replaceAll(">",">")
@@ -2102,11 +1975,7 @@ Auth 상태
 
 sb.auth.onAuthStateChange(
 function(){
-
-```
 session();
-```
-
 }
 );
 
