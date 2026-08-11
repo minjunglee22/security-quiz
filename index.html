@@ -1,0 +1,481 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>2026 정보보안 퀴즈</title>
+
+<style>
+body{
+  font-family:Arial,"Noto Sans KR",sans-serif;
+  max-width:720px;
+  margin:auto;
+  padding:24px;
+  background:#f5f7fa;
+  color:#111827
+}
+main{
+  background:#fff;
+  padding:24px;
+  border-radius:16px;
+  box-shadow:0 4px 18px #0001
+}
+button,input{
+  width:100%;
+  padding:13px;
+  margin:7px 0;
+  box-sizing:border-box;
+  border-radius:9px;
+  border:1px solid #ccc;
+  font-size:16px
+}
+button{
+  background:#111827;
+  color:#fff;
+  cursor:pointer
+}
+.ans{
+  background:#fff;
+  color:#111;
+  text-align:left
+}
+.hide{display:none}
+.muted{color:#667085}
+.notice{
+  background:#eff6ff;
+  padding:12px;
+  border-radius:10px;
+  font-size:14px;
+  line-height:1.6
+}
+.lb p{
+  border-bottom:1px solid #eee;
+  padding:8px
+}
+</style>
+</head>
+
+<body>
+<main>
+
+<section id="home">
+
+<h1>🔐 2026 정보보안 퀴즈</h1>
+
+<p id="period" class="muted">
+참여기간 확인 중...
+</p>
+
+<p class="muted">
+랜덤 10문제 · 쉬움 5 / 보통 3 / 어려움 2
+</p>
+
+<input
+  id="nick"
+  maxlength="20"
+  placeholder="닉네임">
+
+<button onclick="start()">
+퀴즈 시작
+</button>
+
+<div class="notice">
+실명이나 사번은 입력하지 마세요.<br>
+퀴즈 기간 내 여러 번 도전할 수 있으며,
+닉네임별 최고 기록이 순위에 반영됩니다.<br>
+<b>
+행사 종료 시점 최종 1~3위에게 소정의 상품을 지급합니다.
+</b>
+</div>
+
+</section>
+
+
+<section id="quiz" class="hide">
+
+<p>
+<b id="num"></b>
+&nbsp;
+<b id="time"></b>
+</p>
+
+<h2 id="q"></h2>
+
+<div id="a"></div>
+
+</section>
+
+
+<section id="res" class="hide">
+
+<h2>🎉 퀴즈 완료!</h2>
+
+<h3 id="score"></h3>
+
+<h3>🏆 현재 TOP 10</h3>
+
+<div id="lb" class="lb"></div>
+
+<button onclick="location.reload()">
+다시 도전
+</button>
+
+</section>
+
+</main>
+
+
+<script>
+
+const API =
+"https://fwfdldjgfulbjkqasgur.supabase.co/functions/v1/quiz-api";
+
+let token = "";
+let aid = "";
+let qs = [];
+let i = 0;
+let ans = {};
+let timer;
+
+
+/* Supabase API 호출 */
+async function call(action, body = {}) {
+
+  const r = await fetch(API, {
+
+    method:"POST",
+
+    headers:{
+      "content-type":
+      "application/json;charset=UTF-8"
+    },
+
+    body:JSON.stringify({
+      action,
+      ...body
+    })
+
+  });
+
+  const x = await r.json();
+
+  if(!r.ok){
+    throw x;
+  }
+
+  return x;
+}
+
+
+/* 퀴즈 기간 표시 */
+async function init(){
+
+  try{
+
+    const x =
+      await call("config");
+
+    document
+      .getElementById("period")
+      .textContent =
+      "참여기간: " +
+      new Date(x.start_at)
+        .toLocaleString("ko-KR") +
+      " ~ " +
+      new Date(x.end_at)
+        .toLocaleString("ko-KR");
+
+  }
+
+  catch(e){
+
+    document
+      .getElementById("period")
+      .textContent =
+      "참여기간 정보를 불러오지 못했습니다.";
+
+  }
+
+}
+
+
+/* 퀴즈 시작 */
+async function start(){
+
+  try{
+
+    const n =
+      document
+        .getElementById("nick")
+        .value
+        .trim();
+
+    if(!n){
+
+      alert("닉네임을 입력해주세요.");
+
+      return;
+
+    }
+
+
+    const r =
+      await call(
+        "register",
+        {
+          nickname:n
+        }
+      );
+
+
+    token =
+      r.participant
+       .participant_token;
+
+
+    const x =
+      await call(
+        "questions",
+        {
+          token
+        }
+      );
+
+
+    aid = x.attempt_id;
+
+    qs = x.questions;
+
+    i = 0;
+
+    ans = {};
+
+
+    document
+      .getElementById("home")
+      .className = "hide";
+
+    document
+      .getElementById("quiz")
+      .className = "";
+
+
+    show();
+
+  }
+
+  catch(e){
+
+    alert(
+      e.error ||
+      "오류가 발생했습니다."
+    );
+
+  }
+
+}
+
+
+/* 문제 표시 */
+function show(){
+
+  clearInterval(timer);
+
+  let left = 20;
+
+
+  document
+    .getElementById("num")
+    .textContent =
+    (i + 1) +
+    " / " +
+    qs.length;
+
+
+  document
+    .getElementById("time")
+    .textContent =
+    left + "초";
+
+
+  document
+    .getElementById("q")
+    .textContent =
+    qs[i].question;
+
+
+  const box =
+    document
+      .getElementById("a");
+
+
+  box.innerHTML = "";
+
+
+  qs[i].options
+    .forEach(
+      (v,j)=>{
+
+        const b =
+          document.createElement(
+            "button"
+          );
+
+        b.className = "ans";
+
+        b.textContent =
+          String.fromCharCode(65+j)
+          + ". "
+          + v;
+
+
+        b.onclick =
+          ()=>pick(j);
+
+
+        box.appendChild(b);
+
+      }
+    );
+
+
+  timer =
+    setInterval(
+
+      ()=>{
+
+        left--;
+
+        document
+          .getElementById("time")
+          .textContent =
+          Math.max(left,0)
+          + "초";
+
+
+        if(left <= 0){
+
+          pick(-1);
+
+        }
+
+      },
+
+      1000
+
+    );
+
+}
+
+
+/* 답 선택 */
+function pick(v){
+
+  clearInterval(timer);
+
+  ans[qs[i].id] = v;
+
+  i++;
+
+
+  if(i < 10){
+
+    show();
+
+  }
+
+  else{
+
+    submit();
+
+  }
+
+}
+
+
+/* 결과 제출 */
+async function submit(){
+
+  try{
+
+    const x =
+      await call(
+        "submit",
+        {
+          token,
+          attempt_id:aid,
+          answers:ans
+        }
+      );
+
+
+    document
+      .getElementById("quiz")
+      .className = "hide";
+
+
+    document
+      .getElementById("res")
+      .className = "";
+
+
+    document
+      .getElementById("score")
+      .textContent =
+      "최고 기록 " +
+      x.result.best_correct +
+      "/10 · " +
+      x.result.best_seconds +
+      "초 · 현재 " +
+      x.result.rank +
+      "위";
+
+
+    document
+      .getElementById("lb")
+      .innerHTML =
+
+      x.leaderboard
+        .map(
+          (v,j)=>
+
+          "<p>" +
+
+          (j+1) +
+          "위 " +
+
+          v.nickname +
+
+          " · " +
+
+          v.best_correct +
+          "/10 · " +
+
+          v.best_seconds +
+          "초" +
+
+          "</p>"
+
+        )
+        .join("");
+
+  }
+
+  catch(e){
+
+    alert(
+      e.error ||
+      "제출 오류"
+    );
+
+  }
+
+}
+
+
+init();
+
+</script>
+
+</body>
+</html>
