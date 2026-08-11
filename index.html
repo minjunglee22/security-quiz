@@ -1,4 +1,5 @@
 <!doctype html>
+
 <html lang="ko">
 
 <head>
@@ -6,19 +7,19 @@
 <meta charset="UTF-8">
 
 <meta
-  http-equiv="Content-Type"
-  content="text/html; charset=UTF-8">
+http-equiv="Content-Type"
+content="text/html; charset=UTF-8">
 
 <meta
-  name="viewport"
-  content="width=device-width,initial-scale=1">
+name="viewport"
+content="width=device-width,initial-scale=1">
 
 <title>🐣 2026 보안 병아리 퀴즈</title>
 
 <style>
 
 *{
-  box-sizing:border-box
+  box-sizing:border-box;
 }
 
 body{
@@ -88,6 +89,13 @@ button:hover{
   opacity:.9;
 }
 
+button:disabled{
+
+  opacity:.6;
+
+  cursor:not-allowed;
+}
+
 .ans{
 
   background:#fff;
@@ -123,7 +131,7 @@ button:hover{
   display:none!important;
 }
 
-  .submit-loading{
+.submit-loading{
 
   text-align:center;
 
@@ -158,6 +166,7 @@ button:hover{
   }
 
 }
+
 .muted{
   color:#766c60;
 }
@@ -242,24 +251,35 @@ button:hover{
   font-weight:700;
 
   margin:12px 0 18px;
-
 }
 
 .capture{
+
   background:#fff7cf;
+
   padding:20px 16px;
+
   border-radius:16px;
+
   border:3px dashed #f0c84b;
+
   font-weight:800;
+
   font-size:19px;
+
   line-height:1.7;
+
   text-align:center;
+
   margin-top:18px;
 }
 
 .capture b{
+
   font-size:22px;
+
   display:block;
+
   margin-bottom:6px;
 }
 
@@ -279,11 +299,9 @@ button:hover{
 
 </head>
 
-
 <body>
 
 <main>
-
 
 <!-- ==========================================
      시작 화면
@@ -295,69 +313,74 @@ button:hover{
     🐣
   </div>
 
-
   <h1>
 
-    삐약!<br>
+```
+삐약!<br>
 
-    보안 병아리를 지켜주세요!
+보안 병아리를 지켜주세요!
+```
 
   </h1>
 
-
   <p>
 
-    가볍게 즐기는 보안 상식 퀴즈예요.
+```
+가볍게 즐기는 보안 상식 퀴즈예요.
 
-    <br>
+<br>
 
-    닉네임으로 재미있게 도전해보세요 💛
+닉네임으로 재미있게 도전해보세요 💛
+```
 
   </p>
-
 
   <p
     id="period"
     class="muted">
 
-    참여기간을 확인하는 중...
+```
+참여기간을 확인하는 중...
+```
 
   </p>
-
 
   <p
     id="mix"
     class="muted">
 
-    랜덤 문제를 준비하고 있어요.
+```
+랜덤 문제를 준비하고 있어요.
+```
 
   </p>
 
+<input
+ id="nick"
+ maxlength="20"
+ placeholder="귀여운 닉네임을 입력해주세요">
 
-  <input
-    id="nick"
-    maxlength="20"
-    placeholder="귀여운 닉네임을 입력해주세요">
+<button
+ id="startButton"
+ type="button">
 
-
-  <button id = "startButton" onclick="start()">
-    onclick="start()">
-
-    🐣 병아리 구하기 시작!
+```
+🐣 병아리 구하기 시작!
+```
 
   </button>
 
-
   <div class="notice">
 
+```
+<br>
 
-    <br>
-    퀴즈 기간 내 여러 번 도전할 수 있으며,
-    <b>닉네임별 최고 점수</b>가 순위에 반영됩니다.
+퀴즈 기간 내 여러 번 도전할 수 있으며,
+<b>닉네임별 최고 점수</b>가 순위에 반영됩니다.
 
-    <br>
+<br>
 
- <b>
+<b>
   100점 달성자는 상품 추첨 대상이 됩니다.
 </b>
 
@@ -370,13 +393,13 @@ button:hover{
 
 행사 종료 후 100점 달성자 중
 랜덤으로 3명을 선정합니다.
-  <br><br>
-    
+
+<br><br>
+```
+
   </div>
 
 </section>
-
-
 
 <!-- ==========================================
      퀴즈
@@ -386,27 +409,25 @@ button:hover{
   id="quiz"
   class="hide">
 
-
   <p>
 
-    <b id="num"></b>
+```
+<b id="num"></b>
 
-    &nbsp;
+&nbsp;
 
-    <b id="time"></b>
+<b id="time"></b>
+```
 
   </p>
-
 
   <h2
     id="q">
   </h2>
 
-
   <div
     id="a">
   </div>
-
 
 </section>
 
@@ -420,18 +441,20 @@ button:hover{
 
   <div class="submit-loading">
 
-    <div class="loading-chick">
-      🐣
-    </div>
+```
+<div class="loading-chick">
+  🐣
+</div>
 
-    <h2>
-      퀴즈 결과를 확인하고 있어요!
-    </h2>
+<h2>
+  퀴즈 결과를 확인하고 있어요!
+</h2>
 
-    <p>
-      답안을 제출하는 중입니다.<br>
-      잠시만 기다려주세요 😊
-    </p>
+<p>
+  답안을 제출하는 중입니다.<br>
+  잠시만 기다려주세요 😊
+</p>
+```
 
   </div>
 
@@ -445,84 +468,79 @@ button:hover{
   id="res"
   class="hide">
 
-
   <div class="chick">
     🎉
   </div>
 
-
   <div class="result">
 
-
-    <h2>
-      삐약! 퀴즈 완료!
-    </h2>
-
-
-    <div
-      id="nickname"
-      class="nickname">
-    </div>
+```
+<h2>
+  삐약! 퀴즈 완료!
+</h2>
 
 
-    <div
-      id="score"
-      class="score">
-    </div>
+<div
+  id="nickname"
+  class="nickname">
+</div>
 
 
-    <div
-      id="message"
-      class="message">
-    </div>
+<div
+  id="score"
+  class="score">
+</div>
 
 
-    <p
-      id="record">
-    </p>
+<div
+  id="message"
+  class="message">
+</div>
 
 
-    <div class="capture">
+<p
+  id="record">
+</p>
 
-      📸
 
-      <b>
-        이 결과 화면을 꼭 캡처해 두세요!
-      </b>
+<div class="capture">
 
-      퀴즈 기간 종료 후 상품 지급 시 닉네임 확인에 사용됩니다.
+  📸
 
-    </div>
+  <b>
+    이 결과 화면을 꼭 캡처해 두세요!
+  </b>
 
+  퀴즈 기간 종료 후 상품 지급 시
+  닉네임 확인에 사용됩니다.
+
+</div>
+```
 
   </div>
-
 
   <h3>
     🏆 현재 보안 병아리 TOP 10
   </h3>
-
 
   <div
     id="lb"
     class="lb">
   </div>
 
+<button
+ id="retryButton"
+ type="button">
 
-  <button
-    onclick="location.reload()">
-
-    🐣 다시 도전하기
+```
+🐣 다시 도전하기
+```
 
   </button>
 
-
 </section>
 
-
 </main>
-
-
 
 <script>
 
@@ -544,15 +562,21 @@ let ans = {};
 let timer;
 
 
+/* ==========================================
+   API
+========================================== */
+
 const api =
   "https://fwfdldjgfulbjkqasgur.supabase.co/functions/v1/quiz-api";
-  
-// ==========================================
-// 브라우저 식별 ID
-// ==========================================
+
+
+/* ==========================================
+   브라우저 식별 ID
+========================================== */
 
 const BROWSER_ID_KEY =
   "security_quiz_browser_id";
+
 
 function getBrowserId(){
 
@@ -560,6 +584,7 @@ function getBrowserId(){
     localStorage.getItem(
       BROWSER_ID_KEY
     );
+
 
   if(!id){
 
@@ -573,8 +598,11 @@ function getBrowserId(){
 
   }
 
+
   return id;
+
 }
+
 
 /* ==========================================
    API 호출
@@ -629,10 +657,8 @@ async function call(
 }
 
 
-
 /* ==========================================
-   날짜/시간 표시
-   초 단위 제거
+   날짜 / 시간
 ========================================== */
 
 function formatDateTime(
@@ -666,7 +692,6 @@ function formatDateTime(
   );
 
 }
-
 
 
 /* ==========================================
@@ -757,132 +782,139 @@ async function init(){
 }
 
 
-
 /* ==========================================
    퀴즈 시작
 ========================================== */
 
 async function start(){
 
-const button =
-document.getElementById(
-'startButton'
-);
-
-try{
-
-```
-const n =
-  document
-    .getElementById(
-      'nick'
-    )
-    .value
-    .trim();
+  const button =
+    document.getElementById(
+      'startButton'
+    );
 
 
-if(!n){
+  try{
 
-  alert(
-    '닉네임을 입력해주세요 🐣'
-  );
-
-  return;
-
-}
-
-
-// 버튼 즉시 잠금
-button.disabled = true;
-
-button.textContent =
-  '🐣 퀴즈를 준비하고 있어요...';
+    const n =
+      document
+        .getElementById(
+          'nick'
+        )
+        .value
+        .trim();
 
 
-const r =
-  await call(
+    if(!n){
 
-    'register',
+      alert(
+        '닉네임을 입력해주세요 🐣'
+      );
 
-    {
-      nickname: n,
-      browser_id: getBrowserId()
+      return;
+
     }
 
-  );
+
+    /*
+      버튼을 즉시 잠금.
+      register / questions API가
+      끝날 때까지 중복 클릭 방지.
+    */
+
+    button.disabled = true;
+
+    button.textContent =
+      '🐣 퀴즈를 준비하고 있어요...';
 
 
-token =
-  r.participant
-    .participant_token;
+    const r =
+      await call(
+
+        'register',
+
+        {
+          nickname:n,
+
+          browser_id:
+            getBrowserId()
+
+        }
+
+      );
 
 
-const x =
-  await call(
-
-    'questions',
-
-    {
-      token
-    }
-
-  );
+    token =
+      r.participant
+        .participant_token;
 
 
-aid =
-  x.attempt_id;
+    const x =
+      await call(
+
+        'questions',
+
+        {
+          token
+        }
+
+      );
 
 
-qs =
-  x.questions;
+    aid =
+      x.attempt_id;
 
 
-i = 0;
-
-ans = {};
-
-
-document
-  .getElementById(
-    'home'
-  )
-  .className =
-  'hide';
+    qs =
+      x.questions;
 
 
-document
-  .getElementById(
-    'quiz'
-  )
-  .className =
-  '';
+    i = 0;
+
+    ans = {};
 
 
-show();
-```
+    document
+      .getElementById(
+        'home'
+      )
+      .className =
+      'hide';
+
+
+    document
+      .getElementById(
+        'quiz'
+      )
+      .className =
+      '';
+
+
+    show();
+
+  }
+
+  catch(e){
+
+    /*
+      오류 발생 시 다시 시도할 수 있도록
+      버튼을 원래 상태로 복구.
+    */
+
+    button.disabled = false;
+
+    button.textContent =
+      '🐣 병아리 구하기 시작!';
+
+
+    alert(
+      e.error ||
+      '오류가 발생했어요 🐣'
+    );
+
+  }
 
 }
-
-catch(e){
-
-```
-// 오류가 나면 다시 누를 수 있도록 복구
-button.disabled = false;
-
-button.textContent =
-  '🐣 병아리 구하기 시작!';
-
-
-alert(
-  e.error ||
-  '오류가 발생했어요 🐣'
-);
-```
-
-}
-
-}
-
 
 
 /* ==========================================
@@ -905,7 +937,7 @@ function show(){
     )
     .textContent =
 
-    (i+1) +
+    (i + 1) +
 
     ' / ' +
 
@@ -946,7 +978,7 @@ function show(){
     .options
     .forEach(
 
-      (v,j)=>{
+      function(v,j){
 
         const b =
           document
@@ -959,10 +991,14 @@ function show(){
           'ans';
 
 
+        b.type =
+          'button';
+
+
         b.textContent =
 
           String.fromCharCode(
-            65+j
+            65 + j
           ) +
 
           '. ' +
@@ -970,8 +1006,14 @@ function show(){
           v;
 
 
-        b.onclick =
-          () => pick(j);
+        b.addEventListener(
+          'click',
+          function(){
+
+            pick(j);
+
+          }
+        );
 
 
         box.appendChild(
@@ -986,7 +1028,7 @@ function show(){
   timer =
     setInterval(
 
-      ()=>{
+      function(){
 
         left--;
 
@@ -1005,7 +1047,7 @@ function show(){
           '초';
 
 
-        if(left<=0){
+        if(left <= 0){
 
           pick(-1);
 
@@ -1018,7 +1060,6 @@ function show(){
     );
 
 }
-
 
 
 /* ==========================================
@@ -1038,7 +1079,11 @@ function pick(v){
     );
 
 
-  // 이미 답을 선택했다면 중복 클릭 방지
+  /*
+    이미 답을 선택했다면
+    중복 클릭 방지
+  */
+
   if(
     Array.from(buttons).some(
       function(button){
@@ -1056,7 +1101,10 @@ function pick(v){
   }
 
 
-  // 선택한 답변 강조
+  /*
+    선택한 답변 강조
+  */
+
   if(
     v >= 0 &&
     buttons[v]
@@ -1069,7 +1117,10 @@ function pick(v){
   }
 
 
-  // 모든 답변 버튼 잠금
+  /*
+    모든 답변 버튼 잠금
+  */
+
   buttons.forEach(
     function(button){
 
@@ -1080,12 +1131,20 @@ function pick(v){
   );
 
 
+  /*
+    답안 저장
+  */
+
   ans[
     qs[i].id
   ] = v;
 
 
-  // 선택 표시가 잠깐 보인 후 다음 문제
+  /*
+    선택 표시가 잠깐 보인 후
+    다음 문제로 이동
+  */
+
   setTimeout(
 
     function(){
@@ -1094,8 +1153,7 @@ function pick(v){
 
 
       if(
-        i <
-        qs.length
+        i < qs.length
       ){
 
         show();
@@ -1104,7 +1162,12 @@ function pick(v){
 
       else{
 
-        // 마지막 문제 → 제출 중 화면 표시
+        /*
+          마지막 문제
+          → 퀴즈 화면 숨김
+          → 제출 로딩 표시
+        */
+
         document
           .getElementById(
             "quiz"
@@ -1175,7 +1238,6 @@ function getMessage(
 }
 
 
-
 /* ==========================================
    제출
 ========================================== */
@@ -1203,13 +1265,24 @@ async function submit(){
 
       );
 
+
+    /*
+      제출 완료
+      → 로딩 숨김
+    */
+
     document
       .getElementById(
         'submitLoading'
       )
       .className =
       'hide';
-    
+
+
+    /*
+      퀴즈 화면도 확실히 숨김
+    */
+
     document
       .getElementById(
         'quiz'
@@ -1217,6 +1290,10 @@ async function submit(){
       .className =
       'hide';
 
+
+    /*
+      결과 화면 표시
+    */
 
     document
       .getElementById(
@@ -1269,11 +1346,11 @@ async function submit(){
       )
       .textContent =
 
-  '정답 ' +
+      '정답 ' +
 
-x.result.best_correct +
+      x.result.best_correct +
 
-'/10 · 100점 달성자는 상품 추첨 대상입니다.';
+      '/10 · 100점 달성자는 상품 추첨 대상입니다.';
 
 
     draw(
@@ -1282,24 +1359,29 @@ x.result.best_correct +
 
   }
 
-catch(e){
+  catch(e){
 
-  document
-    .getElementById(
-      'submitLoading'
-    )
-    .className =
-    'hide';
+    /*
+      제출 오류가 나도
+      로딩 화면은 반드시 제거
+    */
 
-  alert(
-    e.error ||
-    '제출 오류가 발생했어요.'
-  );
+    document
+      .getElementById(
+        'submitLoading'
+      )
+      .className =
+      'hide';
+
+
+    alert(
+      e.error ||
+      '제출 오류가 발생했어요.'
+    );
+
+  }
 
 }
-
-}
-
 
 
 /* ==========================================
@@ -1324,35 +1406,37 @@ function draw(r){
     r
       .map(
 
-        (x,j)=>`
+        function(x,j){
 
-          <p>
+          return `
 
-            ${
-              medals[j] ||
-              (j+1) +
-              '위'
-            }
+            <p>
 
-            ${escapeHtml(
-              x.nickname
-            )}
+              ${
+                medals[j] ||
+                (j + 1) + '위'
+              }
 
-            ·
+              ${escapeHtml(
+                x.nickname
+              )}
 
-            <b>
-              ${x.best_score}점
-            </b>
+              ·
 
-          </p>
+              <b>
+                ${x.best_score}점
+              </b>
 
-        `
+            </p>
+
+          `;
+
+        }
 
       )
       .join('');
 
 }
-
 
 
 /* ==========================================
@@ -1395,6 +1479,38 @@ function escapeHtml(
 }
 
 
+/* ==========================================
+   버튼 이벤트
+========================================== */
+
+/*
+  HTML에 onclick을 쓰지 않고
+  JavaScript에서 이벤트 연결
+*/
+
+document
+  .getElementById(
+    'startButton'
+  )
+  .addEventListener(
+    'click',
+    start
+  );
+
+
+document
+  .getElementById(
+    'retryButton'
+  )
+  .addEventListener(
+    'click',
+    function(){
+
+      location.reload();
+
+    }
+  );
+
 
 /* ==========================================
    시작
@@ -1403,7 +1519,6 @@ function escapeHtml(
 init();
 
 </script>
-
 
 </body>
 
