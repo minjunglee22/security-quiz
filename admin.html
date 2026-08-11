@@ -764,7 +764,106 @@ label{
     </div>
 
   </div>
+<!-- ==========================================
+     100점 상품 추첨
+========================================== -->
 
+<div class="card">
+
+  <h2>🎁 100점 상품 추첨</h2>
+
+  <div class="note">
+    100점 달성 기록 1건이 추첨권 1장으로 계산됩니다.<br>
+    같은 브라우저에서 여러 닉네임으로 100점을 달성하면
+    추첨 확률은 올라갑니다.<br><br>
+
+    단, 한 브라우저가 당첨되면 해당 브라우저의
+    다른 100점 기록은 모두 추첨에서 제외됩니다.
+    <br><br>
+
+    <b>🎯 최종적으로 서로 다른 3명의 브라우저에게
+    상품을 지급합니다.</b>
+  </div>
+
+  <div class="grid">
+
+    <div class="stat">
+      전체 추첨권
+      <b id="raffleTickets">-</b>
+    </div>
+
+    <div class="stat">
+      추첨 대상 사용자
+      <b id="raffleCandidates">-</b>
+    </div>
+
+    <div class="stat">
+      당첨자
+      <b id="raffleWinners">0</b>
+    </div>
+
+    <div class="stat">
+      남은 상품
+      <b id="raffleRemaining">3</b>
+    </div>
+
+  </div>
+
+  <br>
+
+  <h3>🎯 현재 추첨 대상</h3>
+
+  <div class="scroll">
+
+    <table>
+
+      <thead>
+        <tr>
+          <th>브라우저 ID</th>
+          <th>닉네임</th>
+          <th>100점 횟수</th>
+          <th>최근 100점</th>
+        </tr>
+      </thead>
+
+      <tbody id="raffleList"></tbody>
+
+    </table>
+
+  </div>
+
+  <br>
+
+  <button
+    class="primary"
+    onclick="drawRaffle()">
+
+    🎲 랜덤 추첨하기
+
+  </button>
+
+  <button
+    class="danger"
+    onclick="resetRaffle()">
+
+    ⚠️ 추첨 결과 초기화
+
+  </button>
+
+  <br>
+
+  <h3>🏆 당첨자</h3>
+
+  <div
+    id="raffleWinnerList">
+
+    <div class="empty">
+      아직 당첨자가 없습니다.
+    </div>
+
+  </div>
+
+</div>
 
   <!-- ==========================================
        문제 Pool 관리
@@ -1272,7 +1371,13 @@ async function loadDashboard(){
       data.participants_list || []
     );
 
-
+    renderRaffle(
+      data.raffle || {
+      tickets: 0,
+      candidates: [],
+      winners: []
+      }
+    );
     renderQuestions(
       data.questions || []
     );
@@ -2367,7 +2472,359 @@ async function saveQuestion(id){
 
 }
 
+/* ==========================================
+   100점 상품 추첨
+========================================== */
 
+function renderRaffle(data){
+
+  const tickets =
+    Number(data.tickets || 0);
+
+  const candidates =
+    data.candidates || [];
+
+  const winners =
+    data.winners || [];
+
+
+  document
+    .getElementById("raffleTickets")
+    .textContent =
+    tickets;
+
+
+  document
+    .getElementById("raffleCandidates")
+    .textContent =
+    candidates.length;
+
+
+  document
+    .getElementById("raffleWinners")
+    .textContent =
+    winners.length;
+
+
+  document
+    .getElementById("raffleRemaining")
+    .textContent =
+    Math.max(
+      3 - winners.length,
+      0
+    );
+
+
+  const list =
+    document.getElementById(
+      "raffleList"
+    );
+
+
+  if(!candidates.length){
+
+    list.innerHTML =
+      "<tr>" +
+      "<td colspan='4'>" +
+      "현재 추첨 가능한 100점 달성자가 없습니다." +
+      "</td>" +
+      "</tr>";
+
+  }
+  else{
+
+    list.innerHTML =
+      candidates
+        .map(
+          function(candidate){
+
+            const nicknames =
+              Array.isArray(
+                candidate.nicknames
+              )
+              ? candidate.nicknames
+              : [];
+
+
+            return (
+
+              "<tr>" +
+
+              "<td>" +
+              "<code>" +
+              escapeHtml(
+                candidate.browser_id
+              ) +
+              "</code>" +
+              "</td>" +
+
+              "<td>" +
+
+              nicknames
+                .map(
+                  function(nickname){
+
+                    return (
+                      "<span class='badge'>" +
+                      escapeHtml(
+                        nickname
+                      ) +
+                      "</span>"
+                    );
+
+                  }
+                )
+                .join("") +
+
+              "</td>" +
+
+              "<td>" +
+              "<b>" +
+              candidate.perfect_count +
+              "회" +
+              "</b>" +
+              "</td>" +
+
+              "<td>" +
+              localDate(
+                candidate.last_at
+              ) +
+              "</td>" +
+
+              "</tr>"
+
+            );
+
+          }
+        )
+        .join("");
+
+  }
+
+
+  const winnerBox =
+    document.getElementById(
+      "raffleWinnerList"
+    );
+
+
+  if(!winners.length){
+
+    winnerBox.innerHTML =
+      "<div class='empty'>" +
+      "아직 당첨자가 없습니다." +
+      "</div>";
+
+    return;
+
+  }
+
+
+  winnerBox.innerHTML =
+    winners
+      .map(
+        function(winner,index){
+
+          const medal =
+            ["🥇","🥈","🥉"][index]
+            ||
+            (index + 1) + "번";
+
+
+          return (
+
+            "<div " +
+            "class='card' " +
+            "style='margin-bottom:10px;background:#fff8dc;'>" +
+
+            "<h3>" +
+            medal +
+            " " +
+            escapeHtml(
+              winner.nickname || ""
+            ) +
+            "</h3>" +
+
+            "<p>" +
+            "브라우저 ID: " +
+            "<code>" +
+            escapeHtml(
+              winner.browser_id
+            ) +
+            "</code>" +
+            "</p>" +
+
+            "<p>" +
+            "추첨일: " +
+            localDate(
+              winner.drawn_at
+            ) +
+            "</p>" +
+
+            "</div>"
+
+          );
+
+        }
+      )
+      .join("");
+
+}
+
+
+/* ==========================================
+   랜덤 추첨
+========================================== */
+
+async function drawRaffle(){
+
+  const ok =
+    confirm(
+
+      "🎲 상품 추첨을 시작할까요?\n\n" +
+
+      "100점 달성 기록을 기준으로\n" +
+
+      "최대 3명의 서로 다른 브라우저를\n" +
+
+      "랜덤으로 추첨합니다.\n\n" +
+
+      "한 브라우저가 당첨되면\n" +
+
+      "그 브라우저의 다른 닉네임은\n" +
+
+      "추첨 대상에서 제외됩니다.\n\n" +
+
+      "추첨 후 결과는 저장됩니다."
+
+    );
+
+
+  if(!ok){
+
+    return;
+
+  }
+
+
+  try{
+
+    const result =
+      await api(
+        "raffle_draw",
+        {
+          count:3
+        }
+      );
+
+
+    const winnerCount =
+      result.winners
+      ? result.winners.length
+      : 0;
+
+
+    alert(
+
+      winnerCount > 0
+
+      ?
+
+      "🎉 " +
+      winnerCount +
+      "명의 당첨자를 추첨했습니다!"
+
+      :
+
+      "추첨 가능한 대상이 없습니다."
+
+    );
+
+
+    await loadDashboard();
+
+  }
+  catch(error){
+
+    console.error(
+      "RAFFLE ERROR:",
+      error
+    );
+
+    alert(
+
+      "추첨에 실패했습니다.\n\n" +
+
+      error.message
+
+    );
+
+  }
+
+}
+
+
+/* ==========================================
+   추첨 결과 초기화
+========================================== */
+
+async function resetRaffle(){
+
+  const ok =
+    confirm(
+
+      "⚠️ 정말 추첨 결과를 초기화할까요?\n\n" +
+
+      "현재 저장된 상품 당첨자 기록이\n" +
+
+      "모두 삭제됩니다.\n\n" +
+
+      "실제 상품 지급 전에만 사용하세요."
+
+    );
+
+
+  if(!ok){
+
+    return;
+
+  }
+
+
+  try{
+
+    await api(
+      "raffle_reset",
+      {}
+    );
+
+
+    alert(
+      "추첨 결과를 초기화했습니다."
+    );
+
+
+    await loadDashboard();
+
+  }
+  catch(error){
+
+    console.error(
+      "RAFFLE RESET ERROR:",
+      error
+    );
+
+    alert(
+
+      "추첨 결과 초기화에 실패했습니다.\n\n" +
+
+      error.message
+
+    );
+
+  }
+
+}
 /* ==========================================
    로그아웃
 ========================================== */
