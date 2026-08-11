@@ -622,6 +622,9 @@ const SUPABASE_KEY =
 const ADMIN_EMAIL =
   "dlalswjd4276@naver.com";
 
+const ADMIN_URL =
+  "https://security-quiz-95cgzuc7l-security-quiz.vercel.app/admin.html";
+
 const API =
   SUPABASE_URL +
   "/functions/v1/admin-api";
@@ -653,10 +656,9 @@ async function login(){
 
         email: ADMIN_EMAIL,
 
-        options:{
-          emailRedirectTo:
-            window.location.href
-        }
+   options:{
+    emailRedirectTo: ADMIN_URL
+      }
 
       });
 
