@@ -97,12 +97,67 @@ button:hover{
   text-align:left;
 
   border:1px solid #eadfb8;
+
+  transition:all .15s ease;
+}
+
+.ans.selected{
+
+  background:#fff1a8;
+
+  border:2px solid #d48b00;
+
+  font-weight:800;
+
+  transform:scale(1.01);
+}
+
+.ans.disabled{
+
+  pointer-events:none;
+
+  opacity:.6;
 }
 
 .hide{
   display:none!important;
 }
 
+  .submit-loading{
+
+  text-align:center;
+
+  padding:50px 20px;
+}
+
+.submit-loading .loading-chick{
+
+  font-size:60px;
+
+  animation:bounce 1s infinite;
+}
+
+.submit-loading h2{
+
+  margin:15px 0 8px;
+}
+
+.submit-loading p{
+
+  color:#766c60;
+}
+
+@keyframes bounce{
+
+  0%,100%{
+    transform:translateY(0);
+  }
+
+  50%{
+    transform:translateY(-10px);
+  }
+
+}
 .muted{
   color:#766c60;
 }
@@ -355,7 +410,32 @@ button:hover{
 
 </section>
 
+<!-- ==========================================
+     제출 중 로딩
+========================================== -->
 
+<section
+  id="submitLoading"
+  class="hide">
+
+  <div class="submit-loading">
+
+    <div class="loading-chick">
+      🐣
+    </div>
+
+    <h2>
+      퀴즈 결과를 확인하고 있어요!
+    </h2>
+
+    <p>
+      답안을 제출하는 중입니다.<br>
+      잠시만 기다려주세요 😊
+    </p>
+
+  </div>
+
+</section>
 
 <!-- ==========================================
      결과
@@ -929,31 +1009,106 @@ function pick(v){
   );
 
 
+  const buttons =
+    document.querySelectorAll(
+      "#a .ans"
+    );
+
+
+  // 이미 답을 선택했다면 중복 클릭 방지
+  if(
+    Array.from(buttons).some(
+      function(button){
+
+        return button.classList.contains(
+          "selected"
+        );
+
+      }
+    )
+  ){
+
+    return;
+
+  }
+
+
+  // 선택한 답변 강조
+  if(
+    v >= 0 &&
+    buttons[v]
+  ){
+
+    buttons[v]
+      .classList
+      .add("selected");
+
+  }
+
+
+  // 모든 답변 버튼 잠금
+  buttons.forEach(
+    function(button){
+
+      button.classList
+        .add("disabled");
+
+    }
+  );
+
+
   ans[
     qs[i].id
   ] = v;
 
 
-  i++;
+  // 선택 표시가 잠깐 보인 후 다음 문제
+  setTimeout(
+
+    function(){
+
+      i++;
 
 
-  if(
-    i <
-    qs.length
-  ){
+      if(
+        i <
+        qs.length
+      ){
 
-    show();
+        show();
 
-  }
+      }
 
-  else{
+      else{
 
-    submit();
+        // 마지막 문제 → 제출 중 화면 표시
+        document
+          .getElementById(
+            "quiz"
+          )
+          .className =
+          "hide";
 
-  }
+
+        document
+          .getElementById(
+            "submitLoading"
+          )
+          .className =
+          "";
+
+
+        submit();
+
+      }
+
+    },
+
+    250
+
+  );
 
 }
-
 
 
 /* ==========================================
