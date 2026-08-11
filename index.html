@@ -1180,7 +1180,13 @@ async function submit(){
 
       );
 
-
+    document
+      .getElementById(
+        'submitLoading'
+      )
+      .className =
+      'hide';
+    
     document
       .getElementById(
         'quiz'
@@ -1253,14 +1259,21 @@ x.result.best_correct +
 
   }
 
-  catch(e){
+catch(e){
 
-    alert(
-      e.error ||
-      '제출 오류가 발생했어요.'
-    );
+  document
+    .getElementById(
+      'submitLoading'
+    )
+    .className =
+    'hide';
 
-  }
+  alert(
+    e.error ||
+    '제출 오류가 발생했어요.'
+  );
+
+}
 
 }
 
