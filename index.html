@@ -138,22 +138,30 @@ button:disabled{
 
 .result{
   background:#fff8dc;
-  border-radius:18px;
-  padding:20px;
+  border-radius:20px;
+  padding:24px 20px;
   text-align:center;
+  border:1px solid #f1e3ad;
 }
 
-.score{
-  font-size:48px;
+.result-title{
+  font-size:26px;
   font-weight:800;
-  color:#d48b00;
-  margin:8px;
+  margin:0 0 18px;
 }
 
 .nickname{
   font-size:20px;
   font-weight:700;
-  margin:8px;
+  margin:8px 0 4px;
+}
+
+.score{
+  font-size:56px;
+  font-weight:900;
+  color:#d48b00;
+  margin:6px 0 12px;
+  line-height:1.1;
 }
 
 .message{
@@ -168,12 +176,23 @@ button:disabled{
   border-radius:16px;
   border:3px dashed #f0c84b;
   font-weight:800;
-  font-size:19px;
+  font-size:18px;
   line-height:1.7;
   text-align:center;
-  margin-top:18px;
+  margin-top:20px;
 }
 
+.capture-icon{
+  font-size:52px;
+  line-height:1;
+  margin-bottom:10px;
+}
+
+.capture b{
+  font-size:22px;
+  display:block;
+  margin-bottom:6px;
+}
 .capture b{
   font-size:22px;
   display:block;
@@ -208,11 +227,6 @@ button:disabled{
   animation:bounce 1s infinite;
 }
 
-.capture-icon{
-  font-size:100px;
-  line-height:1;
-  margin-bottom:10px;
-} 
   
 @keyframes bounce{
 
@@ -412,43 +426,45 @@ button:disabled{
     🎉
   </div>
 
-  <div class="result">
+<div class="result">
 
-    <h2>
-      삐약! 퀴즈 완료!
-    </h2>
+  <div class="result-title">
+    🏆 퀴즈 결과
+  </div>
 
-    <div
-      id="nickname"
-      class="nickname">
-    </div>
+  <div
+    id="nickname"
+    class="nickname">
+  </div>
 
-    <div
-      id="score"
-      class="score">
-    </div>
+  <div
+    id="score"
+    class="score">
+  </div>
 
-    <div
-      id="message"
-      class="message">
-    </div>
+  <div
+    id="message"
+    class="message">
+  </div>
 
-    <p id="record"></p>
+  <p id="record"></p>
 
-    <div class="capture">
-        <div class="capture-icon">
+  <div class="capture">
+
+    <div class="capture-icon">
       📸
-        </div>
-      <b>
-        이 결과 화면을 꼭 캡처해 두세요!
-      </b>
-
-      퀴즈 기간 종료 후 상품 지급 시
-      닉네임 확인에 사용됩니다.
-
     </div>
+
+    <b>
+      이 결과 화면을 꼭 캡처해 두세요!
+    </b>
+
+    퀴즈 기간 종료 후 상품 지급 시<br>
+    닉네임 확인에 사용됩니다.
 
   </div>
+
+</div>
 
   <h3>
     🏆 현재 보안 병아리 TOP 10
