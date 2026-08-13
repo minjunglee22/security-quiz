@@ -6,16 +6,21 @@
 <meta charset="UTF-8">
 
 <meta
+  http-equiv="Content-Type"
+  content="text/html; charset=UTF-8">
+
+<meta
   name="viewport"
   content="width=device-width,initial-scale=1">
 
-<title>2026 보안교육 퀴즈</title>
+<title>2026 보안 퀴즈</title>
+
 
 <style>
 
-/* ==========================================
+/* ==================================================
    기본
-========================================== */
+================================================== */
 
 *{
   box-sizing:border-box;
@@ -23,35 +28,45 @@
 
 body{
 
-  margin:0;
-
   font-family:
     Arial,
     "Noto Sans KR",
     sans-serif;
 
-  background:#f4f6f8;
-
-  color:#202b38;
-
-  max-width:760px;
+  max-width:720px;
 
   margin:auto;
 
   padding:24px;
+
+  background:
+    linear-gradient(
+      180deg,
+      #fff5f7 0%,
+      #fffaf7 100%
+    );
+
+  color:#3d3033;
 }
+
 
 main{
 
-  background:#fff;
-
-  border-radius:20px;
+  background:#ffffff;
 
   padding:28px;
 
+  border-radius:24px;
+
   box-shadow:
-    0 8px 30px rgba(0,0,0,.06);
+    0 10px 35px rgba(90,50,60,.08);
+
 }
+
+
+/* ==================================================
+   공통
+================================================== */
 
 h1,
 h2,
@@ -60,6 +75,7 @@ h3{
   line-height:1.4;
 
 }
+
 
 button,
 input{
@@ -70,19 +86,22 @@ input{
 
   margin:7px 0;
 
-  border-radius:10px;
+  box-sizing:border-box;
 
-  border:1px solid #d8dee5;
+  border-radius:12px;
+
+  border:1px solid #e5dfe1;
 
   font-size:16px;
 
 }
 
+
 button{
 
-  background:#26384d;
+  background:#e85d75;
 
-  color:#fff;
+  color:#ffffff;
 
   border:0;
 
@@ -90,87 +109,148 @@ button{
 
   cursor:pointer;
 
+  transition:
+    transform .15s ease,
+    opacity .15s ease,
+    background .15s ease;
+
 }
+
 
 button:hover{
 
   opacity:.92;
 
+  transform:translateY(-1px);
+
 }
+
+
+button:disabled{
+
+  opacity:.55;
+
+  cursor:not-allowed;
+
+  transform:none;
+
+}
+
+
+input:focus{
+
+  outline:none;
+
+  border-color:#e58a9b;
+
+  box-shadow:
+    0 0 0 3px rgba(232,93,117,.10);
+
+}
+
 
 .hide{
 
-  display:none !important;
+  display:none!important;
 
 }
+
 
 .muted{
 
-  color:#687585;
+  color:#766c72;
 
 }
 
 
-/* ==========================================
+/* ==================================================
    시작 화면
-========================================== */
+================================================== */
 
-.header-mark{
+.chick{
 
-  width:52px;
+  font-size:52px;
 
-  height:52px;
-
-  border-radius:14px;
-
-  background:#26384d;
-
-  color:#fff;
-
-  display:flex;
-
-  align-items:center;
-
-  justify-content:center;
-
-  font-size:22px;
-
-  font-weight:800;
-
-  margin-bottom:18px;
+  margin-bottom:8px;
 
 }
+
+
+.home-title{
+
+  color:#3d3033;
+
+  margin-bottom:8px;
+
+}
+
+
+.home-subtitle{
+
+  color:#6f6267;
+
+  line-height:1.7;
+
+}
+
 
 .notice{
 
-  background:#f7f9fb;
+  background:#fff4f5;
 
-  border:1px solid #e1e6eb;
+  padding:17px;
 
-  padding:16px;
-
-  border-radius:12px;
+  border-radius:15px;
 
   font-size:14px;
 
-  line-height:1.8;
+  line-height:1.75;
 
-  margin-top:18px;
+  border:1px solid #f4d9de;
 
-}
-
-.notice strong{
-
-  color:#26384d;
+  margin-top:16px;
 
 }
 
 
-/* ==========================================
+.notice b{
+
+  color:#c9435d;
+
+}
+
+
+/* ==================================================
+   시작 버튼
+================================================== */
+
+.start-button{
+
+  background:
+    linear-gradient(
+      135deg,
+      #e85d75,
+      #d94b66
+    );
+
+  box-shadow:
+    0 7px 18px rgba(217,75,102,.20);
+
+}
+
+
+.start-button.loading{
+
+  background:#c98d97;
+
+}
+
+
+/* ==================================================
    문제
-========================================== */
+================================================== */
 
-.quiz-header{
+.quiz-top{
 
   display:flex;
 
@@ -178,271 +258,261 @@ button:hover{
 
   align-items:center;
 
-  margin-bottom:20px;
+  margin-bottom:12px;
 
 }
+
 
 .quiz-number{
 
+  font-size:14px;
+
   font-weight:800;
 
-  color:#26384d;
+  color:#c9435d;
 
 }
+
 
 .quiz-time{
 
-  color:#687585;
+  font-size:14px;
 
-  font-weight:700;
+  font-weight:800;
+
+  color:#766c72;
 
 }
+
 
 .question{
 
-  font-size:22px;
+  font-size:21px;
 
-  font-weight:800;
+  line-height:1.6;
 
-  line-height:1.5;
-
-  margin-bottom:24px;
+  margin:12px 0 20px;
 
 }
+
+
+/* ==================================================
+   답변
+================================================== */
 
 .ans{
 
-  background:#fff;
+  background:#ffffff;
 
-  color:#26384d;
+  color:#3d3033;
 
   text-align:left;
 
-  border:1px solid #d8dee5;
+  border:1px solid #eadfe2;
 
-  transition:all .15s ease;
+  transition:
+    all .15s ease;
 
 }
+
 
 .ans:hover{
 
-  background:#f7f9fb;
+  background:#fff7f8;
+
+  border-color:#e58a9b;
 
 }
+
 
 .ans.selected{
 
-  background:#e9f0f7;
+  background:#ffe4e9;
 
-  border:2px solid #26384d;
+  border:2px solid #e85d75;
+
+  color:#b43751;
 
   font-weight:800;
 
+  transform:scale(1.01);
+
 }
+
 
 .ans.disabled{
 
   pointer-events:none;
 
-  opacity:.65;
-
 }
 
 
-/* ==========================================
+/* ==================================================
    제출 로딩
-========================================== */
+================================================== */
 
 .submit-loading{
 
   text-align:center;
 
-  padding:70px 20px;
+  padding:65px 20px;
 
 }
 
-.loading-spinner{
 
-  width:48px;
+.loading-chick{
 
-  height:48px;
+  font-size:58px;
 
-  border:5px solid #e4e8ed;
-
-  border-top-color:#26384d;
-
-  border-radius:50%;
-
-  margin:0 auto 24px;
-
-  animation:spin .8s linear infinite;
+  animation:
+    loadingBounce 1s infinite;
 
 }
+
 
 .submit-loading h2{
 
-  font-size:22px;
+  margin:18px 0 8px;
 
-  margin-bottom:8px;
+  color:#3d3033;
 
 }
 
+
 .submit-loading p{
 
-  color:#687585;
+  color:#766c72;
 
   line-height:1.7;
 
 }
 
-@keyframes spin{
 
-  to{
+@keyframes loadingBounce{
 
-    transform:rotate(360deg);
+  0%,100%{
+    transform:translateY(0);
+  }
 
+  50%{
+    transform:translateY(-9px);
   }
 
 }
 
 
-/* ==========================================
-   결과 헤더
-========================================== */
+/* ==================================================
+   결과
+================================================== */
 
-.result-header{
+.result{
 
-  text-align:center;
+  background:
+    linear-gradient(
+      180deg,
+      #fff7f8 0%,
+      #ffffff 100%
+    );
 
-  padding-bottom:24px;
+  border-radius:22px;
 
-  border-bottom:1px solid #e5e9ed;
-
-}
-
-.result-header h1{
-
-  margin:0 0 8px;
-
-  font-size:28px;
-
-}
-
-.result-subtitle{
-
-  color:#687585;
-
-  font-size:14px;
-
-}
-
-
-/* ==========================================
-   닉네임
-========================================== */
-
-.nickname-box{
-
-  margin:22px 0;
-
-  padding:18px;
-
-  background:#f7f9fb;
-
-  border-radius:14px;
+  padding:24px 18px;
 
   text-align:center;
 
-}
-
-.nickname-label{
-
-  font-size:13px;
-
-  color:#687585;
-
-  margin-bottom:6px;
+  border:1px solid #f1dfe3;
 
 }
+
+
+.result-title{
+
+  font-size:23px;
+
+  font-weight:900;
+
+  margin-bottom:8px;
+
+  color:#3d3033;
+
+}
+
 
 .nickname{
 
-  font-size:25px;
+  font-size:20px;
 
   font-weight:800;
 
-  color:#26384d;
+  color:#c9435d;
+
+  margin:8px 0 16px;
 
 }
 
 
-/* ==========================================
-   반원 점수 게이지
-========================================== */
+/* ==================================================
+   반원 점수 그래프
+================================================== */
 
-.score-section{
-
-  text-align:center;
-
-  margin:10px 0 28px;
-
-}
-
-.gauge{
+.score-gauge{
 
   position:relative;
 
-  width:300px;
+  width:280px;
 
-  height:165px;
+  height:155px;
 
-  margin:0 auto;
+  margin:8px auto 0;
 
   overflow:hidden;
 
 }
 
-.gauge-track{
 
-  position:absolute;
+.score-gauge svg{
 
-  width:300px;
+  width:280px;
 
-  height:300px;
-
-  border-radius:50%;
-
-  border:22px solid #e8edf1;
-
-  border-bottom-color:transparent;
-
-  transform:rotate(-45deg);
+  height:155px;
 
 }
 
-.gauge-value{
 
-  position:absolute;
+.score-track{
 
-  width:300px;
+  fill:none;
 
-  height:300px;
+  stroke:#f1e7e9;
 
-  border-radius:50%;
+  stroke-width:18;
 
-  border:22px solid transparent;
-
-  border-top-color:#26384d;
-
-  border-left-color:#26384d;
-
-  border-bottom-color:transparent;
-
-  transform:rotate(-45deg);
+  stroke-linecap:round;
 
 }
 
-.score-center{
+
+.score-progress{
+
+  fill:none;
+
+  stroke:#e85d75;
+
+  stroke-width:18;
+
+  stroke-linecap:round;
+
+  stroke-dasharray:314;
+
+  stroke-dashoffset:314;
+
+  transition:
+    stroke-dashoffset 1s ease;
+
+}
+
+
+.score-number{
 
   position:absolute;
 
@@ -450,380 +520,317 @@ button:hover{
 
   right:0;
 
-  bottom:8px;
+  bottom:1px;
 
-  text-align:center;
-
-}
-
-.score-number{
-
-  font-size:48px;
+  font-size:42px;
 
   font-weight:900;
 
-  color:#26384d;
-
-  line-height:1;
+  color:#3d3033;
 
 }
 
-.score-unit{
 
-  font-size:16px;
+.score-label{
 
-  color:#687585;
+  margin-top:2px;
 
-  margin-top:6px;
+  font-size:15px;
 
-}
-
-.score-result{
-
-  margin-top:10px;
+  color:#766c72;
 
   font-weight:700;
 
-  color:#394858;
+}
+
+
+/* ==================================================
+   분석
+================================================== */
+
+.analysis{
+
+  margin-top:24px;
+
+  text-align:left;
 
 }
 
 
-/* ==========================================
-   결과 요약
-========================================== */
+.analysis-box{
 
-.summary-grid{
+  background:#ffffff;
 
-  display:grid;
+  border:1px solid #eee3e5;
 
-  grid-template-columns:1fr 1fr;
+  border-radius:17px;
 
-  gap:12px;
+  padding:18px;
 
-  margin-bottom:28px;
+  margin-top:12px;
 
 }
 
-.summary-item{
 
-  background:#f7f9fb;
+.analysis-title{
 
-  border-radius:12px;
+  font-size:17px;
 
-  padding:16px;
+  font-weight:900;
 
-  text-align:center;
+  margin-bottom:9px;
+
+  color:#3d3033;
 
 }
 
-.summary-label{
+
+.analysis-title::before{
+
+  content:"";
+
+  display:inline-block;
+
+  width:5px;
+
+  height:17px;
+
+  border-radius:5px;
+
+  background:#e85d75;
+
+  margin-right:8px;
+
+  vertical-align:-2px;
+
+}
+
+
+.analysis-text{
+
+  line-height:1.75;
+
+  color:#5f5459;
+
+}
+
+
+/* ==================================================
+   주제 태그
+================================================== */
+
+.topic-list{
+
+  display:flex;
+
+  flex-wrap:wrap;
+
+  gap:6px;
+
+  margin-top:11px;
+
+}
+
+
+.topic{
+
+  display:inline-block;
+
+  background:#fff0f3;
+
+  color:#bd4058;
+
+  padding:6px 10px;
+
+  border-radius:999px;
 
   font-size:13px;
 
-  color:#687585;
+  font-weight:800;
 
 }
 
-.summary-value{
 
-  font-size:23px;
+/* ==================================================
+   틀린 문제
+================================================== */
+
+.wrong-question{
+
+  background:#fff;
+
+  border:1px solid #eee3e5;
+
+  border-radius:14px;
+
+  padding:16px;
+
+  margin-top:10px;
+
+}
+
+
+.wrong-number{
+
+  font-size:13px;
+
+  color:#a38d94;
 
   font-weight:800;
+
+  margin-bottom:6px;
+
+}
+
+
+.wrong-title{
+
+  font-weight:800;
+
+  line-height:1.6;
+
+  margin-bottom:12px;
+
+}
+
+
+.answer-row{
+
+  font-size:14px;
+
+  line-height:1.6;
 
   margin-top:5px;
 
 }
 
 
-/* ==========================================
-   강점 / 보완
-========================================== */
+.my-answer{
 
-.analysis-section{
-
-  margin-top:28px;
+  color:#b84d5f;
 
 }
 
-.analysis-section h2{
 
-  font-size:19px;
+.correct-answer{
 
-  margin-bottom:12px;
-
-}
-
-.analysis-box{
-
-  border-radius:14px;
-
-  padding:18px;
-
-  margin-bottom:12px;
-
-}
-
-.analysis-box.strength{
-
-  background:#f1f6f4;
-
-  border:1px solid #dce9e3;
-
-}
-
-.analysis-box.improve{
-
-  background:#f8f5ef;
-
-  border:1px solid #ebe2d2;
-
-}
-
-.analysis-title{
+  color:#31805b;
 
   font-weight:800;
+
+}
+
+
+.explanation{
+
+  margin-top:10px;
+
+  padding:11px 12px;
+
+  background:#fff8f9;
+
+  border-radius:10px;
+
+  color:#665c61;
+
+  font-size:13px;
+
+  line-height:1.65;
+
+}
+
+
+/* ==================================================
+   캡처 안내
+================================================== */
+
+.capture{
+
+  background:
+
+    linear-gradient(
+      135deg,
+      #fff0f3,
+      #fff8ee
+    );
+
+  padding:20px 16px;
+
+  border-radius:17px;
+
+  border:2px dashed #e58a9b;
+
+  font-size:16px;
+
+  line-height:1.75;
+
+  text-align:center;
+
+  margin-top:24px;
+
+}
+
+
+.capture-title{
+
+  font-size:21px;
+
+  font-weight:900;
+
+  color:#c9435d;
 
   margin-bottom:8px;
 
 }
 
-.analysis-text{
 
-  line-height:1.7;
+.capture-nickname{
 
-  color:#4f5d6b;
+  display:inline-block;
+
+  background:#ffffff;
+
+  border:1px solid #f0ccd3;
+
+  border-radius:10px;
+
+  padding:7px 14px;
+
+  margin:7px 0;
+
+  font-size:20px;
+
+  font-weight:900;
+
+  color:#3d3033;
 
 }
 
-.topic-list{
+
+/* ==================================================
+   TOP 10
+================================================== */
+
+.lb{
 
   margin-top:10px;
 
 }
 
-.topic{
-
-  display:inline-block;
-
-  padding:5px 9px;
-
-  margin:3px;
-
-  border-radius:999px;
-
-  background:#fff;
-
-  border:1px solid #d9e0e6;
-
-  font-size:12px;
-
-}
-
-
-/* ==========================================
-   틀린 문제
-========================================== */
-
-.review-section{
-
-  margin-top:30px;
-
-}
-
-.review-section h2{
-
-  font-size:19px;
-
-  margin-bottom:14px;
-
-}
-
-.review-card{
-
-  border:1px solid #e0e5ea;
-
-  border-radius:14px;
-
-  padding:18px;
-
-  margin-bottom:12px;
-
-  background:#fff;
-
-}
-
-.review-number{
-
-  font-size:12px;
-
-  color:#687585;
-
-  margin-bottom:7px;
-
-}
-
-.review-question{
-
-  font-weight:800;
-
-  line-height:1.6;
-
-  margin-bottom:14px;
-
-}
-
-.review-answer{
-
-  background:#fafbfc;
-
-  border-radius:10px;
-
-  padding:11px;
-
-  margin:6px 0;
-
-  font-size:14px;
-
-}
-
-.review-answer.wrong{
-
-  background:#fff3f3;
-
-  color:#a13d3d;
-
-}
-
-.review-answer.correct{
-
-  background:#f0f7f3;
-
-  color:#286246;
-
-}
-
-.review-explanation{
-
-  margin-top:12px;
-
-  padding-top:12px;
-
-  border-top:1px solid #edf0f3;
-
-  color:#596675;
-
-  font-size:14px;
-
-  line-height:1.7;
-
-}
-
-.review-topic{
-
-  display:inline-block;
-
-  font-size:12px;
-
-  background:#eef2f5;
-
-  padding:4px 8px;
-
-  border-radius:999px;
-
-  margin-bottom:10px;
-
-}
-
-
-/* ==========================================
-   캡처 안내
-========================================== */
-
-.capture{
-
-  background:#f8f5e9;
-
-  border:2px solid #d9c987;
-
-  border-radius:15px;
-
-  padding:20px 16px;
-
-  text-align:center;
-
-  margin-top:28px;
-
-  line-height:1.7;
-
-}
-
-.capture-icon{
-
-  font-size:38px;
-
-  margin-bottom:8px;
-
-}
-
-.capture-title{
-
-  font-size:18px;
-
-  font-weight:900;
-
-  color:#26384d;
-
-  margin-bottom:8px;
-
-}
-
-.capture strong{
-
-  display:block;
-
-  font-size:15px;
-
-  color:#26384d;
-
-}
-
-.capture-sub{
-
-  margin-top:7px;
-
-  font-size:13px;
-
-  color:#596675;
-
-}
-
-
-/* ==========================================
-   TOP 10
-========================================== */
-
-.leaderboard{
-
-  margin-top:30px;
-
-}
-
-.leaderboard h2{
-
-  font-size:19px;
-
-}
 
 .lb p{
 
-  border-bottom:1px solid #edf0f3;
+  border-bottom:
+    1px solid #eee7e9;
 
-  padding:11px 4px;
+  padding:10px;
 
   margin:0;
 
+  line-height:1.5;
+
 }
+
 
 .lb p:last-child{
 
@@ -832,20 +839,26 @@ button:hover{
 }
 
 
-/* ==========================================
+/* ==================================================
    다시 도전
-========================================== */
+================================================== */
 
-.retry{
+.retry-button{
 
   margin-top:20px;
+
+  background:#ffffff;
+
+  color:#c9435d;
+
+  border:1px solid #e58a9b;
 
 }
 
 
-/* ==========================================
+/* ==================================================
    모바일
-========================================== */
+================================================== */
 
 @media(max-width:500px){
 
@@ -855,57 +868,39 @@ button:hover{
 
   }
 
+
   main{
 
     padding:20px;
 
+    border-radius:20px;
+
   }
+
 
   .question{
 
-    font-size:20px;
+    font-size:19px;
 
   }
 
-  .gauge,
-  .gauge-track,
-  .gauge-value{
+
+  .score-gauge{
 
     width:260px;
-
-  }
-
-  .gauge{
 
     height:145px;
 
   }
 
-  .gauge-track,
-  .gauge-value{
 
-    height:260px;
+  .score-gauge svg{
 
-  }
+    width:260px;
 
-  .score-number{
-
-    font-size:42px;
+    height:145px;
 
   }
-
-}
-
-
-/* ==========================================
-   접근성
-========================================== */
-
-button:disabled{
-
-  cursor:not-allowed;
-
-  opacity:.55;
 
 }
 
@@ -919,66 +914,80 @@ button:disabled{
 <main>
 
 
-<!-- ==========================================
+<!-- ==================================================
      시작 화면
-========================================== -->
+================================================== -->
 
 <section id="home">
 
-  <div class="header-mark">
-    SEC
+  <div class="chick">
+    🐣
   </div>
 
-  <h1>
-    2026 보안교육 퀴즈
+
+  <h1 class="home-title">
+
+    보안 퀴즈
+
   </h1>
 
-  <p>
-    임직원을 위한 보안 상식 퀴즈입니다.
+
+  <p class="home-subtitle">
+
+    일상에서 꼭 알아야 할 보안 상식을
+    가볍게 확인해보세요.
+
     <br>
-    퀴즈를 통해 일상적인 보안수칙을 점검해보세요.
+
+    닉네임으로 재미있게 도전해보세요.
+
   </p>
+
 
   <p
     id="period"
     class="muted">
 
-    참여기간을 확인하는 중입니다.
+    참여기간을 확인하는 중...
 
   </p>
+
 
   <p
     id="mix"
     class="muted">
 
-    출제 문제를 준비하고 있습니다.
+    문제를 준비하고 있어요.
 
   </p>
+
 
   <input
     id="nick"
     maxlength="20"
     placeholder="닉네임을 입력해주세요">
 
+
   <button
     id="startButton"
-    type="button"
+    class="start-button"
     onclick="start()">
 
-    보안교육 퀴즈 시작
+    퀴즈 시작하기
 
   </button>
+
 
   <div class="notice">
 
     퀴즈 기간 내 여러 번 도전할 수 있으며,
-    <strong>닉네임별 최고 점수</strong>가 순위에 반영됩니다.
+    <b>닉네임별 최고 점수</b>가 순위에 반영됩니다.
 
     <br>
 
-    <strong>
+    <b>
       100점 달성자는 상품 추첨 대상이 됩니다.
-    </strong>
+    </b>
 
     <br>
 
@@ -988,28 +997,31 @@ button:disabled{
     <br>
 
     행사 종료 후 100점 달성자 중
-    랜덤으로 3명을 선정하여
-    소정의 상품을 지급합니다.
+    랜덤으로 3명을 선정합니다.
+
+    <br><br>
 
   </div>
 
 </section>
 
 
-<!-- ==========================================
+<!-- ==================================================
      퀴즈
-========================================== -->
+================================================== -->
 
 <section
   id="quiz"
   class="hide">
 
-  <div class="quiz-header">
+
+  <div class="quiz-top">
 
     <div
       id="num"
       class="quiz-number">
     </div>
+
 
     <div
       id="time"
@@ -1018,21 +1030,24 @@ button:disabled{
 
   </div>
 
-  <div
+
+  <h2
     id="q"
     class="question">
-  </div>
+  </h2>
+
 
   <div
     id="a">
   </div>
 
+
 </section>
 
 
-<!-- ==========================================
-     제출 로딩
-========================================== -->
+<!-- ==================================================
+     제출 중
+================================================== -->
 
 <section
   id="submitLoading"
@@ -1040,14 +1055,17 @@ button:disabled{
 
   <div class="submit-loading">
 
-    <div class="loading-spinner"></div>
+    <div class="loading-chick">
+      🐣
+    </div>
 
     <h2>
-      퀴즈 결과를 확인하고 있습니다.
+      퀴즈 결과를 확인하고 있어요
     </h2>
 
     <p>
-      답안을 제출하고 결과를 분석하고 있습니다.<br>
+      답안을 안전하게 제출하고 있습니다.
+      <br>
       잠시만 기다려주세요.
     </p>
 
@@ -1056,228 +1074,196 @@ button:disabled{
 </section>
 
 
-<!-- ==========================================
+<!-- ==================================================
      결과
-========================================== -->
+================================================== -->
 
 <section
   id="res"
   class="hide">
 
 
-  <div class="result-header">
+  <div class="result">
 
-    <h1>
-      보안교육 퀴즈 결과
-    </h1>
 
-    <div class="result-subtitle">
-      이번 퀴즈의 결과와 학습 분석입니다.
+    <div class="result-title">
+      QUIZ RESULT
     </div>
 
-  </div>
-
-
-  <!-- 닉네임 -->
-
-  <div class="nickname-box">
-
-    <div class="nickname-label">
-      참여자
-    </div>
 
     <div
       id="nickname"
       class="nickname">
     </div>
 
-  </div>
 
+    <!-- 반원 점수 -->
 
-  <!-- 점수 -->
+    <div class="score-gauge">
 
-  <div class="score-section">
+      <svg
+        viewBox="0 0 260 145">
 
-    <div class="gauge">
+        <path
+          class="score-track"
+          d="M 35 130 A 95 95 0 0 1 225 130">
+        </path>
 
-      <div class="gauge-track"></div>
+        <path
+          id="scoreProgress"
+          class="score-progress"
+          d="M 35 130 A 95 95 0 0 1 225 130">
+        </path>
+
+      </svg>
+
 
       <div
-        id="gaugeValue"
-        class="gauge-value">
+        id="score"
+        class="score-number">
+
+        0점
+
       </div>
 
-      <div class="score-center">
+    </div>
+
+
+    <div
+      id="scoreLabel"
+      class="score-label">
+
+      정답 0 / 10
+
+    </div>
+
+
+    <!-- 분석 -->
+
+    <div class="analysis">
+
+
+      <!-- 강점 -->
+
+      <div class="analysis-box">
+
+        <div class="analysis-title">
+          나의 보안 강점
+        </div>
+
 
         <div
-          id="score"
-          class="score-number">
-          0
+          id="strengthText"
+          class="analysis-text">
+
+          정답 데이터를 기준으로
+          주요 강점을 분석했습니다.
+
         </div>
 
-        <div class="score-unit">
-          점
+
+        <div
+          id="strengthTopics"
+          class="topic-list">
         </div>
 
       </div>
 
-    </div>
 
-    <div
-      id="scoreResult"
-      class="score-result">
-    </div>
+      <!-- 보완 -->
 
-  </div>
+      <div class="analysis-box">
+
+        <div class="analysis-title">
+          보완하면 좋은 영역
+        </div>
 
 
-  <!-- 결과 요약 -->
+        <div
+          id="weaknessText"
+          class="analysis-text">
 
-  <div class="summary-grid">
+          틀린 문제를 기준으로
+          보완이 필요한 영역을 분석했습니다.
 
-    <div class="summary-item">
+        </div>
 
-      <div class="summary-label">
-        정답
+
+        <div
+          id="weaknessTopics"
+          class="topic-list">
+        </div>
+
       </div>
+
+
+      <!-- 틀린 문제 -->
+
+      <div class="analysis-box">
+
+        <div class="analysis-title">
+          다시 확인해볼 문제
+        </div>
+
+
+        <div
+          id="wrongQuestions">
+        </div>
+
+      </div>
+
+
+    </div>
+
+
+    <!-- 캡처 -->
+
+    <div class="capture">
+
+      <div class="capture-title">
+        📷 결과 화면을 저장해 주세요
+      </div>
+
+
+      <div>
+        상품 지급을 위해
+        <b>본 결과 화면에 닉네임이 포함되도록
+        캡처해 주세요.</b>
+      </div>
+
 
       <div
-        id="correctCount"
-        class="summary-value">
-        -
+        id="captureNickname"
+        class="capture-nickname">
+      </div>
+
+
+      <div>
+        100점 대상자 중 3명을 추첨해서
+        소정의 상품을 지급합니다.
       </div>
 
     </div>
 
-    <div class="summary-item">
-
-      <div class="summary-label">
-        전체 문항
-      </div>
-
-      <div
-        id="totalCount"
-        class="summary-value">
-        -
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- 강점 / 보완 -->
-
-  <div
-    id="analysisSection"
-    class="analysis-section hide">
-
-    <h2>
-      학습 분석
-    </h2>
-
-
-    <div class="analysis-box strength">
-
-      <div class="analysis-title">
-        ✓ 나의 보안 강점
-      </div>
-
-      <div
-        id="strengthText"
-        class="analysis-text">
-      </div>
-
-      <div
-        id="strengthTopics"
-        class="topic-list">
-      </div>
-
-    </div>
-
-
-    <div class="analysis-box improve">
-
-      <div class="analysis-title">
-        △ 보완하면 좋은 영역
-      </div>
-
-      <div
-        id="improveText"
-        class="analysis-text">
-      </div>
-
-      <div
-        id="improveTopics"
-        class="topic-list">
-      </div>
-
-    </div>
-
-  </div>
-
-
-  <!-- 틀린 문제 -->
-
-  <div
-    id="reviewSection"
-    class="review-section hide">
-
-    <h2>
-      다시 확인해볼 문제
-    </h2>
-
-    <div
-      id="reviewList">
-    </div>
-
-  </div>
-
-
-  <!-- 캡처 안내 -->
-
-  <div class="capture">
-
-    <div class="capture-icon">
-      📸
-    </div>
-
-    <div class="capture-title">
-      결과 화면을 꼭 캡처해 주세요!
-    </div>
-
-    <strong>
-      상품 지급을 위해 본 결과 화면에
-      닉네임이 포함되도록 캡처해 주세요.
-    </strong>
-
-    <div class="capture-sub">
-      100점 달성자 중 3명을 추첨하여
-      소정의 상품을 지급합니다.
-    </div>
 
   </div>
 
 
   <!-- TOP 10 -->
 
-  <div class="leaderboard">
+  <h3>
+    현재 보안 퀴즈 TOP 10
+  </h3>
 
-    <h2>
-      현재 보안교육 TOP 10
-    </h2>
 
-    <div
-      id="lb"
-      class="lb">
-    </div>
-
+  <div
+    id="lb"
+    class="lb">
   </div>
 
 
   <button
-    class="retry"
-    type="button"
+    class="retry-button"
     onclick="location.reload()">
 
     다시 도전하기
@@ -1293,9 +1279,10 @@ button:disabled{
 
 <script>
 
-/* ==========================================
+
+/* ==================================================
    기본 변수
-========================================== */
+================================================== */
 
 let token = '';
 
@@ -1307,22 +1294,20 @@ let i = 0;
 
 let ans = {};
 
-let timer = null;
-
-let startButtonLocked = false;
+let timer;
 
 
-/* ==========================================
+/* ==================================================
    API
-========================================== */
+================================================== */
 
 const api =
   "https://fwfdldjgfulbjkqasgur.supabase.co/functions/v1/quiz-api";
 
 
-/* ==========================================
-   브라우저 식별 ID
-========================================== */
+/* ==================================================
+   브라우저 ID
+================================================== */
 
 const BROWSER_ID_KEY =
   "security_quiz_browser_id";
@@ -1335,10 +1320,12 @@ function getBrowserId(){
       BROWSER_ID_KEY
     );
 
+
   if(!id){
 
     id =
       crypto.randomUUID();
+
 
     localStorage.setItem(
       BROWSER_ID_KEY,
@@ -1347,14 +1334,15 @@ function getBrowserId(){
 
   }
 
+
   return id;
 
 }
 
 
-/* ==========================================
+/* ==================================================
    API 호출
-========================================== */
+================================================== */
 
 async function call(
   action,
@@ -1363,8 +1351,11 @@ async function call(
 
   const r =
     await fetch(
+
       api,
+
       {
+
         method:'POST',
 
         headers:{
@@ -1374,26 +1365,20 @@ async function call(
 
         body:
           JSON.stringify({
+
             action,
+
             ...body
+
           })
+
       }
+
     );
 
 
-  let x = {};
-
-  try{
-
-    x =
-      await r.json();
-
-  }
-  catch(e){
-
-    x = {};
-
-  }
+  const x =
+    await r.json();
 
 
   if(!r.ok){
@@ -1408,44 +1393,61 @@ async function call(
 }
 
 
-/* ==========================================
+/* ==================================================
    날짜
-========================================== */
+================================================== */
 
-function formatDateTime(value){
+function formatDateTime(
+  value
+){
 
   const d =
     new Date(value);
 
+
   return d.toLocaleString(
+
     'ko-KR',
+
     {
+
       year:'numeric',
+
       month:'numeric',
+
       day:'numeric',
+
       hour:'numeric',
+
       minute:'2-digit',
+
       hour12:true
+
     }
+
   );
 
 }
 
 
-/* ==========================================
+/* ==================================================
    초기 화면
-========================================== */
+================================================== */
 
 async function init(){
 
   try{
 
     const x =
-      await call('config');
+      await call(
+        'config'
+      );
 
 
     document
-      .getElementById('period')
+      .getElementById(
+        'period'
+      )
       .textContent =
 
       '참여기간: ' +
@@ -1462,53 +1464,79 @@ async function init(){
 
 
     document
-      .getElementById('mix')
+      .getElementById(
+        'mix'
+      )
       .innerHTML =
 
       '랜덤 ' +
 
       x.question_count +
 
-      '문제 · 쉬움 ' +
+      '문제 · ' +
+
+      '<span class="topic">' +
+
+      '쉬움 ' +
 
       x.easy_count +
 
-      ' · 보통 ' +
+      '</span> ' +
+
+      '<span class="topic">' +
+
+      '보통 ' +
 
       x.medium_count +
 
-      ' · 어려움 ' +
+      '</span> ' +
 
-      x.hard_count;
+      '<span class="topic">' +
+
+      '어려움 ' +
+
+      x.hard_count +
+
+      '</span>';
 
   }
 
   catch(e){
 
+    console.error(
+      'CONFIG ERROR:',
+      e
+    );
+
+
     document
-      .getElementById('period')
+      .getElementById(
+        'period'
+      )
       .textContent =
-      '참여기간 정보를 불러오지 못했습니다.';
+
+      '참여기간 정보를 불러오지 못했어요.';
 
   }
 
 }
 
 
-/* ==========================================
+/* ==================================================
    퀴즈 시작
-========================================== */
+================================================== */
 
 async function start(){
 
-  /*
-    버튼 중복 클릭 방지
+  const button =
+    document.getElementById(
+      'startButton'
+    );
 
-    API 호출이 끝날 때까지
-    버튼을 잠그고 문구를 변경한다.
-  */
 
-  if(startButtonLocked){
+  /* 중복 클릭 방지 */
+
+  if(button.disabled){
 
     return;
 
@@ -1517,7 +1545,9 @@ async function start(){
 
   const n =
     document
-      .getElementById('nick')
+      .getElementById(
+        'nick'
+      )
       .value
       .trim();
 
@@ -1533,29 +1563,34 @@ async function start(){
   }
 
 
-  startButtonLocked = true;
-
-
-  const button =
-    document
-      .getElementById('startButton');
-
+  /* 즉시 버튼 잠금 */
 
   button.disabled = true;
 
+  button.classList.add(
+    'loading'
+  );
+
   button.textContent =
-    '퀴즈를 준비하고 있습니다...';
+    '퀴즈를 준비하고 있어요...';
 
 
   try{
 
     const r =
       await call(
+
         'register',
+
         {
+
           nickname:n,
-          browser_id:getBrowserId()
+
+          browser_id:
+            getBrowserId()
+
         }
+
       );
 
 
@@ -1566,10 +1601,15 @@ async function start(){
 
     const x =
       await call(
+
         'questions',
+
         {
+
           token
+
         }
+
       );
 
 
@@ -1578,17 +1618,7 @@ async function start(){
 
 
     qs =
-      x.questions || [];
-
-
-    if(!qs.length){
-
-      throw {
-        error:
-          '출제할 문제가 없습니다.'
-      };
-
-    }
+      x.questions;
 
 
     i = 0;
@@ -1597,13 +1627,17 @@ async function start(){
 
 
     document
-      .getElementById('home')
+      .getElementById(
+        'home'
+      )
       .className =
       'hide';
 
 
     document
-      .getElementById('quiz')
+      .getElementById(
+        'quiz'
+      )
       .className =
       '';
 
@@ -1614,18 +1648,25 @@ async function start(){
 
   catch(e){
 
-    startButtonLocked = false;
+    console.error(
+      'START ERROR:',
+      e
+    );
+
 
     button.disabled = false;
 
+    button.classList.remove(
+      'loading'
+    );
+
     button.textContent =
-      '보안교육 퀴즈 시작';
+      '퀴즈 시작하기';
 
 
     alert(
       e.error ||
-      e.message ||
-      '퀴즈를 시작할 수 없습니다.'
+      '퀴즈를 시작하지 못했습니다.'
     );
 
   }
@@ -1633,20 +1674,24 @@ async function start(){
 }
 
 
-/* ==========================================
+/* ==================================================
    문제 표시
-========================================== */
+================================================== */
 
 function show(){
 
-  clearInterval(timer);
+  clearInterval(
+    timer
+  );
 
 
   let left = 20;
 
 
   document
-    .getElementById('num')
+    .getElementById(
+      'num'
+    )
     .textContent =
 
     (i + 1) +
@@ -1655,19 +1700,29 @@ function show(){
 
 
   document
-    .getElementById('time')
+    .getElementById(
+      'time'
+    )
     .textContent =
-    left + '초';
+
+    left +
+    '초';
 
 
   document
-    .getElementById('q')
+    .getElementById(
+      'q'
+    )
     .textContent =
+
     qs[i].question;
 
 
   const box =
-    document.getElementById('a');
+    document
+      .getElementById(
+        'a'
+      );
 
 
   box.innerHTML = '';
@@ -1676,7 +1731,8 @@ function show(){
   qs[i]
     .options
     .forEach(
-      function(v,j){
+
+      (v,j)=>{
 
         const b =
           document.createElement(
@@ -1686,10 +1742,6 @@ function show(){
 
         b.className =
           'ans';
-
-
-        b.type =
-          'button';
 
 
         b.textContent =
@@ -1704,28 +1756,30 @@ function show(){
 
 
         b.onclick =
-          function(){
-
-            pick(j);
-
-          };
+          () => pick(j);
 
 
-        box.appendChild(b);
+        box.appendChild(
+          b
+        );
 
       }
+
     );
 
 
   timer =
     setInterval(
-      function(){
+
+      ()=>{
 
         left--;
 
 
         document
-          .getElementById('time')
+          .getElementById(
+            'time'
+          )
           .textContent =
 
           Math.max(
@@ -1743,46 +1797,54 @@ function show(){
         }
 
       },
+
       1000
+
     );
 
 }
 
 
-/* ==========================================
+/* ==================================================
    답변 선택
-========================================== */
+================================================== */
 
 function pick(v){
 
-  clearInterval(timer);
+  clearInterval(
+    timer
+  );
 
 
   const buttons =
     document.querySelectorAll(
-      '#a .ans'
+      "#a .ans"
     );
 
 
-  const alreadySelected =
+  /* 이미 선택했으면 무시 */
+
+  if(
     Array.from(buttons)
       .some(
         function(button){
 
           return button
             .classList
-            .contains('selected');
+            .contains(
+              "selected"
+            );
 
         }
-      );
-
-
-  if(alreadySelected){
+      )
+  ){
 
     return;
 
   }
 
+
+  /* 선택 표시 */
 
   if(
     v >= 0 &&
@@ -1791,17 +1853,22 @@ function pick(v){
 
     buttons[v]
       .classList
-      .add('selected');
+      .add(
+        "selected"
+      );
 
   }
 
 
+  /* 버튼 잠금 */
+
   buttons.forEach(
     function(button){
 
-      button
-        .classList
-        .add('disabled');
+      button.classList
+        .add(
+          "disabled"
+        );
 
     }
   );
@@ -1813,13 +1880,15 @@ function pick(v){
 
 
   setTimeout(
+
     function(){
 
       i++;
 
 
       if(
-        i < qs.length
+        i <
+        qs.length
       ){
 
         show();
@@ -1829,15 +1898,19 @@ function pick(v){
       else{
 
         document
-          .getElementById('quiz')
+          .getElementById(
+            "quiz"
+          )
           .className =
-          'hide';
+          "hide";
 
 
         document
-          .getElementById('submitLoading')
+          .getElementById(
+            "submitLoading"
+          )
           .className =
-          '';
+          "";
 
 
         submit();
@@ -1845,367 +1918,17 @@ function pick(v){
       }
 
     },
+
     250
+
   );
 
 }
 
 
-/* ==========================================
-   점수 문구
-========================================== */
-
-function getMessage(score){
-
-  if(score === 100){
-
-    return '보안 역량이 매우 우수합니다.';
-
-  }
-
-  if(score >= 90){
-
-    return '보안 기본지식을 매우 잘 이해하고 있습니다.';
-
-  }
-
-  if(score >= 70){
-
-    return '보안 기본지식을 전반적으로 잘 이해하고 있습니다.';
-
-  }
-
-  if(score >= 50){
-
-    return '기본적인 보안지식은 갖추고 있습니다. 일부 영역을 다시 확인해보세요.';
-
-  }
-
-  return '보안 기본수칙을 중심으로 다시 한번 학습해보세요.';
-
-}
-
-
-/* ==========================================
-   게이지
-========================================== */
-
-function setGauge(score){
-
-  /*
-    CSS 반원 게이지는 시각적인 표현용이다.
-    점수 숫자는 중앙에 정확하게 표시한다.
-  */
-
-  const gauge =
-    document.getElementById(
-      'gaugeValue'
-    );
-
-
-  const safeScore =
-    Math.max(
-      0,
-      Math.min(
-        100,
-        Number(score) || 0
-      )
-    );
-
-
-  /*
-    0~100점에 따라 회전량을 계산한다.
-    시각적인 게이지이므로 점수 숫자를
-    함께 표시해 정확성을 보장한다.
-  */
-
-  const rotation =
-    -45 +
-    (safeScore * 1.8);
-
-
-  gauge.style.transform =
-    'rotate(' +
-    rotation +
-    'deg)';
-
-
-  document
-    .getElementById('score')
-    .textContent =
-    safeScore;
-
-}
-
-
-/* ==========================================
-   토픽 목록
-========================================== */
-
-function renderTopics(
-  elementId,
-  topics
-){
-
-  const box =
-    document.getElementById(
-      elementId
-    );
-
-
-  if(
-    !Array.isArray(topics) ||
-    !topics.length
-  ){
-
-    box.innerHTML = '';
-
-    return;
-
-  }
-
-
-  box.innerHTML =
-    topics
-      .slice(0,5)
-      .map(
-        function(topic){
-
-          return (
-            '<span class="topic">' +
-            escapeHtml(topic) +
-            '</span>'
-          );
-
-        }
-      )
-      .join('');
-
-}
-
-
-/* ==========================================
-   문제 분석
-========================================== */
-
-function renderAnalysis(result){
-
-  /*
-    quiz-api에서 다음 형태를 반환하도록 설계:
-
-    result.analysis = {
-      strength_text,
-      improve_text,
-      strength_topics: [],
-      improve_topics: []
-    }
-  */
-
-  const analysis =
-    result.analysis || {};
-
-
-  const strengthText =
-    analysis.strength_text;
-
-
-  const improveText =
-    analysis.improve_text;
-
-
-  if(
-    !strengthText &&
-    !improveText
-  ){
-
-    return;
-
-  }
-
-
-  document
-    .getElementById(
-      'analysisSection'
-    )
-    .className =
-    'analysis-section';
-
-
-  document
-    .getElementById(
-      'strengthText'
-    )
-    .textContent =
-
-    strengthText ||
-    '정답을 맞힌 문제를 기준으로 보안 강점을 확인해보세요.';
-
-
-  document
-    .getElementById(
-      'improveText'
-    )
-    .textContent =
-
-    improveText ||
-    '틀린 문제의 주제를 중심으로 다시 확인해보세요.';
-
-
-  renderTopics(
-    'strengthTopics',
-    analysis.strength_topics
-  );
-
-
-  renderTopics(
-    'improveTopics',
-    analysis.improve_topics
-  );
-
-}
-
-
-/* ==========================================
-   틀린 문제
-========================================== */
-
-function renderReview(result){
-
-  /*
-    quiz-api 응답 예:
-
-    result.review = [
-      {
-        number: 3,
-        question: "...",
-        topic: "개인정보 보호",
-        selected_answer: "...",
-        correct_answer: "...",
-        explanation: "..."
-      }
-    ]
-  */
-
-
-  const review =
-    result.review || [];
-
-
-  const wrongQuestions =
-    review.filter(
-      function(item){
-
-        return item.is_correct !== true;
-
-      }
-    );
-
-
-  const section =
-    document.getElementById(
-      'reviewSection'
-    );
-
-
-  const list =
-    document.getElementById(
-      'reviewList'
-    );
-
-
-  if(!wrongQuestions.length){
-
-    section.className =
-      'review-section hide';
-
-    return;
-
-  }
-
-
-  section.className =
-    'review-section';
-
-
-  list.innerHTML =
-    wrongQuestions
-      .map(
-        function(item,index){
-
-          const number =
-            item.number ||
-            (index + 1);
-
-
-          return (
-
-            '<div class="review-card">' +
-
-              '<div class="review-number">' +
-                '문제 ' +
-                number +
-              '</div>' +
-
-              (
-                item.topic
-                ?
-                '<div class="review-topic">' +
-                  escapeHtml(
-                    item.topic
-                  ) +
-                '</div>'
-                :
-                ''
-              ) +
-
-              '<div class="review-question">' +
-                escapeHtml(
-                  item.question || ''
-                ) +
-              '</div>' +
-
-              '<div class="review-answer wrong">' +
-                '<strong>내 답변</strong><br>' +
-                escapeHtml(
-                  item.selected_answer ||
-                  '응답하지 않음'
-                ) +
-              '</div>' +
-
-              '<div class="review-answer correct">' +
-                '<strong>정답</strong><br>' +
-                escapeHtml(
-                  item.correct_answer || ''
-                ) +
-              '</div>' +
-
-              (
-                item.explanation
-                ?
-                '<div class="review-explanation">' +
-                  '<strong>해설</strong><br>' +
-                  escapeHtml(
-                    item.explanation
-                  ) +
-                '</div>'
-                :
-                ''
-              ) +
-
-            '</div>'
-
-          );
-
-        }
-      )
-      .join('');
-
-}
-
-
-/* ==========================================
+/* ==================================================
    제출
-========================================== */
+================================================== */
 
 async function submit(){
 
@@ -2213,8 +1936,11 @@ async function submit(){
 
     const x =
       await call(
+
         'submit',
+
         {
+
           token,
 
           attempt_id:
@@ -2222,13 +1948,11 @@ async function submit(){
 
           answers:
             ans
+
         }
+
       );
 
-
-    /*
-      결과 화면 표시
-    */
 
     document
       .getElementById(
@@ -2258,6 +1982,10 @@ async function submit(){
       x.result || {};
 
 
+    /* ==================================================
+       점수
+    ================================================== */
+
     const score =
       Number(
         result.score || 0
@@ -2265,8 +1993,69 @@ async function submit(){
 
 
     /*
-      닉네임
+      서버에서 correct / total을 보내는 경우 사용.
+      기존 서버가 best_correct만 보내는 경우도
+      안전하게 처리.
     */
+
+    let correct =
+      result.correct;
+
+
+    let total =
+      result.total;
+
+
+    if(
+      correct === undefined
+    ){
+
+      correct =
+        result.best_correct;
+
+    }
+
+
+    if(
+      correct === undefined ||
+      correct === null
+    ){
+
+      correct =
+        Math.round(
+          score / 10
+        );
+
+    }
+
+
+    if(
+      total === undefined ||
+      total === null
+    ){
+
+      total =
+        qs.length ||
+        10;
+
+    }
+
+
+    correct =
+      Number(correct);
+
+
+    total =
+      Number(total);
+
+
+    /* ==================================================
+       닉네임
+    ================================================== */
+
+    const nickname =
+      result.nickname || '';
+
 
     document
       .getElementById(
@@ -2274,100 +2063,173 @@ async function submit(){
       )
       .textContent =
 
-      result.nickname ||
-      '참여자';
-
-
-    /*
-      점수 게이지
-    */
-
-    setGauge(score);
+      '닉네임: ' +
+      nickname;
 
 
     document
       .getElementById(
-        'scoreResult'
+        'captureNickname'
       )
       .textContent =
 
-      getMessage(score);
+      nickname;
 
 
-    /*
-      정답 수
-    */
+    /* ==================================================
+       점수
+    ================================================== */
 
     document
       .getElementById(
-        'correctCount'
+        'score'
       )
       .textContent =
 
+      score +
+      '점';
+
+
+    document
+      .getElementById(
+        'scoreLabel'
+      )
+      .textContent =
+
+      '정답 ' +
+      correct +
+      ' / ' +
+      total;
+
+
+    /* ==================================================
+       반원 게이지
+    ================================================== */
+
+    const progress =
+      document
+        .getElementById(
+          'scoreProgress'
+        );
+
+
+    const maxLength = 314;
+
+
+    const offset =
+      maxLength -
       (
-        result.correct_count ??
-        result.best_correct ??
-        0
-      ) +
-      '문항';
+        maxLength *
+        Math.max(
+          0,
+          Math.min(
+            score,
+            100
+          )
+        ) /
+        100
+      );
 
 
-    /*
-      전체 문항 수
-    */
+    progress.style.strokeDashoffset =
+      offset;
+
+
+    /* ==================================================
+       분석 데이터
+    ================================================== */
+
+    const analysis =
+      result.analysis ||
+      x.analysis ||
+      {};
+
+
+    /* 강점 */
+
+    const strengths =
+      analysis.strengths ||
+      {};
+
 
     document
       .getElementById(
-        'totalCount'
+        'strengthText'
       )
       .textContent =
 
-      (
-        result.total_count ??
-        qs.length
-      ) +
-      '문항';
+      strengths.text ||
+      '이번 퀴즈에서 정답률이 높았던 영역을 중심으로 강점을 확인했습니다.';
 
 
-    /*
-      학습 분석
-    */
-
-    renderAnalysis(
-      result
+    renderTopics(
+      'strengthTopics',
+      strengths.topics || []
     );
 
 
-    /*
-      틀린 문제
-    */
+    /* 보완 */
 
-    renderReview(
-      result
+    const weaknesses =
+      analysis.weaknesses ||
+      {};
+
+
+    document
+      .getElementById(
+        'weaknessText'
+      )
+      .textContent =
+
+      weaknesses.text ||
+      (
+        score === 100
+        ?
+        '모든 문제를 정확하게 해결했습니다. 현재 수준을 잘 유지해 주세요.'
+        :
+        '틀린 문제를 중심으로 관련 보안 영역을 다시 확인해보면 좋습니다.'
+      );
+
+
+    renderTopics(
+      'weaknessTopics',
+      weaknesses.topics || []
     );
 
 
-    /*
-      TOP 10
-    */
+    /* ==================================================
+       틀린 문제
+    ================================================== */
+
+    const incorrect =
+      analysis.incorrect_questions ||
+      result.incorrect_questions ||
+      x.incorrect_questions ||
+      [];
+
+
+    renderWrongQuestions(
+      incorrect
+    );
+
+
+    /* ==================================================
+       TOP 10
+    ================================================== */
 
     draw(
       x.leaderboard || []
     );
 
-
-    /*
-      결과 화면으로 이동
-    */
-
-    window.scrollTo({
-      top:0,
-      behavior:'smooth'
-    });
-
   }
 
   catch(e){
+
+    console.error(
+      'SUBMIT ERROR:',
+      e
+    );
+
 
     document
       .getElementById(
@@ -2377,18 +2239,9 @@ async function submit(){
       'hide';
 
 
-    document
-      .getElementById(
-        'quiz'
-      )
-      .className =
-      '';
-
-
     alert(
       e.error ||
-      e.message ||
-      '제출 오류가 발생했습니다.'
+      '제출 오류가 발생했어요.'
     );
 
   }
@@ -2396,32 +2249,27 @@ async function submit(){
 }
 
 
-/* ==========================================
-   TOP 10
-========================================== */
+/* ==================================================
+   강점 / 보완 주제
+================================================== */
 
-function draw(r){
-
-  const medals =
-    [
-      '🥇',
-      '🥈',
-      '🥉'
-    ];
-
+function renderTopics(
+  elementId,
+  topics
+){
 
   const box =
     document.getElementById(
-      'lb'
+      elementId
     );
 
 
-  if(!Array.isArray(r) || !r.length){
+  if(
+    !Array.isArray(topics) ||
+    !topics.length
+  ){
 
-    box.innerHTML =
-      '<p class="muted">' +
-      '아직 순위 데이터가 없습니다.' +
-      '</p>';
+    box.innerHTML = '';
 
     return;
 
@@ -2429,33 +2277,20 @@ function draw(r){
 
 
   box.innerHTML =
-    r
+
+    topics
       .map(
-        function(x,j){
+        function(topic){
 
           return (
 
-            '<p>' +
-
-            (
-              medals[j] ||
-              (j + 1) + '위'
-            ) +
-
-            '　' +
+            '<span class="topic">' +
 
             escapeHtml(
-              x.nickname
+              topic
             ) +
 
-            ' · ' +
-
-            '<b>' +
-            x.best_score +
-            '점' +
-            '</b>' +
-
-            '</p>'
+            '</span>'
 
           );
 
@@ -2466,11 +2301,253 @@ function draw(r){
 }
 
 
-/* ==========================================
-   HTML Escape
-========================================== */
+/* ==================================================
+   틀린 문제
+================================================== */
 
-function escapeHtml(value){
+function renderWrongQuestions(
+  list
+){
+
+  const box =
+    document.getElementById(
+      'wrongQuestions'
+    );
+
+
+  if(
+    !Array.isArray(list) ||
+    !list.length
+  ){
+
+    box.innerHTML =
+
+      '<div class="analysis-text">' +
+
+      '모든 문제를 정확하게 해결했습니다. ' +
+
+      '별도의 보완이 필요한 문제가 없습니다.' +
+
+      '</div>';
+
+    return;
+
+  }
+
+
+  box.innerHTML =
+
+    list
+      .map(
+
+        function(item,index){
+
+          const number =
+            item.number ??
+            item.question_number ??
+            (index + 1);
+
+
+          const question =
+            item.question ||
+            '';
+
+
+          const myAnswer =
+            item.my_answer ||
+            item.user_answer ||
+            item.selected_answer ||
+            '응답하지 않음';
+
+
+          const correctAnswer =
+            item.correct_answer ||
+            item.answer ||
+            '';
+
+
+          const topic =
+            item.topic ||
+            '';
+
+
+          const explanation =
+            item.explanation ||
+            item.source_note ||
+            '';
+
+
+          return (
+
+            '<div class="wrong-question">' +
+
+              '<div class="wrong-number">' +
+
+                '문제 ' +
+
+                escapeHtml(
+                  number
+                ) +
+
+              '</div>' +
+
+
+              '<div class="wrong-title">' +
+
+                escapeHtml(
+                  question
+                ) +
+
+              '</div>' +
+
+
+              (
+                topic
+                ?
+
+                '<div class="topic-list">' +
+
+                  '<span class="topic">' +
+
+                    escapeHtml(
+                      topic
+                    ) +
+
+                  '</span>' +
+
+                '</div>'
+
+                :
+
+                ''
+              ) +
+
+
+              '<div class="answer-row my-answer">' +
+
+                '내가 선택한 답: ' +
+
+                escapeHtml(
+                  myAnswer
+                ) +
+
+              '</div>' +
+
+
+              '<div class="answer-row correct-answer">' +
+
+                '정답: ' +
+
+                escapeHtml(
+                  correctAnswer
+                ) +
+
+              '</div>' +
+
+
+              (
+                explanation
+                ?
+
+                '<div class="explanation">' +
+
+                  escapeHtml(
+                    explanation
+                  ) +
+
+                '</div>'
+
+                :
+
+                ''
+              ) +
+
+
+            '</div>'
+
+          );
+
+        }
+
+      )
+      .join('');
+
+}
+
+
+/* ==================================================
+   TOP 10
+================================================== */
+
+function draw(r){
+
+  const medals = [
+    '🥇',
+    '🥈',
+    '🥉'
+  ];
+
+
+  const box =
+    document.getElementById(
+      'lb'
+    );
+
+
+  if(
+    !Array.isArray(r) ||
+    !r.length
+  ){
+
+    box.innerHTML =
+      '<p class="muted">아직 순위 기록이 없습니다.</p>';
+
+    return;
+
+  }
+
+
+  box.innerHTML =
+
+    r
+      .map(
+
+        (x,j)=>`
+
+          <p>
+
+            ${
+              medals[j] ||
+              (j+1) + '위'
+            }
+
+            ${escapeHtml(
+              x.nickname
+            )}
+
+            ·
+
+            <b>
+              ${x.best_score ?? x.score ?? 0}점
+            </b>
+
+          </p>
+
+        `
+
+      )
+      .join('');
+
+}
+
+
+/* ==================================================
+   HTML Escape
+================================================== */
+
+function escapeHtml(
+  value
+){
 
   return String(
     value ?? ''
@@ -2504,13 +2581,14 @@ function escapeHtml(value){
 }
 
 
-/* ==========================================
+/* ==================================================
    시작
-========================================== */
+================================================== */
 
 init();
 
 </script>
+
 
 </body>
 
