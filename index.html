@@ -6,10 +6,6 @@
 <meta charset="UTF-8">
 
 <meta
-  http-equiv="Content-Type"
-  content="text/html; charset=UTF-8">
-
-<meta
   name="viewport"
   content="width=device-width,initial-scale=1">
 
@@ -38,8 +34,8 @@ body{
     linear-gradient(
       135deg,
       #fff5f6 0%,
-      #fff9f7 45%,
-      #fff 100%
+      #fff9f7 50%,
+      #ffffff 100%
     );
 
   color:#34282b;
@@ -56,20 +52,25 @@ main{
   margin:0 auto;
 
   padding:28px 20px 50px;
+
+}
+
+.hide{
+
+  display:none !important;
+
+}
+
+.muted{
+
+  color:#806f73;
+
 }
 
 
 /* ==========================================
-   공통
+   공통 버튼 / 입력
 ========================================== */
-
-.hide{
-  display:none !important;
-}
-
-.muted{
-  color:#806f73;
-}
 
 button,
 input{
@@ -162,7 +163,9 @@ button:disabled{
 
   display:inline-block;
 
-  padding:7px 12px;
+  padding:
+    7px
+    12px;
 
   border-radius:999px;
 
@@ -240,8 +243,7 @@ button:disabled{
     5px
     10px;
 
-  margin:
-    2px;
+  margin:2px;
 
   border-radius:999px;
 
@@ -271,11 +273,6 @@ button:disabled{
     );
 
 }
-
-
-/* ==========================================
-   안내
-========================================== */
 
 .notice{
 
@@ -476,7 +473,10 @@ button:disabled{
 
   height:64px;
 
-  margin:0 auto 24px;
+  margin:
+    0
+    auto
+    24px;
 
   border-radius:50%;
 
@@ -504,8 +504,6 @@ button:disabled{
     0
     0
     10px;
-
-  color:#302528;
 
 }
 
@@ -554,7 +552,7 @@ button:disabled{
 
   text-align:center;
 
-  padding-bottom:12px;
+  padding-bottom:4px;
 
 }
 
@@ -596,90 +594,71 @@ button:disabled{
 
 
 /* ==========================================
-   반원형 점수 게이지
+   점수 그래프
 ========================================== */
 
 .score-area{
 
   text-align:center;
 
-  margin:
-    18px
-    0
-    8px;
+  margin-top:15px;
 
 }
 
-.gauge{
+.score-gauge{
 
   position:relative;
 
-  width:280px;
+  width:300px;
 
-  height:155px;
+  height:190px;
 
-  margin:0 auto;
+  margin:
+    0
+    auto;
 
-  overflow:hidden;
+}
+
+.score-gauge svg{
+
+  width:300px;
+
+  height:190px;
+
+  overflow:visible;
 
 }
 
 .gauge-track{
 
-  position:absolute;
+  fill:none;
 
-  left:10px;
+  stroke:#f3e2e5;
 
-  top:10px;
+  stroke-width:18;
 
-  width:260px;
-
-  height:260px;
-
-  border-radius:50%;
-
-  border:
-    22px solid #f5e4e7;
-
-  border-bottom-color:transparent;
-
-  border-left-color:#f5e4e7;
-
-  transform:
-    rotate(
-      -45deg
-    );
+  stroke-linecap:round;
 
 }
 
 .gauge-progress{
 
-  position:absolute;
+  fill:none;
 
-  left:10px;
+  stroke:#e95b6b;
 
-  top:10px;
+  stroke-width:18;
 
-  width:260px;
+  stroke-linecap:round;
 
-  height:260px;
+  stroke-dasharray:471;
 
-  border-radius:50%;
-
-  border:
-    22px solid transparent;
-
-  border-top-color:#e95b6b;
-
-  border-right-color:#e95b6b;
-
-  transform:
-    rotate(
-      -45deg
-    );
+  stroke-dashoffset:471;
 
   transition:
-    transform 1s ease;
+    stroke-dashoffset
+    1.5s
+    cubic-bezier(.25,.8,.25,1);
 
 }
 
@@ -691,7 +670,7 @@ button:disabled{
 
   right:0;
 
-  bottom:4px;
+  bottom:18px;
 
   text-align:center;
 
@@ -699,7 +678,7 @@ button:disabled{
 
 .score-number{
 
-  font-size:48px;
+  font-size:50px;
 
   line-height:1;
 
@@ -711,26 +690,24 @@ button:disabled{
 
 .score-unit{
 
-  font-size:16px;
+  margin-top:5px;
 
   color:#806f73;
 
-  margin-top:4px;
+  font-size:15px;
 
 }
 
 .score-message{
 
+  margin:
+    5px
+    0
+    6px;
+
   font-size:18px;
 
   font-weight:800;
-
-  color:#34282b;
-
-  margin:
-    10px
-    0
-    4px;
 
 }
 
@@ -846,6 +823,12 @@ button:disabled{
 
 }
 
+.wrong-question:first-child{
+
+  margin-top:0;
+
+}
+
 .wrong-question-title{
 
   font-weight:800;
@@ -861,7 +844,7 @@ button:disabled{
   display:grid;
 
   grid-template-columns:
-    80px
+    90px
     1fr;
 
   gap:8px;
@@ -898,8 +881,7 @@ button:disabled{
 
   margin-top:12px;
 
-  padding:
-    12px;
+  padding:12px;
 
   background:#fff2f4;
 
@@ -932,7 +914,9 @@ button:disabled{
 
   border-radius:20px;
 
-  padding:22px 18px;
+  padding:
+    22px
+    18px;
 
   text-align:center;
 
@@ -1072,11 +1056,6 @@ button:disabled{
 
 }
 
-
-/* ==========================================
-   결과 버튼
-========================================== */
-
 .retry-button{
 
   background:#34282b;
@@ -1087,7 +1066,7 @@ button:disabled{
 
 
 /* ==========================================
-   반응형
+   모바일
 ========================================== */
 
 @media(max-width:500px){
@@ -1135,7 +1114,7 @@ button:disabled{
 
   }
 
-  .gauge{
+  .score-gauge{
 
     transform:scale(.9);
 
@@ -1149,7 +1128,7 @@ button:disabled{
   .answer-row{
 
     grid-template-columns:
-      72px
+      80px
       1fr;
 
   }
@@ -1167,7 +1146,7 @@ button:disabled{
 
 
 <!-- ==========================================
-     시작
+     시작 화면
 ========================================== -->
 
 <section
@@ -1179,13 +1158,17 @@ button:disabled{
   </div>
 
   <h1>
-    2026 정보보안 퀴즈
+    2026 SKC 보안 퀴즈
   </h1>
 
   <p class="hero-subtitle">
+
     일상에서 꼭 알아야 할 보안 상식을<br>
+
     가볍게 확인해보세요.
+
   </p>
+
 
   <p
     id="period"
@@ -1195,6 +1178,7 @@ button:disabled{
 
   </p>
 
+
   <p
     id="mix"
     class="mix">
@@ -1203,11 +1187,13 @@ button:disabled{
 
   </p>
 
+
   <input
     id="nick"
     maxlength="20"
     placeholder="닉네임을 입력해주세요"
     autocomplete="off">
+
 
   <button
     id="startButton"
@@ -1350,26 +1336,39 @@ button:disabled{
       </div>
 
 
-      <!-- 점수 -->
+      <!-- 점수 그래프 -->
 
       <div class="score-area">
 
-        <div class="gauge">
+        <div class="score-gauge">
 
-          <div class="gauge-track">
-          </div>
+          <svg
+            viewBox="0 0 300 190"
+            aria-hidden="true">
 
-          <div
-            id="gaugeProgress"
-            class="gauge-progress">
-          </div>
+            <!-- 반원 -->
+            <path
+              class="gauge-track"
+              d="M 25 165 A 125 125 0 0 1 275 165">
+            </path>
+
+            <path
+              id="gaugeProgress"
+              class="gauge-progress"
+              d="M 25 165 A 125 125 0 0 1 275 165">
+            </path>
+
+          </svg>
+
 
           <div class="score-center">
 
             <div
               id="score"
               class="score-number">
+
               0
+
             </div>
 
             <div class="score-unit">
@@ -1386,6 +1385,7 @@ button:disabled{
           class="score-message">
         </div>
 
+
         <div
           id="scoreDetail"
           class="score-detail">
@@ -1399,7 +1399,9 @@ button:disabled{
 
     <!-- 강점 -->
 
-    <div class="analysis-card">
+    <div
+      id="strengthCard"
+      class="analysis-card">
 
       <h3 class="analysis-title">
 
@@ -1479,13 +1481,18 @@ button:disabled{
       </div>
 
       <p>
+
         상품 지급을 위해<br>
+
         <strong>
           닉네임이 포함된 본 결과 화면을 캡처해 주세요.
         </strong>
+
         <br><br>
+
         100점 대상자 중 3명을 추첨하여
         소정의 상품을 지급합니다.
+
       </p>
 
     </div>
@@ -1529,6 +1536,7 @@ button:disabled{
 
 <script>
 
+
 /* ==========================================
    기본 변수
 ========================================== */
@@ -1553,7 +1561,7 @@ const api =
 
 
 /* ==========================================
-   브라우저 식별 ID
+   브라우저 ID
 ========================================== */
 
 const BROWSER_ID_KEY =
@@ -1587,7 +1595,7 @@ function getBrowserId(){
 
 
 /* ==========================================
-   API
+   API 호출
 ========================================== */
 
 async function call(
@@ -1625,12 +1633,14 @@ async function call(
 
   let x = {};
 
+
   try{
 
     x =
       await r.json();
 
   }
+
   catch(e){
 
     x = {};
@@ -2095,7 +2105,7 @@ function show(){
 
 
 /* ==========================================
-   답변 선택
+   답 선택
 ========================================== */
 
 function pick(v){
@@ -2226,11 +2236,13 @@ function getMessage(score){
 
   }
 
+
   if(score >= 90){
 
     return "보안 기본기가 매우 탄탄합니다.";
 
   }
+
 
   if(score >= 70){
 
@@ -2238,11 +2250,13 @@ function getMessage(score){
 
   }
 
+
   if(score >= 50){
 
     return "기본적인 보안 지식을 갖추고 있습니다.";
 
   }
+
 
   return "주요 보안 수칙을 다시 한번 확인해보세요.";
 
@@ -2250,51 +2264,161 @@ function getMessage(score){
 
 
 /* ==========================================
-   점수 게이지
+   점수 애니메이션
 ========================================== */
 
-function updateGauge(score){
+function animateScore(score){
+
+  const number =
+    document.getElementById(
+      "score"
+    );
+
 
   const progress =
-    document
-      .getElementById(
-        "gaugeProgress"
-      );
-
-
-  const normalized =
-    Math.max(
-      0,
-      Math.min(
-        100,
-        Number(score) || 0
-      )
+    document.getElementById(
+      "gaugeProgress"
     );
 
 
   /*
-    반원 게이지의 시각적 회전값.
-    0점부터 100점까지 약 180도 범위.
+    반원 둘레는 약 393px.
+    stroke-dasharray는 393으로 설정.
   */
 
-  const rotation =
-    -45 +
-    (normalized / 100) * 180;
+  const circumference =
+    393;
 
 
-  progress.style.transform =
-    "rotate(" +
-    rotation +
-    "deg)";
+  progress.style.strokeDasharray =
+    circumference;
+
+
+  progress.style.strokeDashoffset =
+    circumference;
+
+
+  number.textContent =
+    "0";
+
+
+  /*
+    브라우저가 결과 화면을 먼저 그린 다음
+    애니메이션을 시작하도록 requestAnimationFrame 사용
+  */
+
+  requestAnimationFrame(
+
+    function(){
+
+      requestAnimationFrame(
+
+        function(){
+
+          const target =
+            Math.max(
+              0,
+              Math.min(
+                100,
+                Number(score) || 0
+              )
+            );
+
+
+          const offset =
+            circumference -
+            (
+              circumference *
+              target /
+              100
+            );
+
+
+          progress.style.strokeDashoffset =
+            offset;
+
+
+          const duration =
+            1500;
+
+
+          const startTime =
+            performance.now();
+
+
+          function count(now){
+
+            const elapsed =
+              now -
+              startTime;
+
+
+            const ratio =
+              Math.min(
+                elapsed /
+                duration,
+                1
+              );
+
+
+            /*
+              부드러운 ease-out
+            */
+
+            const eased =
+              1 -
+              Math.pow(
+                1 - ratio,
+                3
+              );
+
+
+            const current =
+              Math.round(
+                target *
+                eased
+              );
+
+
+            number.textContent =
+              current;
+
+
+            if(
+              ratio < 1
+            ){
+
+              requestAnimationFrame(
+                count
+              );
+
+            }
+
+          }
+
+
+          requestAnimationFrame(
+            count
+          );
+
+        }
+
+      );
+
+    }
+
+  );
 
 }
 
 
 /* ==========================================
-   강점 표시
+   강점
 ========================================== */
 
-function renderStrengths(data){
+function renderStrengths(
+  analysis
+){
 
   const box =
     document.getElementById(
@@ -2302,44 +2426,15 @@ function renderStrengths(data){
     );
 
 
-  if(
-    Array.isArray(data) &&
-    data.length
-  ){
+  if(!analysis){
 
     box.innerHTML =
 
-      "<ul class='analysis-list'>" +
-
-      data
-        .map(
-          function(item){
-
-            return (
-              "<li>" +
-              escapeHtml(item) +
-              "</li>"
-            );
-
-          }
-        )
-        .join("") +
-
-      "</ul>";
-
-    return;
-
-  }
-
-
-  if(
-    typeof data === "string" &&
-    data.trim()
-  ){
-
-    box.innerHTML =
       "<p class='analysis-text'>" +
-      escapeHtml(data) +
+
+      "이번 퀴즈 결과를 기준으로 " +
+      "보안 지식이 잘 형성된 영역을 분석했습니다." +
+
       "</p>";
 
     return;
@@ -2347,11 +2442,87 @@ function renderStrengths(data){
   }
 
 
+  const text =
+    analysis.text ||
+    "";
+
+
+  const topics =
+    Array.isArray(
+      analysis.topics
+    )
+    ?
+    analysis.topics
+    :
+    [];
+
+
+  let html = "";
+
+
+  if(text){
+
+    html +=
+
+      "<p class='analysis-text'>" +
+
+      escapeHtml(
+        text
+      ) +
+
+      "</p>";
+
+  }
+
+
+  if(topics.length){
+
+    html +=
+
+      "<ul class='analysis-list'>";
+
+
+    topics.forEach(
+
+      function(topic){
+
+        html +=
+
+          "<li>" +
+
+          escapeHtml(
+            topic
+          ) +
+
+          "</li>";
+
+      }
+
+    );
+
+
+    html +=
+      "</ul>";
+
+  }
+
+
+  if(!html){
+
+    html =
+
+      "<p class='analysis-text'>" +
+
+      "정답을 맞힌 문제를 기준으로 " +
+      "주요 보안 영역의 이해도를 분석했습니다." +
+
+      "</p>";
+
+  }
+
+
   box.innerHTML =
-    "<p class='analysis-text'>" +
-    "이번 퀴즈에서 정답을 맞힌 문제를 기준으로 " +
-    "보안 지식이 잘 형성된 영역을 분석했습니다." +
-    "</p>";
+    html;
 
 }
 
@@ -2360,12 +2531,15 @@ function renderStrengths(data){
    보완 영역
 ========================================== */
 
-function renderWeaknesses(data){
+function renderWeaknesses(
+  analysis
+){
 
   const card =
     document.getElementById(
       "weaknessCard"
     );
+
 
   const box =
     document.getElementById(
@@ -2373,32 +2547,9 @@ function renderWeaknesses(data){
     );
 
 
-  if(
-    Array.isArray(data) &&
-    data.length
-  ){
+  if(!analysis){
 
-    box.innerHTML =
-
-      "<ul class='analysis-list'>" +
-
-      data
-        .map(
-          function(item){
-
-            return (
-              "<li>" +
-              escapeHtml(item) +
-              "</li>"
-            );
-
-          }
-        )
-        .join("") +
-
-      "</ul>";
-
-    card.classList.remove(
+    card.classList.add(
       "hide"
     );
 
@@ -2407,28 +2558,88 @@ function renderWeaknesses(data){
   }
 
 
-  if(
-    typeof data === "string" &&
-    data.trim()
-  ){
+  const text =
+    analysis.text ||
+    "";
 
-    box.innerHTML =
+
+  const topics =
+    Array.isArray(
+      analysis.topics
+    )
+    ?
+    analysis.topics
+    :
+    [];
+
+
+  let html = "";
+
+
+  if(text){
+
+    html +=
+
       "<p class='analysis-text'>" +
-      escapeHtml(data) +
+
+      escapeHtml(
+        text
+      ) +
+
       "</p>";
 
-    card.classList.remove(
-      "hide"
+  }
+
+
+  if(topics.length){
+
+    html +=
+
+      "<ul class='analysis-list'>";
+
+
+    topics.forEach(
+
+      function(topic){
+
+        html +=
+
+          "<li>" +
+
+          escapeHtml(
+            topic
+          ) +
+
+          "</li>";
+
+      }
+
     );
 
-    return;
+
+    html +=
+      "</ul>";
 
   }
 
 
-  card.classList.add(
-    "hide"
-  );
+  if(html){
+
+    box.innerHTML =
+      html;
+
+    card.classList.remove(
+      "hide"
+    );
+
+  }
+  else{
+
+    card.classList.add(
+      "hide"
+    );
+
+  }
 
 }
 
@@ -2437,12 +2648,15 @@ function renderWeaknesses(data){
    틀린 문제
 ========================================== */
 
-function renderWrongQuestions(list){
+function renderWrongQuestions(
+  list
+){
 
   const card =
     document.getElementById(
       "wrongCard"
     );
+
 
   const box =
     document.getElementById(
@@ -2478,26 +2692,22 @@ function renderWrongQuestions(list){
 
           const question =
             item.question ||
-            item.question_text ||
             "";
 
 
           const myAnswer =
             item.my_answer ||
-            item.selected_answer ||
-            "응답 없음";
+            "응답하지 않음";
 
 
           const correctAnswer =
             item.correct_answer ||
-            item.answer ||
             "";
 
 
           const explanation =
             item.explanation ||
-            item.source_note ||
-            "정답과 해설을 다시 확인해보세요.";
+            "정답과 관련된 보안 수칙을 다시 확인해보세요.";
 
 
           return (
@@ -2507,6 +2717,7 @@ function renderWrongQuestions(list){
               "<div class='wrong-question-title'>" +
 
                 (index + 1) +
+
                 ". " +
 
                 escapeHtml(
@@ -2515,6 +2726,7 @@ function renderWrongQuestions(list){
 
               "</div>" +
 
+
               "<div class='answer-row'>" +
 
                 "<div class='answer-label'>" +
@@ -2522,12 +2734,15 @@ function renderWrongQuestions(list){
                 "</div>" +
 
                 "<div class='my-answer'>" +
+
                   escapeHtml(
                     myAnswer
                   ) +
+
                 "</div>" +
 
               "</div>" +
+
 
               "<div class='answer-row'>" +
 
@@ -2536,22 +2751,36 @@ function renderWrongQuestions(list){
                 "</div>" +
 
                 "<div class='correct-answer'>" +
+
                   escapeHtml(
                     correctAnswer
                   ) +
+
                 "</div>" +
 
               "</div>" +
 
-              "<div class='explanation'>" +
 
-                "<strong>해설</strong><br>" +
+              (
+                explanation
 
-                escapeHtml(
-                  explanation
-                ) +
+                ?
 
-              "</div>" +
+                "<div class='explanation'>" +
+
+                  "<strong>해설</strong><br>" +
+
+                  escapeHtml(
+                    explanation
+                  ) +
+
+                "</div>"
+
+                :
+
+                ""
+
+              ) +
 
             "</div>"
 
@@ -2583,8 +2812,11 @@ function draw(r){
   ){
 
     box.innerHTML =
+
       "<p class='muted'>" +
+
       "아직 순위 기록이 없습니다." +
+
       "</p>";
 
     return;
@@ -2676,6 +2908,10 @@ async function submit(){
       );
 
 
+    /*
+      제출 로딩 숨김
+    */
+
     document
       .getElementById(
         "submitLoading"
@@ -2691,6 +2927,10 @@ async function submit(){
       .className =
       "hide";
 
+
+    /*
+      결과 화면 표시
+    */
 
     document
       .getElementById(
@@ -2713,6 +2953,34 @@ async function submit(){
     const nickname =
       result.nickname ||
       "참가자";
+
+
+    /*
+      ========================================
+      핵심 수정 부분
+      ========================================
+
+      Supabase 실제 응답:
+
+      result.analysis.strengths
+      result.analysis.weaknesses
+      result.analysis.incorrect_questions
+    */
+
+    const analysis =
+      result.analysis || {};
+
+
+    const strengths =
+      analysis.strengths || null;
+
+
+    const weaknesses =
+      analysis.weaknesses || null;
+
+
+    const wrongQuestions =
+      analysis.incorrect_questions || [];
 
 
     /* 닉네임 */
@@ -2740,22 +3008,6 @@ async function submit(){
 
     document
       .getElementById(
-        "score"
-      )
-      .textContent =
-
-      score;
-
-
-    updateGauge(
-      score
-    );
-
-
-    /* 메시지 */
-
-    document
-      .getElementById(
         "message"
       )
       .textContent =
@@ -2765,58 +3017,71 @@ async function submit(){
       );
 
 
-    /* 정답 상세 */
-
-    const bestCorrect =
-      result.best_correct;
-
-
     document
       .getElementById(
         "scoreDetail"
       )
       .textContent =
 
-      bestCorrect != null
-
-      ?
-
       "정답 " +
-      bestCorrect +
+
+      (
+        result.correct ??
+        result.best_correct ??
+        0
+      ) +
+
       " / " +
-      qs.length
 
-      :
+      (
+        result.total ||
+        qs.length
+      );
 
-      "이번 도전 결과";
 
-
-    /* 분석 */
+    /*
+      강점
+    */
 
     renderStrengths(
-      x.strengths ||
-      result.strengths
+      strengths
     );
 
+
+    /*
+      보완
+    */
 
     renderWeaknesses(
-      x.weaknesses ||
-      result.weaknesses
+      weaknesses
     );
 
+
+    /*
+      틀린 문제
+    */
 
     renderWrongQuestions(
-      x.wrong_questions ||
-      result.wrong_questions ||
-      []
+      wrongQuestions
     );
 
 
-    /* TOP 10 */
+    /*
+      TOP 10
+    */
 
     draw(
       x.leaderboard ||
       []
+    );
+
+
+    /*
+      마지막에 그래프 애니메이션 시작
+    */
+
+    animateScore(
+      score
     );
 
   }
