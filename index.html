@@ -666,90 +666,6 @@ input:focus{
 
 
 /* ==========================================
-   캡처 안내
-========================================== */
-
-.capture{
-
-  background:
-    linear-gradient(
-      135deg,
-      #fff1f4,
-      #fff8f9
-    );
-
-  padding:22px 18px;
-
-  border-radius:18px;
-
-  border:2px dashed #e88a9c;
-
-  text-align:center;
-
-  margin-top:20px;
-
-}
-
-.capture-icon{
-
-  font-size:36px;
-
-  margin-bottom:8px;
-
-}
-
-.capture-title{
-
-  font-size:19px;
-
-  font-weight:900;
-
-  color:#c84f67;
-
-  margin-bottom:10px;
-
-}
-
-.capture-nickname{
-
-  display:inline-block;
-
-  background:#fff;
-
-  border:1px solid #f0ccd4;
-
-  border-radius:10px;
-
-  padding:8px 14px;
-
-  font-size:17px;
-
-  font-weight:900;
-
-  color:#40363a;
-
-  margin-bottom:10px;
-
-}
-
-.capture p{
-
-  margin:5px 0;
-
-  line-height:1.7;
-
-  color:#66595e;
-
-}
-
-.capture strong{
-
-  color:#c84f67;
-
-}
-
-
-/* ==========================================
    TOP 10
 ========================================== */
 
@@ -874,9 +790,15 @@ input:focus{
 
 
   <input
-    id="nick"
+    id="department"
+    maxlength="50"
+    placeholder="부서를 입력해주세요">
+
+
+  <input
+    id="name"
     maxlength="20"
-    placeholder="이름, 부서를 입력해주세요">
+    placeholder="이름을 입력해주세요">
 
 
   <button
@@ -889,8 +811,6 @@ input:focus{
 
 
   <div class="notice">
-
-    <br>
 
     퀴즈 기간 내 여러 번 도전할 수 있습니다!
 
@@ -905,11 +825,11 @@ input:focus{
     100점 달성 기록이 많을수록
     추첨 기회가 늘어납니다.
 
-    <br>
-
-    수집된 개인정보(부서, 이름)는 상품 제공을 위한 목적으로만 이용되며, 퀴즈 종료 후 상품 제공이 완료되면 즉시 파기합니다.
-
     <br><br>
+
+    수집된 개인정보(부서, 이름)는
+    상품 제공을 위한 목적으로만 이용되며,
+    퀴즈 종료 후 상품 제공이 완료되면 즉시 파기합니다.
 
   </div>
 
@@ -1163,56 +1083,6 @@ input:focus{
       id="wrongQuestions">
 
     </div>
-
-  </div>
-
-
-
-  <!-- 캡처 안내 -->
-
-  <div class="capture">
-
-
-    <div class="capture-icon">
-      📷
-    </div>
-
-
-    <div class="capture-title">
-
-      결과 화면을 저장해 주세요
-
-    </div>
-
-
-    <div
-      id="captureNickname"
-      class="capture-nickname">
-
-      닉네임
-
-    </div>
-
-
-    <p>
-
-      상품 지급을 위해
-
-      <strong>
-        닉네임이 포함된 본 결과 화면을
-        캡처해 주세요.
-      </strong>
-
-    </p>
-
-
-    <p>
-
-      100점 대상자 중 3명을 추첨하여
-      소정의 상품을 지급합니다.
-
-    </p>
-
 
   </div>
 
@@ -1508,19 +1378,28 @@ async function start(){
 
   try{
 
-    const n =
+    const department =
       document
         .getElementById(
-          'nick'
+          'department'
         )
         .value
         .trim();
 
 
-    if(!n){
+    const name =
+      document
+        .getElementById(
+          'name'
+        )
+        .value
+        .trim();
+
+
+    if(!department || !name){
 
       alert(
-        '닉네임을 입력해주세요.'
+        '부서와 이름을 모두 입력해주세요.'
       );
 
       return;
@@ -1543,7 +1422,11 @@ async function start(){
 
         {
 
-          nickname:n,
+          department:
+            department,
+
+          name:
+            name,
 
           browser_id:
             getBrowserId()
@@ -2298,26 +2181,13 @@ function renderResult(
     );
 
 
-  /* 닉네임 */
+  /* 이름 표시 */
 
   document
     .getElementById(
       "nickname"
     )
     .textContent =
-
-    "닉네임: " +
-
-    nickname;
-
-
-  document
-    .getElementById(
-      "captureNickname"
-    )
-    .textContent =
-
-    "닉네임: " +
 
     nickname;
 
@@ -2542,6 +2412,7 @@ function draw(
         `
 
       )
+
       .join('');
 
 }
