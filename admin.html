@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>🐣 보안 병아리 관리자</title>
+<title>보안 퀴즈 관리자</title>
 
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 
@@ -192,6 +192,12 @@ th{
   color:#667085;
 }
 
+.badge-ticket{
+  background:#fff0f3;
+  color:#d6336c;
+  font-weight:700;
+}
+
 .hide{
   display:none !important;
 }
@@ -354,6 +360,22 @@ label{
   font-weight:normal;
 }
 
+.raffle-highlight{
+  background:#fff7f9;
+  border:1px solid #ffd5df;
+}
+
+.ticket-number{
+  font-size:24px;
+  font-weight:800;
+  color:#d6336c;
+}
+
+.winner-card{
+  background:#fff8dc;
+  border:1px solid #f0d87c;
+}
+
 @media(max-width:800px){
 
   .grid{
@@ -377,7 +399,7 @@ label{
   }
 
   table{
-    min-width:700px;
+    min-width:760px;
   }
 
   .answer-selector{
@@ -390,18 +412,16 @@ label{
 
 <body>
 
-<!-- ==========================================
-     관리자 로그인
-========================================== -->
+<!-- 로그인 -->
 
 <div id="login" class="card login">
 
   <div class="login-logo">
-    🐣
+    🔐
   </div>
 
   <h1 class="login-title">
-    보안 병아리 관리자
+    보안 퀴즈 관리자
   </h1>
 
   <p class="muted">
@@ -409,13 +429,10 @@ label{
   </p>
 
   <div class="login-help">
-    💡 이제 이메일 링크 없이<br>
-    관리자 계정과 비밀번호로 바로 로그인할 수 있습니다.
+    관리자 계정으로만 관리자 화면에 접근할 수 있습니다.
   </div>
 
-  <label>
-    관리자 이메일
-  </label>
+  <label>관리자 이메일</label>
 
   <input
     id="email"
@@ -423,9 +440,7 @@ label{
     value="dlalswjd4276@naver.com"
     autocomplete="username">
 
-  <label>
-    비밀번호
-  </label>
+  <label>비밀번호</label>
 
   <input
     id="password"
@@ -437,32 +452,21 @@ label{
     id="loginButton"
     class="primary"
     type="button">
-
-    🐣 관리자 로그인
-
+    관리자 로그인
   </button>
 
-  <p
-    id="loginMsg"
-    class="muted status-message">
-  </p>
+  <p id="loginMsg" class="muted status-message"></p>
 
 </div>
 
 
-<!-- ==========================================
-     관리자 화면
-========================================== -->
+<!-- 관리자 -->
 
 <div id="app" class="wrap hide">
 
-  <!-- HEADER -->
-
   <div class="card">
 
-    <h1>
-      🐣 보안 병아리 관리자
-    </h1>
+    <h1>보안 퀴즈 관리자</h1>
 
     <p class="muted">
       보안 퀴즈 이벤트 운영 현황을 관리합니다.
@@ -472,17 +476,13 @@ label{
       id="logoutButton"
       class="logout"
       type="button">
-
       로그아웃
-
     </button>
 
   </div>
 
 
-  <!-- ==========================================
-       주요 통계
-  ========================================== -->
+  <!-- 통계 -->
 
   <div class="grid">
 
@@ -529,104 +529,49 @@ label{
   </div>
 
 
-  <!-- ==========================================
-       퀴즈 기간 / 출제 설정
-  ========================================== -->
+  <!-- 설정 -->
 
   <div class="card">
 
-    <h2>
-      🗓️ 퀴즈 기간 / 출제 설정
-    </h2>
+    <h2>퀴즈 기간 / 출제 설정</h2>
 
     <div class="note">
 
       관리자가 변경한 기간과 난이도 설정은
-      실제 퀴즈 출제에 바로 반영됩니다.
-
-      <br><br>
-
-      기간이 지나면 참가자는 퀴즈를
-      시작하거나 제출할 수 없습니다.
+      실제 퀴즈에 바로 반영됩니다.
 
     </div>
 
     <div class="grid">
 
       <div>
-
-        <label>
-          시작일시
-        </label>
-
-        <input
-          id="startAt"
-          type="datetime-local">
-
+        <label>시작일시</label>
+        <input id="startAt" type="datetime-local">
       </div>
 
       <div>
-
-        <label>
-          종료일시
-        </label>
-
-        <input
-          id="endAt"
-          type="datetime-local">
-
+        <label>종료일시</label>
+        <input id="endAt" type="datetime-local">
       </div>
 
       <div>
-
-        <label>
-          전체 문제 수
-        </label>
-
-        <input
-          id="qCount"
-          type="number"
-          min="1">
-
+        <label>전체 문제 수</label>
+        <input id="qCount" type="number" min="1">
       </div>
 
       <div>
-
-        <label>
-          쉬움
-        </label>
-
-        <input
-          id="easy"
-          type="number"
-          min="0">
-
+        <label>쉬움</label>
+        <input id="easy" type="number" min="0">
       </div>
 
       <div>
-
-        <label>
-          보통
-        </label>
-
-        <input
-          id="medium"
-          type="number"
-          min="0">
-
+        <label>보통</label>
+        <input id="medium" type="number" min="0">
       </div>
 
       <div>
-
-        <label>
-          어려움
-        </label>
-
-        <input
-          id="hard"
-          type="number"
-          min="0">
-
+        <label>어려움</label>
+        <input id="hard" type="number" min="0">
       </div>
 
     </div>
@@ -635,37 +580,29 @@ label{
       id="settingsButton"
       class="primary"
       type="button">
-
-      💾 설정 저장
-
+      설정 저장
     </button>
 
   </div>
 
 
-  <!-- ==========================================
-       일별 통계
-  ========================================== -->
+  <!-- 일별 통계 -->
 
   <div class="card">
 
-    <h2>
-      📈 일별 참여 추이
-    </h2>
+    <h2>일별 참여 추이</h2>
 
     <div class="scroll">
 
       <table>
 
         <thead>
-
           <tr>
             <th>날짜</th>
             <th>도전</th>
             <th>완료</th>
             <th>완료율</th>
           </tr>
-
         </thead>
 
         <tbody id="daily"></tbody>
@@ -677,31 +614,25 @@ label{
   </div>
 
 
-  <!-- ==========================================
-       TOP 10
-  ========================================== -->
+  <!-- TOP 10 -->
 
   <div class="card">
 
-    <h2>
-      🏆 현재 보안 병아리 TOP 10
-    </h2>
+    <h2>현재 보안 퀴즈 TOP 10</h2>
 
     <div class="scroll">
 
       <table>
 
         <thead>
-
           <tr>
             <th>순위</th>
-            <th>닉네임</th>
+            <th>부서 / 이름</th>
             <th>정답</th>
             <th>시간</th>
             <th>점수</th>
             <th>최종 갱신</th>
           </tr>
-
         </thead>
 
         <tbody id="leaders"></tbody>
@@ -713,30 +644,16 @@ label{
   </div>
 
 
-  <!-- ==========================================
-       참가자 관리
-  ========================================== -->
+  <!-- 참가자 -->
 
   <div class="card">
 
-    <h2>
-      👤 참가자 관리
-    </h2>
+    <h2>참가자 관리</h2>
 
     <div class="note">
 
-      부적절한 닉네임 등 운영상 제외가 필요한
-      참가자는 <b>무효 처리</b>할 수 있습니다.
-
-      <br><br>
-
-      무효 처리된 참가자는 TOP 10과
-      최종 상품 대상에서 제외됩니다.
-
-      <br>
-
-      참가자 기록 자체는 삭제되지 않으며,
-      필요하면 다시 정상 상태로 복구할 수 있습니다.
+      부적절한 참가자 기록은 무효 처리할 수 있습니다.
+      무효 처리된 참가자는 TOP 10과 상품 추첨에서 제외됩니다.
 
     </div>
 
@@ -745,16 +662,14 @@ label{
       <table>
 
         <thead>
-
           <tr>
-            <th>닉네임</th>
+            <th>부서 / 이름</th>
             <th>최고 정답</th>
             <th>최고 점수</th>
             <th>상태</th>
             <th>가입일</th>
             <th>관리</th>
           </tr>
-
         </thead>
 
         <tbody id="participantsList"></tbody>
@@ -764,115 +679,128 @@ label{
     </div>
 
   </div>
-<!-- ==========================================
-     100점 상품 추첨
-========================================== -->
 
-<div class="card">
 
-  <h2>🎁 100점 상품 추첨</h2>
+  <!-- 상품 추첨 -->
 
-  <div class="note">
-    100점 달성 기록 1건이 추첨권 1장으로 계산됩니다.<br>
-    같은 브라우저에서 여러 닉네임으로 100점을 달성하면
-    추첨 확률은 올라갑니다.<br><br>
+  <div class="card raffle-highlight">
 
-    단, 한 브라우저가 당첨되면 해당 브라우저의
-    다른 100점 기록은 모두 추첨에서 제외됩니다.
-    <br><br>
+    <h2>100점 상품 추첨</h2>
 
-    <b>🎯 최종적으로 서로 다른 3명의 브라우저에게
-    상품을 지급합니다.</b>
+    <div class="note">
+
+      <b>추첨권 1장 = 100점 달성 1회</b>입니다.
+
+      <br><br>
+
+      동일한 부서/이름으로 여러 번 100점을 달성한 경우
+      <b>100점 달성 횟수만큼 추첨 확률이 증가합니다.</b>
+
+      <br><br>
+
+      관리자 화면에서는 동일한 사람을 한 줄로 표시하지만,
+      실제 추첨에서는 각각의 100점 기록이 별도의 추첨권으로 계산됩니다.
+
+      <br><br>
+
+      한 사람이 당첨되면 해당 사람의 다른 추첨권은
+      이후 추첨에서 제외됩니다.
+
+      <br><br>
+
+      <b>최종적으로 서로 다른 3명의 참가자에게 상품을 지급합니다.</b>
+
+    </div>
+
+
+    <div class="grid">
+
+      <div class="stat">
+        전체 추첨권
+        <b id="raffleTickets">-</b>
+      </div>
+
+      <div class="stat">
+        추첨 대상 사용자
+        <b id="raffleCandidates">-</b>
+      </div>
+
+      <div class="stat">
+        당첨자
+        <b id="raffleWinners">0</b>
+      </div>
+
+      <div class="stat">
+        남은 상품
+        <b id="raffleRemaining">3</b>
+      </div>
+
+    </div>
+
+
+    <br>
+
+    <h3>현재 추첨 대상</h3>
+
+    <div class="scroll">
+
+      <table>
+
+        <thead>
+
+          <tr>
+            <th>브라우저 ID</th>
+            <th>부서 / 이름</th>
+            <th>100점 횟수</th>
+            <th>최근 100점</th>
+          </tr>
+
+        </thead>
+
+        <tbody id="raffleList"></tbody>
+
+      </table>
+
+    </div>
+
+
+    <br>
+
+    <button
+      class="primary"
+      type="button"
+      onclick="drawRaffle()">
+      랜덤 추첨하기
+    </button>
+
+    <button
+      class="danger"
+      type="button"
+      onclick="resetRaffle()">
+      추첨 결과 초기화
+    </button>
+
+
+    <h3>당첨자</h3>
+
+    <div id="raffleWinnerList">
+
+      <div class="empty">
+        아직 당첨자가 없습니다.
+      </div>
+
+    </div>
+
   </div>
 
-  <div class="grid">
 
-    <div class="stat">
-      전체 추첨권
-      <b id="raffleTickets">-</b>
-    </div>
-
-    <div class="stat">
-      추첨 대상 사용자
-      <b id="raffleCandidates">-</b>
-    </div>
-
-    <div class="stat">
-      당첨자
-      <b id="raffleWinners">0</b>
-    </div>
-
-    <div class="stat">
-      남은 상품
-      <b id="raffleRemaining">3</b>
-    </div>
-
-  </div>
-
-  <br>
-
-  <h3>🎯 현재 추첨 대상</h3>
-
-  <div class="scroll">
-
-    <table>
-
-      <thead>
-        <tr>
-          <th>브라우저 ID</th>
-          <th>닉네임</th>
-          <th>100점 횟수</th>
-          <th>최근 100점</th>
-        </tr>
-      </thead>
-
-      <tbody id="raffleList"></tbody>
-
-    </table>
-
-  </div>
-
-  <br>
-
-  <button
-    class="primary"
-    onclick="drawRaffle()">
-
-    🎲 랜덤 추첨하기
-
-  </button>
-
-  <button
-    class="danger"
-    onclick="resetRaffle()">
-
-    ⚠️ 추첨 결과 초기화
-
-  </button>
-
-  <br>
-
-  <h3>🏆 당첨자</h3>
-
-  <div
-    id="raffleWinnerList">
-
-    <div class="empty">
-      아직 당첨자가 없습니다.
-    </div>
-
-  </div>
-
-</div>
-
-  <!-- ==========================================
-       문제 Pool 관리
-  ========================================== -->
+  <!-- 문제 Pool -->
 
   <div class="card">
 
     <h2>
-      📚 문제 Pool 관리
+
+      문제 Pool 관리
 
       <span
         id="questionCountLabel"
@@ -883,18 +811,8 @@ label{
 
     <p class="muted">
 
-      현재 등록된 문제 Pool을 직접 수정할 수 있습니다.
-
-      <br>
-
       문제 / 보기 / 정답 / 난이도 / 주제 /
       트렌드 / 활성 여부 / 해설을 관리합니다.
-
-      <br><br>
-
-      <b>
-        💡 비활성 문제는 실제 퀴즈 출제에서 제외됩니다.
-      </b>
 
     </p>
 
@@ -906,10 +824,6 @@ label{
 
 
 <script>
-
-/* ==========================================
-   Supabase
-========================================== */
 
 const SUPABASE_URL =
   "https://fwfdldjgfulbjkqasgur.supabase.co";
@@ -928,9 +842,72 @@ const sb =
   );
 
 
-/* ==========================================
+/* ==============================
+   공통
+============================== */
+
+function escapeHtml(value){
+
+  return String(
+    value == null ? "" : value
+  )
+  .replace(/&/g,"&amp;")
+  .replace(/</g,"&lt;")
+  .replace(/>/g,"&gt;")
+  .replace(/"/g,"&quot;")
+  .replace(/'/g,"&#039;");
+
+}
+
+
+function escapeAttribute(value){
+
+  return escapeHtml(value);
+
+}
+
+
+function localDate(value){
+
+  if(!value){
+    return "-";
+  }
+
+  return new Date(value)
+    .toLocaleString("ko-KR");
+
+}
+
+
+function dt(value){
+
+  if(!value){
+    return "";
+  }
+
+  const d = new Date(value);
+
+  const pad =
+    n => String(n).padStart(2,"0");
+
+  return (
+    d.getFullYear() +
+    "-" +
+    pad(d.getMonth()+1) +
+    "-" +
+    pad(d.getDate()) +
+    "T" +
+    pad(d.getHours()) +
+    ":" +
+    pad(d.getMinutes())
+  );
+
+}
+
+
+/* ==============================
    로그인
-========================================== */
+============================== */
 
 async function login(){
 
@@ -954,7 +931,7 @@ async function login(){
   if(!email){
 
     msg.textContent =
-      "❌ 관리자 이메일을 입력해주세요.";
+      "관리자 이메일을 입력해주세요.";
 
     return;
 
@@ -963,7 +940,7 @@ async function login(){
   if(!password){
 
     msg.textContent =
-      "❌ 비밀번호를 입력해주세요.";
+      "비밀번호를 입력해주세요.";
 
     return;
 
@@ -972,40 +949,29 @@ async function login(){
   button.disabled = true;
 
   msg.textContent =
-    "🔐 로그인 중입니다...";
+    "로그인 중입니다...";
 
   try{
 
     const result =
       await sb.auth.signInWithPassword({
-
-        email:email,
-
-        password:password
-
+        email,
+        password
       });
 
     if(result.error){
-
       throw result.error;
-
     }
-
-    msg.textContent =
-      "✅ 로그인되었습니다.";
 
     await showAdmin();
 
   }
   catch(error){
 
-    console.error(
-      "LOGIN ERROR:",
-      error
-    );
+    console.error(error);
 
     msg.textContent =
-      "❌ 로그인 실패: " +
+      "로그인 실패: " +
       (
         error.message ||
         "이메일 또는 비밀번호를 확인해주세요."
@@ -1021,9 +987,22 @@ async function login(){
 }
 
 
-/* ==========================================
-   관리자 화면 표시
-========================================== */
+async function checkSession(){
+
+  const result =
+    await sb.auth.getSession();
+
+  const session =
+    result?.data?.session;
+
+  if(session){
+
+    await showAdmin();
+
+  }
+
+}
+
 
 async function showAdmin(){
 
@@ -1042,57 +1021,26 @@ async function showAdmin(){
 }
 
 
-/* ==========================================
-   기존 세션 확인
-========================================== */
+async function logout(){
 
-async function checkSession(){
+  await sb.auth.signOut();
 
-  try{
-
-    const result =
-      await sb.auth.getSession();
-
-    const session =
-      result &&
-      result.data &&
-      result.data.session;
-
-    if(session){
-
-      await showAdmin();
-
-    }
-
-  }
-  catch(error){
-
-    console.error(
-      "SESSION ERROR:",
-      error
-    );
-
-  }
+  location.reload();
 
 }
 
 
-/* ==========================================
-   관리자 API
-========================================== */
+/* ==============================
+   API
+============================== */
 
-async function api(
-  action,
-  body
-){
+async function api(action,body={}){
 
   const result =
     await sb.auth.getSession();
 
   const session =
-    result &&
-    result.data &&
-    result.data.session;
+    result?.data?.session;
 
   if(!session){
 
@@ -1109,7 +1057,7 @@ async function api(
         method:"POST",
 
         headers:{
-          "Authorization":
+          Authorization:
             "Bearer " +
             session.access_token,
 
@@ -1118,30 +1066,19 @@ async function api(
         },
 
         body:
-          JSON.stringify(
-            Object.assign(
-              {
-                action:action
-              },
-              body || {}
-            )
-          )
+          JSON.stringify({
+            action,
+            ...body
+          })
       }
     );
 
   let json = {};
 
   try{
-
-    json =
-      await response.json();
-
+    json = await response.json();
   }
-  catch(error){
-
-    json = {};
-
-  }
+  catch(e){}
 
   if(!response.ok){
 
@@ -1157,86 +1094,9 @@ async function api(
 }
 
 
-/* ==========================================
-   날짜
-========================================== */
-
-function dt(value){
-
-  if(!value){
-    return "";
-  }
-
-  const d =
-    new Date(value);
-
-  const pad =
-    function(n){
-
-      return String(n)
-        .padStart(2,"0");
-
-    };
-
-  return (
-    d.getFullYear() +
-    "-" +
-    pad(d.getMonth()+1) +
-    "-" +
-    pad(d.getDate()) +
-    "T" +
-    pad(d.getHours()) +
-    ":" +
-    pad(d.getMinutes())
-  );
-
-}
-
-
-function localDate(value){
-
-  if(!value){
-
-    return "-";
-
-  }
-
-  return new Date(value)
-    .toLocaleString("ko-KR");
-
-}
-
-
-/* ==========================================
-   HTML Escape
-========================================== */
-
-function escapeHtml(value){
-
-  return String(
-    value == null
-    ? ""
-    : value
-  )
-  .replace(/&/g,"&amp;")
-  .replace(/</g,"&lt;")
-  .replace(/>/g,"&gt;")
-  .replace(/"/g,"&quot;")
-  .replace(/'/g,"&#039;");
-
-}
-
-
-function escapeAttribute(value){
-
-  return escapeHtml(value);
-
-}
-
-
-/* ==========================================
+/* ==============================
    Dashboard
-========================================== */
+============================== */
 
 async function loadDashboard(){
 
@@ -1249,123 +1109,79 @@ async function loadDashboard(){
       data.stats || {};
 
 
-    document
-      .getElementById("visits")
+    document.getElementById("visits")
       .textContent =
-      stats.visits == null
-      ? "-"
-      : stats.visits;
+      stats.visits ?? "-";
 
-
-    document
-      .getElementById("participants")
+    document.getElementById("participants")
       .textContent =
-      stats.participants == null
-      ? "-"
-      : stats.participants;
+      stats.participants ?? "-";
 
-
-    document
-      .getElementById("attempts")
+    document.getElementById("attempts")
       .textContent =
-      stats.attempts == null
-      ? "-"
-      : stats.attempts;
+      stats.attempts ?? "-";
 
-
-    document
-      .getElementById("completion")
+    document.getElementById("completion")
       .textContent =
       stats.completion_rate == null
       ? "-"
       : stats.completion_rate + "%";
 
-
-    document
-      .getElementById("avgCorrect")
+    document.getElementById("avgCorrect")
       .textContent =
       stats.avg_correct == null
       ? "-"
       : stats.avg_correct + "/10";
 
-
-    document
-      .getElementById("avgScore")
+    document.getElementById("avgScore")
       .textContent =
       stats.avg_score == null
       ? "-"
       : stats.avg_score + "점";
 
-
-    document
-      .getElementById("avgElapsed")
+    document.getElementById("avgElapsed")
       .textContent =
       stats.avg_elapsed == null
       ? "-"
       : stats.avg_elapsed + "초";
 
-
-    document
-      .getElementById("submitted")
+    document.getElementById("submitted")
       .textContent =
-      stats.submitted == null
-      ? "-"
-      : stats.submitted;
+      stats.submitted ?? "-";
 
 
     if(data.settings){
 
-      document
-        .getElementById("startAt")
+      document.getElementById("startAt")
         .value =
-        dt(
-          data.settings.start_at
-        );
+        dt(data.settings.start_at);
 
-
-      document
-        .getElementById("endAt")
+      document.getElementById("endAt")
         .value =
-        dt(
-          data.settings.end_at
-        );
+        dt(data.settings.end_at);
 
-
-      document
-        .getElementById("qCount")
+      document.getElementById("qCount")
         .value =
         data.settings.question_count;
 
-
-      document
-        .getElementById("easy")
+      document.getElementById("easy")
         .value =
         data.settings.easy_count;
 
-
-      document
-        .getElementById("medium")
+      document.getElementById("medium")
         .value =
         data.settings.medium_count;
 
-
-      document
-        .getElementById("hard")
+      document.getElementById("hard")
         .value =
         data.settings.hard_count;
 
     }
 
 
-    renderDaily(
-      data.daily || []
-    );
+    renderDaily(data.daily || []);
 
-
-    renderLeaders(
-      data.leaders || []
-    );
-
+    renderLeaders(data.leaders || []);
 
     renderParticipants(
       data.participants_list || []
@@ -1373,11 +1189,12 @@ async function loadDashboard(){
 
     renderRaffle(
       data.raffle || {
-      tickets: 0,
-      candidates: [],
-      winners: []
+        tickets:0,
+        candidates:[],
+        winners:[]
       }
     );
+
     renderQuestions(
       data.questions || []
     );
@@ -1386,12 +1203,12 @@ async function loadDashboard(){
   catch(error){
 
     console.error(
-      "DASHBOARD ERROR:",
+      "DASHBOARD ERROR",
       error
     );
 
     alert(
-      "Dashboard를 불러오지 못했습니다.\n\n" +
+      "관리자 데이터를 불러오지 못했습니다.\n\n" +
       error.message
     );
 
@@ -1400,9 +1217,9 @@ async function loadDashboard(){
 }
 
 
-/* ==========================================
-   일별 통계
-========================================== */
+/* ==============================
+   일별
+============================== */
 
 function renderDaily(list){
 
@@ -1412,137 +1229,110 @@ function renderDaily(list){
   if(!list.length){
 
     box.innerHTML =
-      "<tr>" +
-      "<td colspan='4'>" +
+      "<tr><td colspan='4'>" +
       "아직 데이터가 없습니다." +
-      "</td>" +
-      "</tr>";
+      "</td></tr>";
 
     return;
 
   }
 
   box.innerHTML =
-    list
-      .map(
-        function(item){
+    list.map(item => {
 
-          const rate =
-            item.attempts
-            ? Math.round(
-                item.completed /
-                item.attempts *
-                1000
-              ) / 10
-            : 0;
+      const rate =
+        item.attempts
+        ? Math.round(
+            item.completed /
+            item.attempts *
+            1000
+          ) / 10
+        : 0;
 
-          return (
-            "<tr>" +
+      return `
+        <tr>
+          <td>${escapeHtml(item.date)}</td>
+          <td>${item.attempts}</td>
+          <td>${item.completed}</td>
+          <td>${rate}%</td>
+        </tr>
+      `;
 
-            "<td>" +
-            escapeHtml(item.date) +
-            "</td>" +
-
-            "<td>" +
-            item.attempts +
-            "</td>" +
-
-            "<td>" +
-            item.completed +
-            "</td>" +
-
-            "<td>" +
-            rate +
-            "%" +
-            "</td>" +
-
-            "</tr>"
-          );
-
-        }
-      )
-      .join("");
+    }).join("");
 
 }
 
 
-/* ==========================================
+/* ==============================
    TOP 10
-========================================== */
+============================== */
 
 function renderLeaders(list){
 
   const box =
     document.getElementById("leaders");
 
-  const medals =
-    ["🥇","🥈","🥉"];
-
   if(!list.length){
 
     box.innerHTML =
-      "<tr>" +
-      "<td colspan='6'>" +
+      "<tr><td colspan='6'>" +
       "아직 기록이 없습니다." +
-      "</td>" +
-      "</tr>";
+      "</td></tr>";
 
     return;
 
   }
 
+  const medals =
+    ["🥇","🥈","🥉"];
+
   box.innerHTML =
-    list
-      .map(
-        function(item,index){
+    list.map((item,index) => {
 
-          const rank =
-            medals[index] ||
-            (index + 1) + "위";
+      const rank =
+        medals[index] ||
+        (index + 1) + "위";
 
-          return (
-            "<tr>" +
+      return `
+        <tr>
 
-            "<td>" +
-            rank +
-            "</td>" +
+          <td>${rank}</td>
 
-            "<td>" +
-            escapeHtml(item.nickname) +
-            "</td>" +
+          <td>
+            <b>
+              ${escapeHtml(
+                item.nickname || ""
+              )}
+            </b>
+          </td>
 
-            "<td>" +
-            item.best_correct +
-            "/10" +
-            "</td>" +
+          <td>
+            ${item.best_correct}/10
+          </td>
 
-            "<td>" +
-            item.best_seconds +
-            "초" +
-            "</td>" +
+          <td>
+            ${item.best_seconds}초
+          </td>
 
-            "<td>" +
-            item.best_score +
-            "점" +
-            "</td>" +
+          <td>
+            <b>${item.best_score}점</b>
+          </td>
 
-            "<td>" +
-            localDate(item.updated_at) +
-            "</td>" +
+          <td>
+            ${localDate(item.updated_at)}
+          </td>
 
-            "</tr>"
-          );
+        </tr>
+      `;
 
-        }
-      )
-      .join("");
+    }).join("");
 
 }
 
 
-/* ==========================================
-   참가자 관리
-========================================== */
+/* ==============================
+   참가자
+============================== */
 
 function renderParticipants(list){
 
@@ -1554,116 +1344,106 @@ function renderParticipants(list){
   if(!list.length){
 
     box.innerHTML =
-      "<tr>" +
-      "<td colspan='6'>" +
+      "<tr><td colspan='6'>" +
       "아직 참가자가 없습니다." +
-      "</td>" +
-      "</tr>";
+      "</td></tr>";
 
     return;
 
   }
 
   box.innerHTML =
-    list
-      .map(
-        function(person){
+    list.map(person => {
 
-          const valid =
-            person.is_valid !== false;
+      const valid =
+        person.is_valid !== false;
 
-          const status =
-            valid
-            ?
-            "<span class='badge badge-valid'>정상</span>"
-            :
-            "<span class='badge badge-invalid'>🚫 무효</span>";
+      const status =
+        valid
+        ?
+        "<span class='badge badge-valid'>" +
+        "정상" +
+        "</span>"
+        :
+        "<span class='badge badge-invalid'>" +
+        "무효" +
+        "</span>";
 
-          const action =
-            valid
-            ?
-            "<button " +
-            "class='danger small-button' " +
-            "type='button' " +
-            "onclick=\"invalidateParticipant('" +
-            person.id +
-            "')\">" +
-            "🗑️ 무효 처리" +
-            "</button>"
-            :
-            "<button " +
-            "class='restore small-button' " +
-            "type='button' " +
-            "onclick=\"restoreParticipant('" +
-            person.id +
-            "')\">" +
-            "↩️ 복구" +
-            "</button>";
+      const action =
+        valid
+        ?
+        `
+        <button
+          class="danger small-button"
+          type="button"
+          onclick="invalidateParticipant('${person.id}')">
+          무효 처리
+        </button>
+        `
+        :
+        `
+        <button
+          class="restore small-button"
+          type="button"
+          onclick="restoreParticipant('${person.id}')">
+          복구
+        </button>
+        `;
 
-          return (
-            "<tr class='" +
-            (
-              valid
-              ? ""
-              : "participant-invalid"
-            ) +
-            "'>" +
+      return `
+        <tr
+          class="${
+            valid ? "" : "participant-invalid"
+          }">
 
-            "<td><b>" +
-            escapeHtml(person.nickname) +
-            "</b></td>" +
+          <td>
+            <b>
+              ${escapeHtml(
+                person.nickname || ""
+              )}
+            </b>
+          </td>
 
-            "<td>" +
-            (
+          <td>
+            ${
               person.best_correct >= 0
               ? person.best_correct + "/10"
               : "-"
-            ) +
-            "</td>" +
+            }
+          </td>
 
-            "<td>" +
-            (
+          <td>
+            ${
               person.best_score >= 0
               ? person.best_score + "점"
               : "-"
-            ) +
-            "</td>" +
+            }
+          </td>
 
-            "<td>" +
-            status +
-            "</td>" +
+          <td>${status}</td>
 
-            "<td>" +
-            localDate(person.created_at) +
-            "</td>" +
+          <td>
+            ${localDate(person.created_at)}
+          </td>
 
-            "<td class='action-cell'>" +
-            action +
-            "</td>" +
+          <td>
+            ${action}
+          </td>
 
-            "</tr>"
-          );
+        </tr>
+      `;
 
-        }
-      )
-      .join("");
+    }).join("");
 
 }
 
 
-/* ==========================================
-   참가자 무효
-========================================== */
-
 async function invalidateParticipant(id){
 
-  const ok =
-    confirm(
-      "이 참가자를 무효 처리할까요?\n\n" +
-      "TOP 10과 최종 순위에서 제외됩니다."
-    );
-
-  if(!ok){
+  if(!confirm(
+    "이 참가자를 무효 처리할까요?\n\n" +
+    "TOP 10과 상품 추첨에서 제외됩니다."
+  )){
     return;
   }
 
@@ -1671,13 +1451,11 @@ async function invalidateParticipant(id){
 
     await api(
       "participant_invalidate",
-      {
-        id:id
-      }
+      {id}
     );
 
     alert(
-      "🚫 참가자를 무효 처리했습니다."
+      "참가자를 무효 처리했습니다."
     );
 
     await loadDashboard();
@@ -1686,7 +1464,7 @@ async function invalidateParticipant(id){
   catch(error){
 
     alert(
-      "무효 처리에 실패했습니다.\n\n" +
+      "무효 처리 실패\n\n" +
       error.message
     );
 
@@ -1695,18 +1473,11 @@ async function invalidateParticipant(id){
 }
 
 
-/* ==========================================
-   참가자 복구
-========================================== */
-
 async function restoreParticipant(id){
 
-  const ok =
-    confirm(
-      "이 참가자를 다시 정상 상태로 복구할까요?"
-    );
-
-  if(!ok){
+  if(!confirm(
+    "이 참가자를 다시 정상 상태로 복구할까요?"
+  )){
     return;
   }
 
@@ -1714,13 +1485,11 @@ async function restoreParticipant(id){
 
     await api(
       "participant_restore",
-      {
-        id:id
-      }
+      {id}
     );
 
     alert(
-      "↩️ 참가자를 복구했습니다."
+      "참가자를 복구했습니다."
     );
 
     await loadDashboard();
@@ -1729,7 +1498,7 @@ async function restoreParticipant(id){
   catch(error){
 
     alert(
-      "복구에 실패했습니다.\n\n" +
+      "복구 실패\n\n" +
       error.message
     );
 
@@ -1738,67 +1507,47 @@ async function restoreParticipant(id){
 }
 
 
-/* ==========================================
-   퀴즈 설정 저장
-========================================== */
+/* ==============================
+   설정
+============================== */
 
 async function saveSettings(){
 
   const q =
     Number(
-      document
-        .getElementById("qCount")
-        .value
+      document.getElementById("qCount").value
     );
 
   const easy =
     Number(
-      document
-        .getElementById("easy")
-        .value
+      document.getElementById("easy").value
     );
 
   const medium =
     Number(
-      document
-        .getElementById("medium")
-        .value
+      document.getElementById("medium").value
     );
 
   const hard =
     Number(
-      document
-        .getElementById("hard")
-        .value
+      document.getElementById("hard").value
     );
 
-
-  if(
-    q !==
-    easy +
-    medium +
-    hard
-  ){
+  if(q !== easy + medium + hard){
 
     alert(
-      "전체 문제 수와 난이도별 문제 수의 합계를 맞춰주세요."
+      "전체 문제 수와 난이도별 문제 수를 맞춰주세요."
     );
 
     return;
 
   }
 
-
   const startValue =
-    document
-      .getElementById("startAt")
-      .value;
+    document.getElementById("startAt").value;
 
   const endValue =
-    document
-      .getElementById("endAt")
-      .value;
-
+    document.getElementById("endAt").value;
 
   if(!startValue || !endValue){
 
@@ -1809,7 +1558,6 @@ async function saveSettings(){
     return;
 
   }
-
 
   if(
     new Date(startValue) >=
@@ -1824,37 +1572,27 @@ async function saveSettings(){
 
   }
 
-
   try{
 
     await api(
       "settings",
       {
         start_at:
-          new Date(
-            startValue
-          ).toISOString(),
+          new Date(startValue).toISOString(),
 
         end_at:
-          new Date(
-            endValue
-          ).toISOString(),
+          new Date(endValue).toISOString(),
 
         question_count:q,
-
         easy_count:easy,
-
         medium_count:medium,
-
         hard_count:hard
       }
     );
 
-
     alert(
-      "🐣 퀴즈 설정을 저장했습니다!"
+      "퀴즈 설정을 저장했습니다."
     );
-
 
     await loadDashboard();
 
@@ -1871,610 +1609,9 @@ async function saveSettings(){
 }
 
 
-/* ==========================================
-   문제 Pool
-========================================== */
-
-function renderQuestions(list){
-
-  const box =
-    document.getElementById(
-      "questions"
-    );
-
-  const countLabel =
-    document.getElementById(
-      "questionCountLabel"
-    );
-
-
-  countLabel.textContent =
-    list.length +
-    "개 등록됨";
-
-
-  if(!list.length){
-
-    box.innerHTML =
-      "<div class='empty'>" +
-      "등록된 문제가 없습니다." +
-      "</div>";
-
-    return;
-
-  }
-
-
-  box.innerHTML =
-    list
-      .map(
-        function(question,index){
-
-          const options =
-            Array.isArray(
-              question.options
-            )
-            ? question.options
-            : [];
-
-
-          let correct =
-            Number(
-              question.correct_index
-            );
-
-
-          if(
-            correct < 0 ||
-            correct > 3 ||
-            !Number.isFinite(correct)
-          ){
-
-            correct = 0;
-
-          }
-
-
-          const labels =
-            ["①","②","③","④"];
-
-
-          let optionHtml = "";
-
-
-          for(
-            let i = 0;
-            i < 4;
-            i++
-          ){
-
-            optionHtml +=
-
-              "<div class='option-row'>" +
-
-              "<div class='option-label'>" +
-              labels[i] +
-              "</div>" +
-
-              "<input " +
-              "id='o_" +
-              question.id +
-              "_" +
-              i +
-              "' " +
-              "value='" +
-              escapeAttribute(
-                options[i] || ""
-              ) +
-              "' " +
-              "placeholder='보기 " +
-              (i + 1) +
-              "'>" +
-
-              "</div>";
-
-          }
-
-
-          let answerHtml = "";
-
-
-          for(
-            let i = 0;
-            i < 4;
-            i++
-          ){
-
-            answerHtml +=
-
-              "<label>" +
-
-              "<input " +
-              "type='radio' " +
-              "name='answer_" +
-              question.id +
-              "' " +
-              "value='" +
-              i +
-              "'" +
-
-              (
-                correct === i
-                ? " checked"
-                : ""
-              ) +
-
-              ">" +
-
-              "<span>" +
-              labels[i] +
-              "</span>" +
-
-              "</label>";
-
-          }
-
-
-          const trendBadge =
-            question.is_trending
-            ?
-            "<span class='badge badge-trending'>" +
-            "🔥 트렌드" +
-            "</span>"
-            :
-            "";
-
-
-          const activeBadge =
-            question.active
-            ?
-            "<span class='badge badge-active'>" +
-            "활성" +
-            "</span>"
-            :
-            "<span class='badge badge-inactive'>" +
-            "비활성" +
-            "</span>";
-
-
-          return (
-
-            "<details class='card question-card'>" +
-
-            "<summary>" +
-
-            "<div class='question-header'>" +
-
-            "<div class='question-number'>" +
-            "#" +
-            (index + 1) +
-            "</div>" +
-
-            "<div class='question-title'>" +
-
-            "<b>" +
-            escapeHtml(
-              question.question
-            ) +
-            "</b>" +
-
-            "<br>" +
-
-            "<span class='badge'>" +
-            escapeHtml(
-              question.difficulty || ""
-            ) +
-            "</span>" +
-
-            trendBadge +
-
-            activeBadge +
-
-            "<span class='badge badge-answer'>" +
-            "정답 " +
-            labels[correct] +
-            "</span>" +
-
-            "</div>" +
-
-            "</div>" +
-
-            "</summary>" +
-
-
-            "<div class='question-editor'>" +
-
-
-            "<label>문제</label>" +
-
-            "<textarea " +
-            "id='q_" +
-            question.id +
-            "' " +
-            "rows='3'>" +
-            escapeHtml(
-              question.question || ""
-            ) +
-            "</textarea>" +
-
-
-            "<label>보기</label>" +
-
-            optionHtml +
-
-
-            "<label>정답</label>" +
-
-            "<div class='answer-selector'>" +
-
-            answerHtml +
-
-            "</div>" +
-
-
-            "<div class='editor-grid'>" +
-
-
-            "<div>" +
-
-            "<label>난이도</label>" +
-
-            "<select id='d_" +
-            question.id +
-            "'>" +
-
-            "<option value='쉬움'" +
-            (
-              question.difficulty === "쉬움"
-              ? " selected"
-              : ""
-            ) +
-            ">쉬움</option>" +
-
-            "<option value='보통'" +
-            (
-              question.difficulty === "보통"
-              ? " selected"
-              : ""
-            ) +
-            ">보통</option>" +
-
-            "<option value='어려움'" +
-            (
-              question.difficulty === "어려움"
-              ? " selected"
-              : ""
-            ) +
-            ">어려움</option>" +
-
-            "</select>" +
-
-            "</div>" +
-
-
-            "<div>" +
-
-            "<label>주제</label>" +
-
-            "<input " +
-            "id='t_" +
-            question.id +
-            "' " +
-            "value='" +
-            escapeAttribute(
-              question.topic || ""
-            ) +
-            "'>" +
-
-            "</div>" +
-
-
-            "<div>" +
-
-            "<label>활성 여부</label>" +
-
-            "<select id='a_" +
-            question.id +
-            "'>" +
-
-            "<option value='true'" +
-            (
-              question.active
-              ? " selected"
-              : ""
-            ) +
-            ">활성</option>" +
-
-            "<option value='false'" +
-            (
-              !question.active
-              ? " selected"
-              : ""
-            ) +
-            ">비활성</option>" +
-
-            "</select>" +
-
-            "</div>" +
-
-
-            "<div>" +
-
-            "<label>트렌드 여부</label>" +
-
-            "<select id='tr_" +
-            question.id +
-            "'>" +
-
-            "<option value='false'" +
-            (
-              !question.is_trending
-              ? " selected"
-              : ""
-            ) +
-            ">일반 문제</option>" +
-
-            "<option value='true'" +
-            (
-              question.is_trending
-              ? " selected"
-              : ""
-            ) +
-            ">🔥 트렌드 문제</option>" +
-
-            "</select>" +
-
-            "</div>" +
-
-
-            "</div>" +
-
-
-            "<label>해설 / 출처 메모</label>" +
-
-            "<textarea " +
-            "id='s_" +
-            question.id +
-            "' " +
-            "rows='4' " +
-            "placeholder='정답 해설 또는 출처를 입력하세요.'>" +
-
-            escapeHtml(
-              question.source_note || ""
-            ) +
-
-            "</textarea>" +
-
-
-            "<button " +
-            "class='save-question' " +
-            "type='button' " +
-            "onclick=\"saveQuestion('" +
-            question.id +
-            "')\">" +
-
-            "💾 문제 / 보기 / 정답 저장" +
-
-            "</button>" +
-
-
-            "</div>" +
-
-            "</details>"
-
-          );
-
-        }
-      )
-      .join("");
-
-}
-
-
-/* ==========================================
-   문제 저장
-========================================== */
-
-async function saveQuestion(id){
-
-  try{
-
-    const dashboard =
-      await api("dashboard");
-
-
-    const current =
-      (dashboard.questions || [])
-        .find(
-          function(item){
-
-            return item.id === id;
-
-          }
-        );
-
-
-    if(!current){
-
-      throw new Error(
-        "문제를 찾을 수 없습니다."
-      );
-
-    }
-
-
-    const options = [];
-
-
-    for(
-      let i = 0;
-      i < 4;
-      i++
-    ){
-
-      const input =
-        document.getElementById(
-          "o_" +
-          id +
-          "_" +
-          i
-        );
-
-
-      options.push(
-        input
-        ? input.value.trim()
-        : ""
-      );
-
-    }
-
-
-    if(
-      options.some(
-        function(value){
-
-          return !value;
-
-        }
-      )
-    ){
-
-      alert(
-        "보기 4개를 모두 입력해주세요."
-      );
-
-      return;
-
-    }
-
-
-    const answer =
-      document.querySelector(
-        "input[name='answer_" +
-        id +
-        "']:checked"
-      );
-
-
-    if(!answer){
-
-      alert(
-        "정답을 하나 선택해주세요."
-      );
-
-      return;
-
-    }
-
-
-    const question =
-      document
-        .getElementById(
-          "q_" +
-          id
-        )
-        .value
-        .trim();
-
-
-    if(!question){
-
-      alert(
-        "문제 내용을 입력해주세요."
-      );
-
-      return;
-
-    }
-
-
-    await api(
-      "question_update",
-      {
-        id:id,
-
-        question:question,
-
-        options:options,
-
-        correct_index:
-          Number(
-            answer.value
-          ),
-
-        difficulty:
-          document
-            .getElementById(
-              "d_" +
-              id
-            )
-            .value,
-
-        topic:
-          document
-            .getElementById(
-              "t_" +
-              id
-            )
-            .value
-            .trim(),
-
-        active:
-          document
-            .getElementById(
-              "a_" +
-              id
-            )
-            .value === "true",
-
-        is_trending:
-          document
-            .getElementById(
-              "tr_" +
-              id
-            )
-            .value === "true",
-
-        source_note:
-          document
-            .getElementById(
-              "s_" +
-              id
-            )
-            .value
-            .trim()
-      }
-    );
-
-
-    alert(
-      "🐣 문제 / 보기 / 정답을 저장했습니다!"
-    );
-
-
-    await loadDashboard();
-
-  }
-  catch(error){
-
-    console.error(
-      "QUESTION SAVE ERROR:",
-      error
-    );
-
-    alert(
-      "문제를 저장하지 못했습니다.\n\n" +
-      error.message
-    );
-
-  }
-
-}
-
-/* ==========================================
-   100점 상품 추첨
-========================================== */
+/* =========================================================
+   ⭐ 100점 상품 추첨
+========================================================= */
 
 function renderRaffle(data){
 
@@ -2482,11 +1619,19 @@ function renderRaffle(data){
     Number(data.tickets || 0);
 
   const candidates =
-    data.candidates || [];
+    Array.isArray(data.candidates)
+    ? data.candidates
+    : [];
 
   const winners =
-    data.winners || [];
+    Array.isArray(data.winners)
+    ? data.winners
+    : [];
 
+
+  /*
+   * 상단 통계
+   */
 
   document
     .getElementById("raffleTickets")
@@ -2515,6 +1660,10 @@ function renderRaffle(data){
     );
 
 
+  /*
+   * 후보 목록
+   */
+
   const list =
     document.getElementById(
       "raffleList"
@@ -2524,83 +1673,77 @@ function renderRaffle(data){
   if(!candidates.length){
 
     list.innerHTML =
-      "<tr>" +
-      "<td colspan='4'>" +
-      "현재 추첨 가능한 100점 달성자가 없습니다." +
-      "</td>" +
-      "</tr>";
+      `
+      <tr>
+        <td colspan="4" class="empty">
+          현재 추첨 가능한 100점 달성자가 없습니다.
+        </td>
+      </tr>
+      `;
 
   }
   else{
 
     list.innerHTML =
       candidates
-        .map(
-          function(candidate){
+        .sort(
+          (a,b) =>
+            Number(b.perfect_count || 0) -
+            Number(a.perfect_count || 0)
+        )
+        .map(candidate => {
 
-            const nicknames =
-              Array.isArray(
-                candidate.nicknames
-              )
-              ? candidate.nicknames
-              : [];
+          const displayName =
+            candidate.display_name ||
+            candidate.nickname ||
+            "정보 없음";
 
-
-            return (
-
-              "<tr>" +
-
-              "<td>" +
-              "<code>" +
-              escapeHtml(
-                candidate.browser_id
-              ) +
-              "</code>" +
-              "</td>" +
-
-              "<td>" +
-
-              nicknames
-                .map(
-                  function(nickname){
-
-                    return (
-                      "<span class='badge'>" +
-                      escapeHtml(
-                        nickname
-                      ) +
-                      "</span>"
-                    );
-
-                  }
-                )
-                .join("") +
-
-              "</td>" +
-
-              "<td>" +
-              "<b>" +
-              candidate.perfect_count +
-              "회" +
-              "</b>" +
-              "</td>" +
-
-              "<td>" +
-              localDate(
-                candidate.last_at
-              ) +
-              "</td>" +
-
-              "</tr>"
-
+          const count =
+            Number(
+              candidate.perfect_count || 0
             );
 
-          }
-        )
+          return `
+            <tr>
+
+              <td>
+                <code>
+                  ${escapeHtml(
+                    candidate.browser_id || ""
+                  )}
+                </code>
+              </td>
+
+              <td>
+                <b>
+                  ${escapeHtml(displayName)}
+                </b>
+              </td>
+
+              <td>
+                <span class="badge badge-ticket">
+                  ${count}회
+                </span>
+              </td>
+
+              <td>
+                ${localDate(
+                  candidate.last_at
+                )}
+              </td>
+
+            </tr>
+          `;
+
+        })
         .join("");
 
   }
 
+
+  /*
+   * 당첨자
+   */
 
   const winnerBox =
     document.getElementById(
@@ -2611,9 +1754,11 @@ function renderRaffle(data){
   if(!winners.length){
 
     winnerBox.innerHTML =
-      "<div class='empty'>" +
-      "아직 당첨자가 없습니다." +
-      "</div>";
+      `
+      <div class="empty">
+        아직 당첨자가 없습니다.
+      </div>
+      `;
 
     return;
 
@@ -2622,90 +1767,71 @@ function renderRaffle(data){
 
   winnerBox.innerHTML =
     winners
-      .map(
-        function(winner,index){
+      .map((winner,index) => {
 
-          const medal =
-            ["🥇","🥈","🥉"][index]
-            ||
-            (index + 1) + "번";
+        const medal =
+          ["🥇","🥈","🥉"][index] ||
+          (index + 1) + "번";
 
+        return `
+          <div
+            class="card winner-card">
 
-          return (
+            <h3>
+              ${medal}
+              ${escapeHtml(
+                winner.nickname || ""
+              )}
+            </h3>
 
-            "<div " +
-            "class='card' " +
-            "style='margin-bottom:10px;background:#fff8dc;'>" +
+            <p>
+              브라우저 ID:
+              <code>
+                ${escapeHtml(
+                  winner.browser_id || ""
+                )}
+              </code>
+            </p>
 
-            "<h3>" +
-            medal +
-            " " +
-            escapeHtml(
-              winner.nickname || ""
-            ) +
-            "</h3>" +
+            <p>
+              추첨일:
+              ${localDate(
+                winner.drawn_at
+              )}
+            </p>
 
-            "<p>" +
-            "브라우저 ID: " +
-            "<code>" +
-            escapeHtml(
-              winner.browser_id
-            ) +
-            "</code>" +
-            "</p>" +
+          </div>
+        `;
 
-            "<p>" +
-            "추첨일: " +
-            localDate(
-              winner.drawn_at
-            ) +
-            "</p>" +
-
-            "</div>"
-
-          );
-
-        }
-      )
+      })
       .join("");
 
 }
 
 
-/* ==========================================
-   랜덤 추첨
-========================================== */
+/* ==============================
+   실제 랜덤 추첨
+============================== */
 
 async function drawRaffle(){
 
   const ok =
     confirm(
+      "상품 추첨을 시작할까요?\n\n" +
 
-      "🎲 상품 추첨을 시작할까요?\n\n" +
+      "100점 달성 1회당 추첨권 1장으로 계산됩니다.\n" +
 
-      "100점 달성 기록을 기준으로\n" +
+      "여러 번 100점을 받은 사람은 그만큼\n" +
+      "추첨 확률이 높아집니다.\n\n" +
 
-      "최대 3명의 서로 다른 브라우저를\n" +
-
-      "랜덤으로 추첨합니다.\n\n" +
-
-      "한 브라우저가 당첨되면\n" +
-
-      "그 브라우저의 다른 닉네임은\n" +
-
-      "추첨 대상에서 제외됩니다.\n\n" +
+      "당첨자는 서로 다른 참가자로 선정됩니다.\n\n" +
 
       "추첨 후 결과는 저장됩니다."
-
     );
 
-
   if(!ok){
-
     return;
-
   }
-
 
   try{
 
@@ -2717,29 +1843,20 @@ async function drawRaffle(){
         }
       );
 
-
-    const winnerCount =
+    const count =
       result.winners
       ? result.winners.length
       : 0;
 
-
     alert(
-
-      winnerCount > 0
-
+      count
       ?
-
       "🎉 " +
-      winnerCount +
+      count +
       "명의 당첨자를 추첨했습니다!"
-
       :
-
       "추첨 가능한 대상이 없습니다."
-
     );
-
 
     await loadDashboard();
 
@@ -2747,16 +1864,13 @@ async function drawRaffle(){
   catch(error){
 
     console.error(
-      "RAFFLE ERROR:",
+      "RAFFLE ERROR",
       error
     );
 
     alert(
-
       "추첨에 실패했습니다.\n\n" +
-
       error.message
-
     );
 
   }
@@ -2764,32 +1878,21 @@ async function drawRaffle(){
 }
 
 
-/* ==========================================
-   추첨 결과 초기화
-========================================== */
+/* ==============================
+   추첨 초기화
+============================== */
 
 async function resetRaffle(){
 
   const ok =
     confirm(
-
-      "⚠️ 정말 추첨 결과를 초기화할까요?\n\n" +
-
-      "현재 저장된 상품 당첨자 기록이\n" +
-
-      "모두 삭제됩니다.\n\n" +
-
-      "실제 상품 지급 전에만 사용하세요."
-
+      "정말 추첨 결과를 초기화할까요?\n\n" +
+      "현재 저장된 당첨자 기록이 삭제됩니다."
     );
 
-
   if(!ok){
-
     return;
-
   }
-
 
   try{
 
@@ -2798,49 +1901,557 @@ async function resetRaffle(){
       {}
     );
 
-
     alert(
       "추첨 결과를 초기화했습니다."
     );
-
 
     await loadDashboard();
 
   }
   catch(error){
 
-    console.error(
-      "RAFFLE RESET ERROR:",
-      error
-    );
-
     alert(
-
-      "추첨 결과 초기화에 실패했습니다.\n\n" +
-
+      "추첨 결과 초기화 실패\n\n" +
       error.message
-
     );
 
   }
 
 }
-/* ==========================================
-   로그아웃
-========================================== */
 
-async function logout(){
 
-  await sb.auth.signOut();
+/* =========================================================
+   문제 Pool
+========================================================= */
 
-  window.location.reload();
+function renderQuestions(list){
+
+  const box =
+    document.getElementById(
+      "questions"
+    );
+
+  const countLabel =
+    document.getElementById(
+      "questionCountLabel"
+    );
+
+  countLabel.textContent =
+    list.length +
+    "개 등록됨";
+
+
+  if(!list.length){
+
+    box.innerHTML =
+      `
+      <div class="empty">
+        등록된 문제가 없습니다.
+      </div>
+      `;
+
+    return;
+
+  }
+
+
+  const labels =
+    ["①","②","③","④"];
+
+
+  box.innerHTML =
+    list.map((question,index) => {
+
+      const options =
+        Array.isArray(question.options)
+        ? question.options
+        : [];
+
+
+      let correct =
+        Number(
+          question.correct_index
+        );
+
+      if(
+        !Number.isFinite(correct) ||
+        correct < 0 ||
+        correct > 3
+      ){
+        correct = 0;
+      }
+
+
+      let optionHtml = "";
+
+      for(let i=0;i<4;i++){
+
+        optionHtml += `
+          <div class="option-row">
+
+            <div class="option-label">
+              ${labels[i]}
+            </div>
+
+            <input
+              id="o_${question.id}_${i}"
+              value="${escapeAttribute(
+                options[i] || ""
+              )}"
+              placeholder="보기 ${i+1}">
+
+          </div>
+        `;
+
+      }
+
+
+      let answerHtml = "";
+
+      for(let i=0;i<4;i++){
+
+        answerHtml += `
+          <label>
+
+            <input
+              type="radio"
+              name="answer_${question.id}"
+              value="${i}"
+              ${correct === i ? "checked" : ""}>
+
+            <span>
+              ${labels[i]}
+            </span>
+
+          </label>
+        `;
+
+      }
+
+
+      return `
+        <details
+          class="card question-card">
+
+          <summary>
+
+            <div class="question-header">
+
+              <div class="question-number">
+                #${index + 1}
+              </div>
+
+              <div class="question-title">
+
+                <b>
+                  ${escapeHtml(
+                    question.question || ""
+                  )}
+                </b>
+
+                <br>
+
+                <span class="badge">
+                  ${escapeHtml(
+                    question.difficulty || ""
+                  )}
+                </span>
+
+                ${
+                  question.is_trending
+                  ?
+                  `
+                  <span
+                    class="badge badge-trending">
+                    트렌드
+                  </span>
+                  `
+                  :
+                  ""
+                }
+
+                ${
+                  question.active
+                  ?
+                  `
+                  <span
+                    class="badge badge-active">
+                    활성
+                  </span>
+                  `
+                  :
+                  `
+                  <span
+                    class="badge badge-inactive">
+                    비활성
+                  </span>
+                  `
+                }
+
+                <span
+                  class="badge badge-answer">
+                  정답 ${labels[correct]}
+                </span>
+
+              </div>
+
+            </div>
+
+          </summary>
+
+
+          <div class="question-editor">
+
+            <label>문제</label>
+
+            <textarea
+              id="q_${question.id}"
+              rows="3">${escapeHtml(
+                question.question || ""
+              )}</textarea>
+
+
+            <label>보기</label>
+
+            ${optionHtml}
+
+
+            <label>정답</label>
+
+            <div class="answer-selector">
+
+              ${answerHtml}
+
+            </div>
+
+
+            <div class="editor-grid">
+
+              <div>
+
+                <label>난이도</label>
+
+                <select
+                  id="d_${question.id}">
+
+                  <option
+                    value="쉬움"
+                    ${
+                      question.difficulty === "쉬움"
+                      ? "selected"
+                      : ""
+                    }>
+                    쉬움
+                  </option>
+
+                  <option
+                    value="보통"
+                    ${
+                      question.difficulty === "보통"
+                      ? "selected"
+                      : ""
+                    }>
+                    보통
+                  </option>
+
+                  <option
+                    value="어려움"
+                    ${
+                      question.difficulty === "어려움"
+                      ? "selected"
+                      : ""
+                    }>
+                    어려움
+                  </option>
+
+                </select>
+
+              </div>
+
+
+              <div>
+
+                <label>주제</label>
+
+                <input
+                  id="t_${question.id}"
+                  value="${escapeAttribute(
+                    question.topic || ""
+                  )}">
+
+              </div>
+
+
+              <div>
+
+                <label>활성 여부</label>
+
+                <select
+                  id="a_${question.id}">
+
+                  <option
+                    value="true"
+                    ${
+                      question.active
+                      ? "selected"
+                      : ""
+                    }>
+                    활성
+                  </option>
+
+                  <option
+                    value="false"
+                    ${
+                      !question.active
+                      ? "selected"
+                      : ""
+                    }>
+                    비활성
+                  </option>
+
+                </select>
+
+              </div>
+
+
+              <div>
+
+                <label>트렌드 여부</label>
+
+                <select
+                  id="tr_${question.id}">
+
+                  <option
+                    value="false"
+                    ${
+                      !question.is_trending
+                      ? "selected"
+                      : ""
+                    }>
+                    일반 문제
+                  </option>
+
+                  <option
+                    value="true"
+                    ${
+                      question.is_trending
+                      ? "selected"
+                      : ""
+                    }>
+                    트렌드 문제
+                  </option>
+
+                </select>
+
+              </div>
+
+            </div>
+
+
+            <label>
+              해설 / 출처 메모
+            </label>
+
+            <textarea
+              id="s_${question.id}"
+              rows="4"
+              placeholder="정답 해설 또는 출처를 입력하세요.">${escapeHtml(
+                question.source_note || ""
+              )}</textarea>
+
+
+            <button
+              class="save-question"
+              type="button"
+              onclick="saveQuestion('${question.id}')">
+
+              문제 / 보기 / 정답 저장
+
+            </button>
+
+          </div>
+
+        </details>
+      `;
+
+    }).join("");
 
 }
 
 
-/* ==========================================
-   버튼 이벤트
-========================================== */
+/* ==============================
+   문제 저장
+============================== */
+
+async function saveQuestion(id){
+
+  try{
+
+    const dashboard =
+      await api("dashboard");
+
+    const current =
+      (dashboard.questions || [])
+        .find(
+          item => item.id === id
+        );
+
+    if(!current){
+
+      throw new Error(
+        "문제를 찾을 수 없습니다."
+      );
+
+    }
+
+
+    const options = [];
+
+    for(let i=0;i<4;i++){
+
+      const input =
+        document.getElementById(
+          `o_${id}_${i}`
+        );
+
+      options.push(
+        input
+        ? input.value.trim()
+        : ""
+      );
+
+    }
+
+
+    if(
+      options.some(
+        value => !value
+      )
+    ){
+
+      alert(
+        "보기 4개를 모두 입력해주세요."
+      );
+
+      return;
+
+    }
+
+
+    const answer =
+      document.querySelector(
+        `input[name="answer_${id}"]:checked`
+      );
+
+    if(!answer){
+
+      alert(
+        "정답을 선택해주세요."
+      );
+
+      return;
+
+    }
+
+
+    const question =
+      document
+        .getElementById(
+          `q_${id}`
+        )
+        .value
+        .trim();
+
+
+    if(!question){
+
+      alert(
+        "문제 내용을 입력해주세요."
+      );
+
+      return;
+
+    }
+
+
+    await api(
+      "question_update",
+      {
+
+        id,
+
+        question,
+
+        options,
+
+        correct_index:
+          Number(answer.value),
+
+        difficulty:
+          document
+            .getElementById(
+              `d_${id}`
+            )
+            .value,
+
+        topic:
+          document
+            .getElementById(
+              `t_${id}`
+            )
+            .value
+            .trim(),
+
+        active:
+          document
+            .getElementById(
+              `a_${id}`
+            )
+            .value === "true",
+
+        is_trending:
+          document
+            .getElementById(
+              `tr_${id}`
+            )
+            .value === "true",
+
+        source_note:
+          document
+            .getElementById(
+              `s_${id}`
+            )
+            .value
+            .trim()
+
+      }
+    );
+
+
+    alert(
+      "문제를 저장했습니다."
+    );
+
+    await loadDashboard();
+
+  }
+  catch(error){
+
+    console.error(error);
+
+    alert(
+      "문제 저장 실패\n\n" +
+      error.message
+    );
+
+  }
+
+}
+
+
+/* ==============================
+   이벤트
+============================== */
 
 document
   .getElementById("loginButton")
@@ -2870,24 +2481,18 @@ document
   .getElementById("password")
   .addEventListener(
     "keydown",
-    function(event){
+    event => {
 
       if(event.key === "Enter"){
-
         login();
-
       }
 
     }
   );
 
 
-/* ==========================================
-   Auth 상태
-========================================== */
-
 sb.auth.onAuthStateChange(
-  function(event,session){
+  (event,session) => {
 
     if(
       session &&
@@ -2904,10 +2509,6 @@ sb.auth.onAuthStateChange(
   }
 );
 
-
-/* ==========================================
-   시작
-========================================== */
 
 checkSession();
 
